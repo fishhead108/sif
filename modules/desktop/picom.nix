@@ -15,7 +15,7 @@ in {
       fade = true;
       fadeDelta = 5;
       shadow = true;
-      backend = "glx";
+      # backend = "glx";
     };
   };
 }
