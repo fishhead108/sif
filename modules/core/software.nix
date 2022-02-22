@@ -53,6 +53,7 @@ in {
     nmap
     ntfsprogs
     samba
+    alacritty
 
     #neovimWT
     lm_sensors
