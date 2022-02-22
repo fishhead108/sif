@@ -10,13 +10,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-flake = {
 	    url = "github:wiltaylor/neovim-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev, ... }:
+  outputs = inputs @ {self, nixpkgs, home-manager, neovim-flake, wks, nixpkgs-overlay, dev, ... }:
   with builtins;
   let
     lib = import ./lib;

@@ -4,8 +4,11 @@ with builtins;
 let
   xorg = (elem "xorg" config.sys.graphics.desktopProtocols);
   desktopMode = xorg;
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in {
-
+  imports = [
+    (import "${home-manager}/nixos")
+  ];
   config = mkIf desktopMode {
     home-manager.users.fishhead.xsession.windowManager.i3 = {
       enable = true;
