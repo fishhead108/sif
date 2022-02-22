@@ -53,9 +53,6 @@
         in {
           boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
           boot.kernelModules = [ "it87" "k10temp" "nct6775" "kvm-intel" ];
-
-          services.xserver.displayManager.defaultSession = "sway";
-
           sys.hotfix.kernelVectorWarning = true;
 
           networking.interfaces."enp59s0" = { useDHCP = true; };
@@ -70,7 +67,7 @@
           #   }
           # ];
 
-          sys.kernelPackage = pkgs.linuxPackages_zen;
+          sys.kernelPackage = pkgs.linuxPackages_5_16;
           sys.locale = "en_US.UTF-8";
           sys.timeZone = "Europe/Zurich";
 
@@ -84,9 +81,10 @@
           sys.cpu.type = "intel";
           sys.cpu.cores = 6;
           sys.cpu.threadsPerCore = 2;
-          sys.cpu.sensorCommand = ''sensors | grep "Tdie" | awk '{print $2}' '';
+          sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.biosType = "efi";
           # sys.graphics.primaryGPU = "amd";
+          services.xserver.displayManager.defaultSession = "sway";
           sys.graphics.displayManager = "gdm";
           sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
           sys.graphics.v4l2loopback = true;
