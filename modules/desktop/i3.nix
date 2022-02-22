@@ -7,9 +7,6 @@ let
 in {
 
   config = mkIf desktopMode {
-    sys.users.allUsers.home.file.".config/i3/rofi_powermenu.sh".source = ./i3/rofi_powermenu.sh;
-    sys.users.allUsers.home.file.".config/i3/rofi_custom.sh".source = ./i3/rofi_custom.sh;
-    sys.users.allUsers.home.file.".config/i3/polybar.sh".source = ./polybar/launch.sh;
     sys.users.allUsers.xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -186,9 +183,8 @@ in {
         ];
       };
     };
-  };
 
-  sys.users.allUsers.files = {
+    sys.users.allUsers.files = {
       rofi_powermenu = {
         path = ".config/i3/rofi_powermenu.sh";
         text = ''
@@ -284,5 +280,6 @@ in {
           done 
         '';
       };
+    };
   };
 }
