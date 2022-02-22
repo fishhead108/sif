@@ -119,7 +119,7 @@ in rec {
 
     # This is the main layout I have on my systems. 
     # It works by using the correct labels for drives.
-    boot.initrd.luks.devices."cryptroot".device = (mkIf (cfg.diskLayout == "btrfs-crypt") "/dev/disk/by-label/CRYPTROOT");
+    # boot.initrd.luks.devices."cryptroot".device = (mkIf (cfg.diskLayout == "btrfs-crypt") "/dev/disk/by-label/CRYPTROOT");
 
     fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
