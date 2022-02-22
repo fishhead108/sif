@@ -120,6 +120,7 @@ in {
   config = {
     users.users."${cfg.primaryUser.name}" = {
       name = cfg.primaryUser.name;
+      group = cfg.primaryUser.name;
       isNormalUser = true;
       isSystemUser = false;
       extraGroups = cfg.primaryUser.extraGroups;

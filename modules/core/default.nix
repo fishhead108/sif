@@ -106,7 +106,7 @@ in rec {
     boot.loader.systemd-boot.enable = cfg.bootloader == "systemd-boot";
     boot.loader.efi.canTouchEfiVariables = cfg.bootloader == "systemd-boot";
 
-    kernel.sysctl = {
+    boot.kernel.sysctl = {
       # Allow VS Code to watch more files
       "fs.inotify.max_user_watches" = 524288;
       "vm.swappiness" = lib.mkDefault 1;
