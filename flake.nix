@@ -85,7 +85,7 @@
           sys.biosType = "efi";
           # sys.graphics.primaryGPU = "amd";
           services.xserver.displayManager.defaultSession = "sway";
-          sys.graphics.displayManager = "gdm";
+          sys.graphics.displayManager = "lightdm";
           sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
           sys.graphics.v4l2loopback = true;
           sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
