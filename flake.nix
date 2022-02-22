@@ -2,7 +2,7 @@
   description = "Wil Taylor's system configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable-small";
     wks.url = "github:wiltaylor/nixwks";
     nixpkgs-overlay.url = "github:wiltaylor/nixpkgs-overlay";
     dev = {
