@@ -74,6 +74,7 @@
           sys.locale = "en_US.UTF-8";
           sys.timeZone = "Europe/Zurich";
 
+          sys.users.primaryUser.name = "fishhead";
           sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
           sys.virtualisation.vagrant.enable = true;
           sys.virtualisation.kvm.enable = true;
