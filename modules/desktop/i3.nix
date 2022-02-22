@@ -7,7 +7,7 @@ let
 in {
 
   config = mkIf desktopMode {
-    xsession.windowManager.i3 = {
+    home-manager.users.fishhead.xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
       extraConfig = "popup_during_fullscreen smart\ndefault_border pixel 1\ndefault_floating_border pixel 1\n";
