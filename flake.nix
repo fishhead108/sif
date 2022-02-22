@@ -1,214 +1,161 @@
 {
-  description = "System Config";
-  
+  description = "Wil Taylor's system configuration";
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    wks.url = "github:wiltaylor/nixwks";
+    nixpkgs-overlay.url = "github:wiltaylor/nixpkgs-overlay";
+    dev = {
+      url = "github:wiltaylor/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-flake = {
-      url = "github:jordanisaacs/neovim-flake";
-    };
-
-    homeage = {
-      url = "github:jordanisaacs/homeage/activatecheck";
+	    url = "github:wiltaylor/neovim-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    extra-container = {
-      url = "github:erikarvstedt/extra-container";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-utils.url = "github:numtide/flake-utils";
-    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs, home-manager, nur, neovim-flake, homeage, extra-container, ... }@inputs:
-    let
-      inherit (nixpkgs) lib;
+  outputs = inputs @ {self, nixpkgs, neovim-flake, wks, nixpkgs-overlay, dev, ... }:
+  with builtins;
+  let
+    lib = import ./lib;
 
-      util = import ./lib {
-        inherit system pkgs home-manager lib overlays inputs;
+    allPkgs = lib.mkPkgs { 
+      inherit nixpkgs; 
+      cfg = { allowUnfree = true; };
+      overlays = [
+        #neovim-flake.overlay
+        wks.overlay
+        nixpkgs-overlay.overlay
+        dev.overlay
+
+        (self: last: {
+          neovimWT = neovim-flake.packages."${self.system}".neovimWT; 
+        })
+      ];
+    };
+
+  in {
+    devShell = lib.withDefaultSystems (sys: let
+      pkgs = allPkgs."${sys}";
+    in import ./shell.nix { inherit pkgs; });
+
+    packages = lib.mkSearchablePackages allPkgs;
+
+    nixosConfigurations = {
+      dell = lib.mkNixOSConfig {
+        name = "dell";
+        system = "x86_64-linux";
+        inherit nixpkgs allPkgs;
+        cfg = let 
+          pkgs = allPkgs.x86_64-linux;
+        in {
+          boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+          boot.kernelModules = [ "it87" "k10temp" "nct6775" "kvm-intel" ];
+
+          services.xserver.displayManager.defaultSession = "sway";
+
+          sys.hotfix.kernelVectorWarning = true;
+
+          networking.interfaces."enp59s0" = { useDHCP = true; };
+          networking.networkmanager.enable = true;
+          networking.useDHCP = false; 
+
+          sys.desktop.kanshi.profiles = [];
+          #   {
+          #     "DP-1" = "position 0,0";
+          #     "HDMI-A-1" = "position 3840,0";
+          #     "DP-2" = "position 7680,0";
+          #   }
+          # ];
+
+          sys.kernelPackage = pkgs.linuxPackages_zen;
+          sys.locale = "en_US.UTF-8";
+          sys.timeZone = "Europe/Zurich";
+
+          sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+          sys.virtualisation.vagrant.enable = true;
+          sys.virtualisation.kvm.enable = true;
+          sys.virtualisation.docker.enable = true;
+          sys.virtualisation.appImage.enable = true;
+          sys.virtualisation.virtualBox.enable = true;
+          sys.cpu.type = "intel";
+          sys.cpu.cores = 6;
+          sys.cpu.threadsPerCore = 2;
+          sys.cpu.sensorCommand = ''sensors | grep "Tdie" | awk '{print $2}' '';
+          sys.biosType = "efi";
+          # sys.graphics.primaryGPU = "amd";
+          sys.graphics.displayManager = "gdm";
+          sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
+          sys.graphics.v4l2loopback = true;
+          sys.graphics.gpuSensorCommand = ''sensors | grep "junction:" | awk '{print $2}' '';
+
+          sys.audio.server = "pipewire";
+          sys.hardware.g810led = false;
+          sys.hardware.kindle = false;
+
+          sys.security.yubikey = true;
+          sys.security.username = "fishhead";
+          sys.security.sshPublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2u34uDlLjo6YfpgyvYTnhsUcmlANFdXEOo+jaM9R7DxNXjTVouMX06gwXvhtoKzbzqYf4OKBe+4xPA1rj/eBQenmCtzMLLCEy8JNDtx6KqdmrAZF9zlT71Y53Kl/EFFUDLEECcy6OmjkMDBLkxG6VhE3d3P39NbfXYa606dD0c6iGhZbj3iQK08Lz0Mt/S93/dQV6AfHtQDq0I/V5UwaA6vhpqFCkdqWWDxsew6IUxVXDFLLfb/ghYt4RND6c2xq2mqSwhZ9uVjUBdju0mZfgnQ616JkRGJANuE8BRUijp6LUswz1GYA7b0B7a0nKwk+VLoy6yYj8a+AX5XuREF70IeE2Kq85KmfRnumxMfAvLFDO0i9ACGyzmwFLP/tYyYyk9T4Ttdk8PM94BrlsHcFkZ3DcAtsx4H84KaWAsaZPVC+tBQFrTVS9HdJdi09L4N5+db4Cs1Fhwm69YXcSkQvNN61g3C5lYER7U7Wc4L7l1AlqxaEBdDURpGcpAjUvlRO+ZlTyUF/ZR3Qx24jMWtK3VkZdIkaV253v4TuZcDHwHub/9MnbUMydyTsp94n50WeKpAz/PHBHeB5KpE29DWNk8vmEQ134/t4S0hc6yL0vTGmlMLLOzqC0GNBBps+yamMI9xj6GVcic152+B2+mILRPC4LQu3u5nSCRaq2Qflh1Q==";
+
+          sys.vfio.enable = false;
+          sys.vfio.gpuType = "nvidia";
+          sys.vfio.gpuPciIds = "10de:1e87,10de:10f8,10de:1ad8,10de:1ad9";
+          sys.vfio.devIds = "0000:0c:00.0 0000:0c:00.1 0000:0c:00.2 0000:0c:00.3";
+          sys.bluetooth = true;
+
+        };
       };
 
-      scripts = import ./scripts {
-        inherit pkgs lib;
-      };
+      mini = lib.mkNixOSConfig {
+        name = "mini";
+        system = "x86_64-linux";
+        inherit nixpkgs allPkgs;
+        cfg = let 
+          pkgs = allPkgs.x86_64-linux;
+        in {
+          boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
 
-      inherit (import ./pkgs {
-        inherit pkgs;
-      }) myPkgs;
+          networking.interfaces."wlo1" = { useDHCP = true; };
+          networking.wireless.interfaces = [ "wol1" ];
+          networking.networkmanager.enable = true;
+          networking.useDHCP = false; 
 
-      inherit (import ./overlays {
-        inherit system pkgs lib nur neovim-flake homeage scripts myPkgs extra-container;
-      }) overlays;
+          sys.locale = "en_US.UTF-8";
+          sys.timeZone = "Europe/Zurich";
 
-      inherit (util) user;
-      inherit (util) host;
+          sys.users.primaryUser.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" "wil" ];
 
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config = {
-          permittedInsecurePackages = [
-            "electron-9.4.4"
+          sys.kernelPackage = pkgs.linuxPackages_5_10;
+          sys.graphics.displayManager = "gdm";
+          sys.graphics.desktopProtocols = [ "xorg" "wayland" ];
+          sys.cpu.type = "intel";
+          sys.cpu.cores = 6;
+          sys.cpu.threadsPerCore = 2;
+          sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
+          sys.biosType = "efi";
+          sys.graphics.primaryGPU = "intel";
+          sys.audio.server = "pipewire";
+          sys.virtualisation.docker.enable = true;
+          sys.virtualisation.appImage.enable = true;
+
+          sys.desktop.kanshi.profiles = [
+            {
+              "eDP-1" = "position 0,0";
+            }
           ];
-          allowUnfree = true;
-        };
-      };
 
-      system = "x86_64-linux";
 
-      defaultConfig = {
-        core.enable = true;
-        boot = "efi";
-        gnome = {
-          enable = true;
-          keyring = {
-            enable = true;
-          };
-        };
-        connectivity = {
-          bluetooth.enable = true;
-          sound.enable = true;
-          printing.enable = true;
-        };
-        graphical = {
-          xorg.enable = true;
-          wayland = {
-            enable = true;
-            swaylock-pam = true;
-          };
-        };
-        ssh.enable = true;
-        extraContainer.enable = true;
-      };
+          sys.virtualisation.kvm.enable = true;
+          sys.bluetooth = true;
+          #sys.wifi = true;
 
-      dellConfig = defaultConfig // {
-        dell = {
-          enable = true;
-        };
-      };
-
-      lenovoConfig = dellConfig // {
-        lenovo = {
-          enable = true;
-          fprint = {
-            enable = true;
-          };
-        };
-      };
-
-      defaultUser = [{
-        name = "fishhead";
-        groups = [ "wheel" "networkmanager" "video" ];
-        uid = 1000;
-        shell = pkgs.zsh;
-        sshKeys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwSKMhCkWOzbKbM3sv2uepBW7hAwGCdG22vPxu3bYgn lenovo-09-12-2021"
-            "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyyuGULHQkJjH4kD6G0qcyzEu2g6AOm41Qk50EOxu0eVf2GCkJbhGHSXrJ3NxN5iaGNhWMon4iDbw4qKPcqmQg9urpPq6iaR/Vkt09P67oVwbcZI/MdAVI8X2atl+W10q71vnTRsIQEpZ3fNDT5vaWBEtJvM60L8ofzdQcczDGxyb/VWz0bkl6lwTIvWLxuINfWiBSjSD2orZhXtww+O+rbwZMwKiYeYVQzaXlhVxveHK3Fpu124pBU8M1wU+/tKXPxAoeHg8oFr6BvbNlXwMm8xR391f4/jA0giK+GIsn01LPfvON5nyNycsQDAjYwbjeLxHpg8m6FenlBmQQmDbDEiAXN9cY53PV7iEc9xQt8CFIxYhzzFZfEtQiokKMq9ZntgaP+WumB3w7yLS9dDGP1KjCd98TYn/GZg6crT5x0qwdQ8CabAoq6RJtRJVIZ/eAaPN1qlJh4ZrA83N55kEFqifae6cqGTXhGqEsII48ZEOGvl8jpy7YZJo3/Om3M9k= CM user"
-            "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDVfCoUj2xE7VDaVSv/6MY9zKc/1aGN6/9mV5g4DtTazAuURuAXqhPBh/FEK3eCFQsp+pF7IG9hczct1AdO7bJvo38BTxnXp2b5dEw3/vfq2e+NavltT/iStgHgyx69iE1eT19VxSXEJeNsRziJuH6VsABnuSvaS2u+WDh6DdLevudLJuRZ2yyq9bM8vOtboLwvN933RZTdFJGrwwTJTojmbqL7vE/zS8oc6cMC5ubzWc03NRZHr/MQOtmCM5NKYs422E27OnKLoS0ZhPBrYwIIuvGFpoNghsIGq4ikG0dCe2KBKP485chAMdA7dNePclnxA2Bx5FMYEZvL4NJLOrO3wo3B902EYTK9i1L7NqxijasyQxp53xvynpCSyNU530Gtawr6x8JchWc/2R7A81Psu67o7697hlLpnUIyTil2uHc+mxv4aXBBhO4PtwS8In4mg4Z44NglzVPHYTLSJFbOAEvxq1LZUibgg4TBD4KMiIgzOGgTVJ88IaNKZB8EzimESWzd8aJTFCq/55VU154Io4iqyJdCMBJmAfCUpwWDQ5issSfUZpwi7rVLYDp0iY51aZnYh/PM1PpBlfghqZ0ZKEdvLf9deyynDidjCLj5pzR/ySxVgEEGLu4hLdkJLCXR2QMfkMpXSbkc0SzMQ3XeeN1XCu2HrUYxgO03Q2zZYw== cardno:10 127 999"
-        ];
-      }];
-
-    in
-    {
-      installMedia = {
-        kde = host.mkISO {
-          name = "nixos";
-          kernelPackage = pkgs.linuxPackages_latest;
-          initrdMods = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid" ];
-          kernelMods = [ "kvm-intel" "kvm-amd" ];
-          kernelParams = [ ];
-          systemConfig = { };
-        };
-      };
-
-      homeManagerConfigurations = {
-        jd = user.mkHMUser {
-          userConfig = {
-            graphical = {
-              applications = {
-                enable = true;
-                firefox.enable = true;
-                libreoffice.enable = true;
-              };
-              wayland = {
-                enable = true;
-                type = "dwl";
-                background.enable = true;
-                statusbar.enable = true;
-                screenlock.enable = true;
-              };
-              xorg = {
-                enable = true;
-                type = "dwm";
-                screenlock.enable = true;
-              };
-            };
-            applications.enable = true;
-            gpg.enable = true;
-            git.enable = true;
-            zsh.enable = true;
-            ssh.enable = true;
-            direnv.enable = true;
-            weechat.enable = true;
-            office365 = {
-              enable = true;
-              onedriver.enable = true; # pkg currently broken
-            };
-            wine = {
-              enable = false; # wine things currently broken
-              office365 = false;
-            };
-            keybase.enable = true;
-            pijul.enable = true;
-          };
-          username = "fishhead";
-        };
-      };
-
-      nixosConfigurations = {
-        dell = host.mkHost {
-          name = "dell";
-          NICs = [ "enp0s31f6" "wlp2s0" ];
-          kernelPackage = pkgs.linuxPackages;
-          initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-          kernelMods = [ "kvm-intel" ];
-          kernelParams = [ ];
-          systemConfig = dellConfig;
-          users = defaultUser;
-          cpuCores = 12;
-        };
-
-        lenovo = host.mkHost {
-          name = "lenovo";
-          NICs = [ "wlp170s0" ];
-          kernelPackage = pkgs.linuxPackages_latest;
-          initrdMods = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
-          kernelMods = [ "kvm-intel" ];
-          kernelParams = [ ];
-          systemConfig = lenovoConfig;
-          users = defaultUser;
-          cpuCores = 8;
-          stateVersion = "21.11";
-        };
-
-        tower = host.mkHost {
-          name = "desktop";
-          NICs = [ "enp6s0" "wlp5s0" ];
-          kernelPackage = pkgs.linuxPackages_latest;
-          initrdMods = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-          kernelMods = [ "kvm-amd" ];
-          kernelParams = [ ];
-          systemConfig = defaultConfig;
-          users = defaultUser;
-          cpuCores = 12;
-          stateVersion = "21.11";
+          sys.security.yubikey = true;
+          sys.security.username = "fishhead";
+          sys.security.sshPublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2u34uDlLjo6YfpgyvYTnhsUcmlANFdXEOo+jaM9R7DxNXjTVouMX06gwXvhtoKzbzqYf4OKBe+4xPA1rj/eBQenmCtzMLLCEy8JNDtx6KqdmrAZF9zlT71Y53Kl/EFFUDLEECcy6OmjkMDBLkxG6VhE3d3P39NbfXYa606dD0c6iGhZbj3iQK08Lz0Mt/S93/dQV6AfHtQDq0I/V5UwaA6vhpqFCkdqWWDxsew6IUxVXDFLLfb/ghYt4RND6c2xq2mqSwhZ9uVjUBdju0mZfgnQ616JkRGJANuE8BRUijp6LUswz1GYA7b0B7a0nKwk+VLoy6yYj8a+AX5XuREF70IeE2Kq85KmfRnumxMfAvLFDO0i9ACGyzmwFLP/tYyYyk9T4Ttdk8PM94BrlsHcFkZ3DcAtsx4H84KaWAsaZPVC+tBQFrTVS9HdJdi09L4N5+db4Cs1Fhwm69YXcSkQvNN61g3C5lYER7U7Wc4L7l1AlqxaEBdDURpGcpAjUvlRO+ZlTyUF/ZR3Qx24jMWtK3VkZdIkaV253v4TuZcDHwHub/9MnbUMydyTsp94n50WeKpAz/PHBHeB5KpE29DWNk8vmEQ134/t4S0hc6yL0vTGmlMLLOzqC0GNBBps+yamMI9xj6GVcic152+B2+mILRPC4LQu3u5nSCRaq2Qflh1Q==";
         };
       };
     };
+  };
 }
