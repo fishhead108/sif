@@ -98,7 +98,7 @@ rec {
         sys.security.secrets = secrets;
 
         nixpkgs.pkgs = pkgs;
-        system.stateVersion = "20.09";
+        system.stateVersion = "22.05";
         networking.hostName = "${name}";
       }
     ];
