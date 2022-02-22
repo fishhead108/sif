@@ -186,4 +186,103 @@ in {
         ];
       };
     };
+  };
+
+  sys.users.allUsers.files = {
+      rofi_powermenu = {
+        path = ".config/i3/rofi_powermenu.sh";
+        text = ''
+          #!/bin/bash
+          action=$(echo -e "lock\nlogout\nshutdown\nreboot" | rofi -dmenu -p "power:")
+
+          if [[ "$action" == "lock" ]]
+          then
+              ~/.i3/i3lock-fancy-multimonitor/lock
+          fi
+
+          if [[ "$action" == "logout" ]]
+          then
+              i3-msg exit
+          fi
+
+          if [[ "$action" == "shutdown" ]]
+          then
+              systemctl poweroff
+          fi
+
+          if [[ "$action" == "reboot" ]]
+          then
+              shutdown -r now
+          fi 
+        '';
+      };
+
+      rofi_custom = {
+        path = ".config/i3/rofi_custom.sh";
+        text = ''
+          #!/bin/bash
+          action=$(echo -e "ompd\nompd-git\nspotify\ntransmission\nnicotine\nstreamstudio\nnetflix\nmps-youtube" | rofi -dmenu -p "custom:")
+
+          if [[ "$action" == "ompd" ]]
+          then
+              /usr/bin/google-chrome-stable --app="http://127.0.0.1/OMPD"
+          fi
+
+          if [[ "$action" == "ompd-git" ]]
+          then
+              /usr/bin/google-chrome-stable --app="http://127.0.0.1/ompd_test"
+          fi
+
+          if [[ "$action" == "transmission" ]]
+          then
+              /usr/bin/google-chrome-stable --app="http://localhost:9091/transmission/web/"
+          fi
+
+          if [[ "$action" == "streamstudio" ]]
+          then
+              streamstudio
+          fi
+
+          if [[ "$action" == "netflix" ]]
+          then
+              /usr/bin/google-chrome-stable --app="https://www.netflix.com"
+          fi
+
+          if [[ "$action" == "mps-youtube" ]]
+          then
+              urxvtc -e mpsyt
+          fi
+
+          if [[ "$action" == "nicotine" ]]
+          then
+              nicotine
+          fi
+
+          if [[ "$action" == "spotify" ]]
+          then
+              blockify
+          fi 
+        '';
+      };
+
+      polybar = {
+        path = ".config/i3/polybar.sh";
+        text = ''
+          #!/usr/bin/env sh
+          # Terminate already running bar instances
+          killall -q polybar
+
+          # Wait until the processes have been shut down
+          while pgrep -x polybar >/dev/null; do sleep 1; done
+
+          for m in $(polybar --list-monitors | cut -d":" -f1); do
+              export TRAY_POSITION=none
+              if [[ $m == "eDP1" ]]; then
+                  TRAY_POSITION=right
+              fi
+              MONITOR=$m polybar --reload powerbar &
+          done 
+        '';
+      };
+  };
 }
