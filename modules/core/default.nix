@@ -119,26 +119,41 @@ in rec {
 
     # This is the main layout I have on my systems. 
     # It works by using the correct labels for drives.
-    # boot.initrd.luks.devices."cryptroot".device = (mkIf (cfg.diskLayout == "btrfs-crypt") "/dev/disk/by-label/CRYPTROOT");
+    boot.initrd.luks.devices = {
+      cryptkey = {
+        device = "/dev/disk/by-label/NIXKEY";
+      };
 
-    fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+      cryptroot = {
+        device = "/dev/disk/by-label/NIXROOT";
+        keyFile = "/dev/mapper/cryptkey";
+      };
+
+      cryptswap = {
+        device = "/dev/disk/by-label/NIXSWAP";
+        keyFile = "/dev/mapper/cryptkey";
+      };
+    };
+
+    fileSystems."/" = {
+      device = "/dev/disk/by-label/DECRYPTNIXROOT";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
 
-  fileSystems."/nfs" =
-    {
+    swapDevices = [
+      { device = "/dev/disk/by-label/DECRYPTNIXSWAP"; }
+    ];
+
+    fileSystems."/nfs" = {
       mountPoint = "/nfs";
       device = "192.168.1.239:/volume1/fishhead";
       fsType = "nfs";
     };
-  
-  swapDevices = [ ];
 
   };
 }
