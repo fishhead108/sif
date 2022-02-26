@@ -1,0 +1,51 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/;"	extras:pseudo
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/;"	extras:pseudo
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/;"	extras:pseudo
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/;"	extras:pseudo
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/;"	extras:pseudo
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/;"	extras:pseudo
+!_TAG_PROC_CWD	/nfs/fromMAC/local-repos/remote/NIXOS_CFGS/github.com/fishhead108-flakes/	//;"	extras:pseudo
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//;"	extras:pseudo
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/;"	extras:pseudo
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/;"	extras:pseudo
+!_TAG_PROGRAM_VERSION	5.9.0	//;"	extras:pseudo
+-0,0 +1,19	overlays/makefile_service.patch	/^@@ -0,0 +1,19 @@$/;"	kind:hunk	line:89	language:Diff	scope:newFile:b/tlp-sleep.service.in	roles:def
+-0,0 +1,19	overlays/tlp-sleep-service.patch	/^@@ -0,0 +1,19 @@$/;"	kind:hunk	line:61	language:Diff	scope:newFile:b/tlp-sleep.service.in	roles:def
+-1,11 +0,0	overlays/makefile_service.patch	/^@@ -1,11 +0,0 @@$/;"	kind:hunk	line:72	language:Diff	scope:deletedFile:a/tlp-sleep	roles:def
+-1,11 +0,0	overlays/tlp-sleep-service.patch	/^@@ -1,11 +0,0 @@$/;"	kind:hunk	line:44	language:Diff	scope:deletedFile:a/tlp-sleep	roles:def
+-106,7 +107,6	overlays/makefile_service.patch	/^@@ -106,7 +107,6 @@ SHFILES = \\$/;"	kind:hunk	line:41	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-106,7 +107,6	overlays/tlp-sleep-service.patch	/^@@ -106,7 +107,6 @@ SHFILES = \\$/;"	kind:hunk	line:13	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-107,8 +110,8	pkgs/la-capitaine-icon-theme/configure-cursor.patch	/^@@ -107,8 +110,8 @@ case $yn in$/;"	kind:hunk	line:38	language:Diff	scope:modifiedFile:a/configure	roles:def
+-129,8 +132,7	pkgs/la-capitaine-icon-theme/configure-cursor.patch	/^@@ -129,8 +132,7 @@ cd "$wd\/places\/scalable"$/;"	kind:hunk	line:49	language:Diff	scope:modifiedFile:a/configure	roles:def
+-159,7 +159,7	overlays/makefile_service.patch	/^@@ -159,7 +159,7 @@ ifneq ($(TLP_NO_INIT),1)$/;"	kind:hunk	line:49	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-159,7 +159,7	overlays/tlp-sleep-service.patch	/^@@ -159,7 +159,7 @@ ifneq ($(TLP_NO_INIT),1)$/;"	kind:hunk	line:21	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-216,7 +216,7	overlays/makefile_service.patch	/^@@ -216,7 +216,7 @@ uninstall-tlp:$/;"	kind:hunk	line:58	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-216,7 +216,7	overlays/tlp-sleep-service.patch	/^@@ -216,7 +216,7 @@ uninstall-tlp:$/;"	kind:hunk	line:30	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-251,7 +251,7	modules/hotfix/no-irq-handler-for-vector.patch	/^@@ -251,7 +251,7 @@$/;"	kind:hunk	line:3	language:Diff	scope:modifiedFile:./arch/x86/kernel/irq.c	roles:def
+-51,19 +51,19	overlays/fix-makefile-sed.patch	/^@@ -51,19 +51,19 @@ _TPACPIBAT = $(DESTDIR)$(TPACPIBAT)$/;"	kind:hunk	line:5	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-51,19 +51,19	overlays/makefile_service.patch	/^@@ -51,19 +51,19 @@ _TPACPIBAT = $(DESTDIR)$(TPACPIBAT)$/;"	kind:hunk	line:5	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-526,6 +526,29	overlays/x11-session-type.patch	/^@@ -526,6 +526,29 @@ connect_hook(DBusConnection *connection, void *data)$/;"	kind:hunk	line:13	language:Diff	scope:modifiedFile:a/hw/xfree86/os-support/linux/systemd-logind.c	roles:def
+-74,8 +74,12	pkgs/la-capitaine-icon-theme/configure-cursor.patch	/^@@ -74,8 +74,12 @@ alt_distromatch() {$/;"	kind:hunk	line:14	language:Diff	scope:modifiedFile:a/configure	roles:def
+-76,6 +76,7	overlays/makefile_service.patch	/^@@ -76,6 +76,7 @@ INFILES = \\$/;"	kind:hunk	line:33	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-76,6 +76,7	overlays/tlp-sleep-service.patch	/^@@ -76,6 +76,7 @@ INFILES = \\$/;"	kind:hunk	line:5	language:Diff	scope:modifiedFile:a/Makefile	roles:def
+-8,6 +8,8	overlays/unset-is-match.patch	/^@@ -8,6 +8,8 @@ if [[ -n $stdenv ]]; then$/;"	kind:hunk	line:5	language:Diff	scope:modifiedFile:a/src/nix/get-env.sh	roles:def
+-83,8 +87,7	pkgs/la-capitaine-icon-theme/configure-cursor.patch	/^@@ -83,8 +87,7 @@ de_error=0$/;"	kind:hunk	line:28	language:Diff	scope:modifiedFile:a/configure	roles:def
+./arch/x86/kernel/irq.c	modules/hotfix/no-irq-handler-for-vector.patch	/^--- .\/arch\/x86\/kernel\/irq.c	2020-10-01 10:36:35.000000000 -0500$/;"	kind:modifiedFile	line:1	language:Diff	roles:def
+a/Makefile	overlays/fix-makefile-sed.patch	/^--- a\/Makefile$/;"	kind:modifiedFile	line:3	language:Diff	roles:def
+a/Makefile	overlays/makefile_service.patch	/^--- a\/Makefile$/;"	kind:modifiedFile	line:3	language:Diff	roles:def
+a/Makefile	overlays/tlp-sleep-service.patch	/^--- a\/Makefile$/;"	kind:modifiedFile	line:3	language:Diff	roles:def
+a/configure	pkgs/la-capitaine-icon-theme/configure-cursor.patch	/^--- a\/configure$/;"	kind:modifiedFile	line:12	language:Diff	roles:def
+a/hw/xfree86/os-support/linux/systemd-logind.c	overlays/x11-session-type.patch	/^--- a\/hw\/xfree86\/os-support\/linux\/systemd-logind.c$/;"	kind:modifiedFile	line:11	language:Diff	roles:def
+a/src/nix/get-env.sh	overlays/unset-is-match.patch	/^--- a\/src\/nix\/get-env.sh$/;"	kind:modifiedFile	line:3	language:Diff	roles:def
+a/tlp-sleep	overlays/makefile_service.patch	/^--- a\/tlp-sleep$/;"	kind:deletedFile	line:70	language:Diff	roles:def
+a/tlp-sleep	overlays/tlp-sleep-service.patch	/^--- a\/tlp-sleep$/;"	kind:deletedFile	line:42	language:Diff	roles:def
+b/tlp-sleep.service.in	overlays/makefile_service.patch	/^+++ b\/tlp-sleep.service.in$/;"	kind:newFile	line:88	language:Diff	roles:def
+b/tlp-sleep.service.in	overlays/tlp-sleep-service.patch	/^+++ b\/tlp-sleep.service.in$/;"	kind:newFile	line:60	language:Diff	roles:def
+configure-cursor.patch	pkgs/la-capitaine-icon-theme/configure-cursor.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:61	epoch:1645475460
+fix-makefile-sed.patch	overlays/fix-makefile-sed.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:32	epoch:1645475223
+makefile_service.patch	overlays/makefile_service.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:108	epoch:1645475223
+no-irq-handler-for-vector.patch	modules/hotfix/no-irq-handler-for-vector.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:11	epoch:1645535204
+tangle.sh	emacs/tangle.sh	1;"	kind:file	line:1	language:Sh	roles:def	extras:inputFile	end:10	epoch:1645535270
+tlp-sleep-service.patch	overlays/tlp-sleep-service.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:80	epoch:1645475223
+unset-is-match.patch	overlays/unset-is-match.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:13	epoch:1645475223
+x11-session-type.patch	overlays/x11-session-type.patch	1;"	kind:file	line:1	language:Diff	roles:def	extras:inputFile	end:45	epoch:1645475223

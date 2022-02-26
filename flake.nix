@@ -89,7 +89,7 @@
           sys.cpu.sensorCommand = ''sensors | grep "pch_cannonlake-virtual" -A 3 | grep "temp1" | awk '{print $2}' '';
           sys.biosType = "efi";
           # sys.graphics.primaryGPU = "amd";
-          services.xserver.displayManager.defaultSession = "none+i3";
+          # services.xserver.displayManager.defaultSession = "none+i3";
           sys.graphics.displayManager = "lightdm";
           sys.graphics.desktopProtocols = [ "xorg" ];
           sys.graphics.v4l2loopback = true;
