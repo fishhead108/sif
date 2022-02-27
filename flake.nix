@@ -56,7 +56,7 @@
         cfg = let 
           pkgs = allPkgs.x86_64-linux;
         in {
-          boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+          boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" "nvme" ];
           boot.kernelModules = [ "it87" "k10temp" "nct6775" "kvm-intel" ];
           sys.hotfix.kernelVectorWarning = true;
 
