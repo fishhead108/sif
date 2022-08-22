@@ -3,7 +3,7 @@
 {
   imports = [
     ./alacritty.nix
-    ./battery_check.nix
+    ./battery_status.nix
     ./dunst.nix
     ./gpg.nix
     ./i3.nix

@@ -4,7 +4,7 @@ let
   mkHome = username: (
 
     let
-    homeDirectory = "/mnt/home/${username}";
+    homeDirectory = "/home/${username}";
     configHome = "${homeDirectory}/.config";
 
     pkgs = import nixpkgs {
