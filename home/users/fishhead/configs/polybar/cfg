@@ -1,0 +1,395 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+background = #222
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #55
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+tray-maxsize = 18
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+
+; over || xor || source
+compositing-background   = source
+compositing-foreground   = source
+compositing-overline     = source
+compositing-underline    = source
+compositing-border       = source
+
+[bar/top]
+monitor = ${env:MONITOR}
+monitor-strict = true
+dpi = [0-9]+
+bottom = false
+width = 100%
+height = 30
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+underline-size = 2
+underline-color = #00f
+
+module-margin-right = 1
+modules-left = i3
+modules-right = volume pkg vpncheck date
+
+tray-position = right
+tray-padding = 1
+override-redirect = true
+
+font-0 = hack:pixelsize=12;2
+font-1 = unifont:fontformat=truetype:size=12
+font-2 = Wuncon Siji:pixelsize=12;1
+font-3 = "FuraMono Nerd Font:style=Medium,Regular"
+font-4 = "FontAwesome:style=Regular:pixelsize=12"
+font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
+
+[bar/top2]
+monitor = ${env:MONITOR}
+monitor-strict = true
+dpi = [0-9]+
+bottom = false
+width = 100%
+height = 20
+offset-x = 0
+offset-y = 0
+
+;background = ${xrdb:color9}
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 0
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+border-bottom-size = 0
+border-bottom-color = ${colors.background}
+
+spacing = 1
+padding-left = 0
+padding-right = 0
+module-margin-left = 1
+module-margin-right = 0
+
+font-0 = hack:pixelsize=12;2
+font-1 = unifont:fontformat=truetype:size=12
+font-2 = Wuncon Siji:pixelsize=12;1
+font-3 = "FuraMono Nerd Font:style=Medium,Regular"
+font-4 = "FontAwesome:style=Regular:pixelsize=12"
+font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
+
+modules-left = i3
+#modules-center =
+modules-right = date
+;modules-right = backlight volume pkg wlan vpncheck battery date powermenu
+
+#wm-restack = i3
+#override-redirect = true
+
+[bar/bottom]
+monitor = ${env:MONITOR}
+monitor-strict = true
+dpi = [0-9]+
+bottom = true
+width = 100%
+height = 20
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+module-margin-right = 1
+
+modules-left = eth
+modules-center = time-tomsk
+modules-right = xkeyboard filesystem cpu memory
+
+font-0 = hack:pixelsize=12;2
+font-1 = unifont:fontformat=truetype:size=12
+font-2 = Wuncon Siji:pixelsize=12;1
+font-3 = "FuraMono Nerd Font:style=Medium,Regular"
+font-4 = "FontAwesome:style=Regular:pixelsize=12"
+font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format = <label-layout> <label-indicator>
+
+format-underline = ${colors.secondary}
+format-prefix =  "🖮 "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/filesystem]
+type = internal/fs
+
+mount-0 = /
+mount-1 = /home
+mount-2 = /store
+
+fixed-values = true
+spacing = 1
+format-mounted = <label-mounted>
+
+;label-mounted = %mountpoint%: %percentage_free%%
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+strip-wsnumbers = true
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+;label-focused-underline= #f3f99d
+label-focused-padding = 2
+
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+label-urgent = %name%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-visible = %name%
+label-visible-background = ${colors.background-alt}
+label-visible-underline = ${colors.primary}
+label-visible-padding = 2
+
+[module/github]
+type = internal/github
+token = ${env:GITHUB_TOKEN}
+
+label = "%notifications%"
+format-underline = #2aa198
+format-prefix = " "
+format-prefix-foreground = #5b
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label> <ramp-coreload>
+label = CPU %percentage%%
+ramp-coreload-0 = %{F#5b}▁%{F-}
+ramp-coreload-1 = %{F#5b}▂%{F-}
+ramp-coreload-2 = %{F#5b}▃%{F-}
+ramp-coreload-3 = %{F#ff5c57}▄%{F-}
+ramp-coreload-4 = %{F#ff5c57}▅%{F-}
+ramp-coreload-5 = %{F#ff5c57}▆%{F-}
+ramp-coreload-6 = %{F#ff5c57}▇%{F-}
+ramp-coreload-7 = %{F#ff5c57}█%{F-}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <label>
+
+label = RAM %gb_used%
+
+;format-prefix = "RAM "
+;format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #4bffdc
+;label = %gb_used%
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = #5b
+
+format-connected-underline = #9f78e1
+;format-disconnected-underline = ${self.format-connected-underline}
+
+label-connected = "%{A1:connman-gtk &:}%essid%%{A}"
+label-disconnected = "%{A1:connman-gtk &:}%{A}"
+label-disconnected-foreground = #5b
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/eth]
+type = internal/network
+interface = ${env:ACTIVE_INT}
+interval = 300
+
+format-connected-underline = #55aa55
+format-connected-prefix = "🖧 "
+format-connected-foreground-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname%
+label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = "%d-%m-%Y%"
+date-alt = " %d"
+
+time = "%H:%M:%{F#ff0000}%S%"
+time-alt =  %H:%M
+
+;format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = "%{A1:gsimplecal:}%date% %time%%{A}"
+
+[module/time-tomsk]
+type = custom/script
+exec = TZ=Asia/Tomsk date +"Tomsk: %H:%M"
+interval = 30
+
+[module/bluetooth]
+type = custom/script
+interval = 5
+exec = ~/.config/polybar/bluetooth.sh
+
+[module/volume]
+type = internal/pulseaudio
+
+sink = alsa_input.pci-0000_00_1f.3.analog-stereo 
+use-ui-max = true
+interval = 5
+
+format-volume = <label-volume> <bar-volume>
+
+label-muted = 🔇 muted
+label-volume = ""
+label-volume-foreground = ${root.foreground}
+label-muted-foreground = ${colors.foreground-alt}
+
+bar-volume-width = 20
+bar-volume-foreground-0 = #5af78e
+bar-volume-foreground-1 = #5af78e
+bar-volume-foreground-2 = #5af78e
+bar-volume-foreground-3 = #5af78e
+bar-volume-foreground-4 = #5af78e
+bar-volume-foreground-5 = #f3f99d
+bar-volume-foreground-6 = #ff5c57
+bar-volume-gradient = false
+bar-volume-indicator = │
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+time-format = "%H:%{F#92}%M%{F-}"
+
+label-discharging = %percentage%% %time%
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #f3f99d
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 =   
+animation-charging-1 =   
+animation-charging-2 =   
+animation-charging-3 =   
+animation-charging-4 =   
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/pkg]
+type = custom/script
+;tail = true
+interval = 600
+format = <label>
+format-underline = #ff5c57
+label = "%output:0:30%"
+exec = .config/polybar/pkg.sh
+exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
+
+[module/system-usb-udev]
+type = custom/script
+exec = .config/polybar/system-usb-udev.sh
+tail = true
+click-left = .config/polybar/system-usb-udev.sh --mount
+click-right = .config/polybar/system-usb-udev.sh --unmount
+
+[module/vpncheck]
+type = custom/script
+exec = pgrep openvpn
+interval = 5
+label = vpn
+format-underline = #268bd2
+format-prefix = " "
+format-prefix-foreground = #5b
+
+; vim:ft=dosini
