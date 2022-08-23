@@ -88,7 +88,7 @@
       dnsutils                            # network: dig
       iproute2                            # A collection of utilities for controlling TCP/IP networking and traffic control in Linux
       wirelesstools                       # network: iwgetid
-      # nix-trees                           # Interactively browse a Nix store paths dependencies
+      nix-tree                            # Interactively browse a Nix store paths dependencies
     ];
   };
   
