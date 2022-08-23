@@ -2,6 +2,9 @@
   description = "Home Manager (dotfiles) and NixOS configurations";
 
   inputs = {
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     nurpkgs = {
@@ -16,9 +19,10 @@
 
   };
 
-  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager }:
+  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs }:
     let
       system = "x86_64-linux";
+      # pkgs = import nixpkgs { inherit system; };
     in
     {
       nixosConfigurations = (
@@ -39,5 +43,24 @@
           inherit system nixpkgs;
         }
       );
+
+      deploy.nodes.dell = {
+        
+        hostname = "dell";
+        sshUser = "fishhead";
+        profiles = {
+          system = {
+            user = "root";
+            path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
+          };
+          home = {
+            user = "fishhead";
+            profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
+            path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead";
+          };
+        };
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }
