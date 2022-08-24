@@ -46,13 +46,13 @@
 
       deploy.nodes.dell = {
         
-        hostname = "dell";
+        hostname = "192.168.1.199";
         sshUser = "fishhead";
         profiles = {
-          system = {
-            user = "root";
-            path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
-          };
+          # system = {
+          #   user = "root";
+          #   path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
+          # };
           home = {
             user = "fishhead";
             profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
