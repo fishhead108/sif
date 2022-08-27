@@ -1,9 +1,6 @@
 { pkgs, ...}:
 
 {
-
-  home.file.".config/systemd/user/battery_status.sh".source = ./battery_status/battery_status.sh;
-
   systemd.user.services.battery_status = {
     Unit = {
       Description = "Service: Send notification if battery is low";
@@ -12,7 +9,13 @@
     
     Service = {
       Type = "oneshot";
-      ExecStart = "%h/.config/systemd/user/battery_status.sh";
+      ExecStart = "" + pkgs.writeScript "battery_status" ''
+        #!${pkgs.stdenv.shell} --login
+        . <(udevadm info -q property -p /sys/class/power_supply/BAT0 | grep -E 'POWER_SUPPLY_(CAPACITY|STATUS)=')
+        if [[ $POWER_SUPPLY_STATUS = Discharging && $POWER_SUPPLY_CAPACITY -lt 15 ]];
+        then notify-send -u critical "Battery is low: $POWER_SUPPLY_CAPACITY";
+        fi
+      '';
       Environment = ''"DISPLAY=:0"'';
     };
   };

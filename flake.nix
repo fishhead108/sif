@@ -1,5 +1,5 @@
 {
-  description = "Home Manager (dotfiles) and NixOS configurations";
+  description = "NixOS and user(Home Manager) configurations";
 
   inputs = {
 
@@ -22,7 +22,6 @@
   outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs }:
     let
       system = "x86_64-linux";
-      # pkgs = import nixpkgs { inherit system; };
     in
     {
       nixosConfigurations = (

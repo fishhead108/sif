@@ -20,13 +20,6 @@ in
     # gnome-keyring.
     gnome.seahorse
 
-    # # Add the keybase filesystem package explicitly to ensure git-remote-keybase
-    # # is available.
-    # kbfs
-
-    # # Add the keybase GUI.
-    # keybase-gui
-
     # Ensure xinput is available.
     xorg.xinput
 
@@ -37,6 +30,8 @@ in
     # The Yubikey personalization tool and its GUI.
     yubikey-personalization
     yubikey-personalization-gui
+
+    # A tool to detect when your YubiKey is waiting for a touch
     yubikey-touch-detector
 
     # The Yubikey oath configuration program.
@@ -46,15 +41,33 @@ in
     pass
   ];
 
+  systemd.user.sockets.yubikey-touch-detector = {
+    Unit.Description = "Unix socket activation for YubiKey touch detector service";
+    Socket = {
+      ListenStream = "%t/yubikey-touch-detector.socket";
+      RemoveOnStop = true;
+    };
+    Install.WantedBy = [ "sockets.target" ];
+  };
+
+  systemd.user.services.yubikey-touch-detector = {
+    Unit = {
+      Description = "Detects when your YubiKey is waiting for a touch";
+      Requires = "yubikey-touch-detector.socket";
+    };
+    Service = {
+      ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
+      EnvironmentFile = "-%E/yubikey-touch-detector/service.conf";
+    };
+    Install = {
+      Also = "yubikey-touch-detector.socket";
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   # The askpass to use for GUI ssh and sudo prompts.
   home.sessionVariables.SSH_ASKPASS = askpass;
   home.sessionVariables.SUDO_ASKPASS = askpass;
-
-  # # Enable keybase's FUSE mount.
-  # services.kbfs.enable = true;
-
-  # # Enable the keybase service.
-  # services.keybase.enable = true;
 
   # Extra commands to run when starting X11.
   xsession.initExtra = ''
@@ -75,19 +88,4 @@ in
   #   "${mod}+Control+Shift+y" = "exec ${xinput} enable '${yubikeyInput}'";
   # };
 
-  # Extra i3 configuration.
-  xsession.windowManager.i3.extraConfig = ''
-    # Put keybase's GUI on the scratchpad.
-    for_window [class="^Keybase$"] move scratchpad
-  '';
-
-  # Make keybase's GUI a floating window.
-  xsession.windowManager.i3.config.floating.criteria = [
-    { class = "^Keybase$"; }
-  ];
-
-  # Start keybase's GUI on i3 startup.
-  xsession.windowManager.i3.config.startup = [
-    { command = "${config.home.profileDirectory}/bin/keybase-gui"; }
-  ];
 }

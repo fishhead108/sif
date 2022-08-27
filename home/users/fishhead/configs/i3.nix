@@ -44,8 +44,7 @@
           { command = "floating enable"; criteria = { class = "qt5ct|Lxappearance|^Gpick$|Pamac|Peek|Nitrogen|Audacious|Pavucontrol"; }; } 
           { command = "focus"; criteria = { class = "Gksu|Pinentry|Pinentry-gtk-2|pinentry-gnome3"; }; } 
           { command = "no_focus"; criteria = { class = "Skype"; }; }
-          { command = "layout tabbed"; criteria = { class = "^URxvt$"; instance = "^weechat$"; }; }
-          { command = "move to workspace 5, workspace --no-auto-back-and-forth 5"; criteria = { class = "Spotify"; }; }
+          { command = "move to workspace 5, workspace --no-auto-back-and-forth 5"; criteria = { class = "spotify"; }; }
         ];
       };
 
