@@ -1,8 +1,6 @@
 { pkgs, ... }: {
 
-#  nix.settings.trusted-users = [ "root" "fishhead" "cm" "fish" ];
-  nix.settings.trusted-users = [ "root" "fishhead" "deployer" ]; 
- # age.secrets.rootPassword.file = ./password.age;
+  # age.secrets.rootPassword.file = ./password.age;
   # users.users.root.passwordFile = config.age.secrets.rootPassword.path;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {

@@ -7,6 +7,9 @@
 
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    # agenix = { 
+    #   url = "github:ryantm/agenix";inputs.nixpkgs.follows = "nixpkgs"; };
+
     nurpkgs = {
       url = github:nix-community/NUR;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,21 +40,19 @@
         }
       );
 
-      devShell.${system} = (
-        import ./outputs/installation.nix {
-          inherit system nixpkgs;
-        }
-      );
+      # devShells.${system}.default = pkgs.mkShellNoCC {
+      #   packages = [ pkgs.nixpkgs-fmt inputs.agenix.defaultPackage.${system} pkgs.age-plugin-yubikey ];
+      # };
 
       deploy.nodes.dell = {
         
         hostname = "192.168.1.199";
         sshUser = "fishhead";
         profiles = {
-          # system = {
-          #   user = "root";
-          #   path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
-          # };
+          system = {
+            user = "root";
+            path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
+          };
           home = {
             user = "fishhead";
             profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";

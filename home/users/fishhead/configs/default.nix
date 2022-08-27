@@ -19,5 +19,6 @@
     ./tmux.nix
     ./udiskie.nix
     ./vscode.nix
+    ./xdg.nix
   ];
 }

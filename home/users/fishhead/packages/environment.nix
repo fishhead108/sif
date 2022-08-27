@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }: 
 
 {
-  xdg.mime.enable = true;
-
   gtk = {
     enable = true;
 

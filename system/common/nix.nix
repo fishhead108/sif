@@ -1,12 +1,10 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
 
   system.stateVersion = "22.05";
 
   nixpkgs.config.allowUnfree = true;
 
   nix = {
-
-    settings.auto-optimise-store = true;
 
     # Enable automatic garbage collection
     gc = {
@@ -15,17 +13,19 @@
       options = "--delete-older-than 30d";
     };
 
-    extraOptions = ''
-    experimental-features = nix-command flakes
-
-    keep-outputs = true
-    keep-derivations      = true
-    cores = 4
-    connect-timeout = 3
-    max-jobs = 6
-    min-free = ${toString (500 * 1024 * 1024)}
-    max-free = ${toString (5 * 1024 * 1024 * 1024)}
-  '';
+    settings = {
+      experimental-features    = [ "nix-command" ];
+      trusted-users            = [ "@wheel" "deployer" ];
+      auto-optimise-store      = true;
+      builders-use-substitutes = true;
+      keep-outputs             = true;
+      keep-derivations         = true;
+      cores                    = 4;
+      connect-timeout          = 3;
+      max-jobs                 = 6;
+      min-free                 = "524288000";
+      max-free                 = "5368709120";
+    };
   };
 
   systemd = {
@@ -44,8 +44,8 @@
   };
 
   location = {
-    latitude = 46.543934;
-    longitude = 6.630556;
+    latitude = 46.512184;
+    longitude = 6.626003;
   };
 
   documentation = {
