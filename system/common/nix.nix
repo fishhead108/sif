@@ -20,7 +20,6 @@
       builders-use-substitutes = true;
       keep-outputs             = true;
       keep-derivations         = true;
-      cores                    = 4;
       connect-timeout          = 3;
       max-jobs                 = 6;
       min-free                 = "524288000";
