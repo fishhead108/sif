@@ -3,17 +3,20 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
+let
+  kernelVersion = pkgs.linuxPackages_5_19;
+in
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_5_18;
+    kernelPackages = kernelVersion;
 
     extraModulePackages = with pkgs; [
-      linuxPackages_5_18.v4l2loopback 
-      linuxPackages_5_18.acpi_call
+      kernelVersion.v4l2loopback 
+      kernelVersion.acpi_call
     ];
 
     loader = { 

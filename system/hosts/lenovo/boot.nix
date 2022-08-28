@@ -21,8 +21,8 @@
     };
 
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-      kernelModules = [ "vfat" "nls_cp437" "nls_iso8859-1" "usbhid" ];
+      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+      kernelModules = [ ];
     };
   };
 
@@ -48,19 +48,6 @@
       mountPoint = "/french";
       device = "192.168.1.239:/volume1/French";
       fsType = "nfs";
-    };
-
-  fileSystems."/fs2" =
-    {
-      mountPoint = "/fs2";
-      device = "//office-fs2/Revizto";
-      fsType = "cifs";
-
-      options = let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-
-      in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
     };
 
 }

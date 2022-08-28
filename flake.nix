@@ -40,23 +40,41 @@
         }
       );
 
-      # devShells.${system}.default = pkgs.mkShellNoCC {
-      #   packages = [ pkgs.nixpkgs-fmt inputs.agenix.defaultPackage.${system} pkgs.age-plugin-yubikey ];
-      # };
+      devShell.${system} = (
+        import ./outputs/installation.nix {
+          inherit system nixpkgs;
+        }
+      );
 
-      deploy.nodes.dell = {
-        
-        hostname = "192.168.1.199";
-        sshUser = "fishhead";
-        profiles = {
-          system = {
-            user = "root";
-            path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
+      deploy.nodes = {
+        dell = {
+          hostname = "192.168.1.199";
+          sshUser = "fishhead";
+          profiles = {
+            system = {
+              user = "root";
+              path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."dell";
+            };
+            home = {
+              user = "fishhead";
+              profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
+              path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead";
+            };
           };
-          home = {
-            user = "fishhead";
-            profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
-            path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead";
+        };
+
+        lenovo = {
+          hostname = "localhost";
+          profiles = {
+            system = {
+              user = "root";
+              path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."lenovo";
+            };
+            # home = {
+            #   user = "fishhead";
+            #   profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
+            #   path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead";
+            # };
           };
         };
       };

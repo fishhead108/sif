@@ -45,7 +45,6 @@
     # Terminal
     termite                 # A simple VTE-based terminal
     termius                 # A cross-platform SSH client with cloud data sync and more
-    coreutils-full          # The basic file, shell and text manipulation utilities of the GNU operating system
     wtf                     # The personal information dashboard for your terminal
     gh                      # GitHub CLI tool
     htop                    # An interactive process viewer

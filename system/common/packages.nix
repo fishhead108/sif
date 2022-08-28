@@ -47,18 +47,13 @@
     };
 
     systemPackages = with pkgs; [
-      # ack                                 # A grep-like tool tailored to working with large trees of source code
-      # silver-searcher                     # A code-searching tool similar to ack, but faster
-      # ripgrep                             # A utility that combines the usability of The Silver Searcher with the raw speed of grep
       wget                                # Tool for retrieving files using HTTP, HTTPS, and FTP
       curl                                # A command line tool for transferring files with URL syntax
       git                                 # Distributed version control system
       pv                                  # Tool for monitoring the progress of data through a pipeline
-      acpi                                # Show battery status and other ACPI information
       home-manager                        # A user environment configurator
       brightnessctl                       # This program allows you read and control device brightness
-      ddcutil                             # Query and change Linux monitor settings using DDC/CI and USB
-      system-config-printer               # It uses IPP to configure a CUPS server.
+      ddcutil                             # Query and change Linux monitor settings using DDC/CI and USB.
       ccid                                # ccid drivers for pcsclite
       pcsclite                            # Middleware to access a smart card using SCard API (PC/SC)
       libimobiledevice                    # A software library that talks the protocols to support iPhone®, iPod Touch® and iPad® devices on Linux
@@ -82,13 +77,15 @@
       pinentry-gnome                      # GnuPG’s interface to passphrase input
       pinentry-curses                     # GnuPG’s interface to passphrase input
       libnotify                           # A library that sends desktop notifications to a notification daemon
-      accountsservice                     # D-Bus interface for user account query and manipulation
+      # accountsservice                     # D-Bus interface for user account query and manipulation
       ranger                              # File manager with minimalistic curses interface
       geoclue2                            # Geolocation framework and some data providers
       dnsutils                            # network: dig
+      coreutils-full                      # The basic file, shell and text manipulation utilities of the GNU operating system
       iproute2                            # A collection of utilities for controlling TCP/IP networking and traffic control in Linux
       wirelesstools                       # network: iwgetid
       nix-tree                            # Interactively browse a Nix store paths dependencies
+      deploy-rs                           # A simple multi-profile Nix-flake deploy tool.
     ];
   };
   

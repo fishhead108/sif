@@ -10,7 +10,7 @@
 
     firewall = {
       allowPing = true;
-      allowedTCPPorts = [ 22 443 3000 8080 25565 ];
+      allowedTCPPorts = [ 22 25565 ];
       allowedUDPPorts = [ config.services.tailscale.port ];
       trustedInterfaces = [ "tailscale0" ];
     };

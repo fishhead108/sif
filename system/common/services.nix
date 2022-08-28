@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }: {
   
   services = {
+
+    localtimed.enable = true;
+
     journald.extraConfig = ''
       SystemMaxUse=100M
       MaxFileSec=7day
@@ -14,7 +17,7 @@
     udev.packages = with pkgs; [ yubikey-personalization libu2f-host ];
     
     #### GEOCLUE
-    # geoclue2.enable = true;
+    geoclue2.enable = true;
 
     # clight = {
     #   # Maybe causes freezes on sway + nvidia
@@ -49,8 +52,9 @@
     # ssh
     openssh = {
       enable = true;
-      # kbdInteractiveAuthentication = false;
-      # permitRootLogin = "no";
+      passwordAuthentication = false;
+      kbdInteractiveAuthentication = false;
+      permitRootLogin = "no";
     };
     
     dbus.packages = with pkgs; [ dconf ];
