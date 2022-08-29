@@ -6,6 +6,7 @@
       lightdm_gtk_greeter
       system-config-printer               # It uses IPP to configure a CUPS server
       acpi                                # Show battery status and other ACPI information
+      smartmontools
     ];
   };
 }

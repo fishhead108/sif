@@ -1,5 +1,7 @@
-{ pkgs, lib, config, ... }:
-
+{ pkgs, lib, config, systemConfig ? (import <nixpkgs/nixos> {}).config, ... }:
+let
+  hostname = "${builtins.readFile /etc/hostname }";
+in
 {
   home.file.".xprofile".source = ./i3/xprofile;
   home.file.".config/i3/rofi_powermenu.sh".source = ./i3/rofi_powermenu.sh;
@@ -12,7 +14,9 @@
     extraConfig = "popup_during_fullscreen smart\ndefault_border pixel 1\ndefault_floating_border pixel 1\n";
 
     config = rec {
-      modifier = "Mod4";
+      # modifier = if systemConfig.networking.hostName != "lenovo" then "Mod4" else "Mod1";
+      modifier = if hostname != "lenovo" then "Mod4" else "Mod1";
+      # modifier = "Mod1";
       bars = [ ];
 
       focus.forceWrapping = true;
@@ -53,7 +57,7 @@
         "2" = [{ instance = "^Navigator$"; class = "^Firefox$"; }];
         "3" = [{ class = "^Code$"; }];
         "4" = [{ class = "^TelegramDesktop$|^Skype$|^Slack$|^zoom$"; }];
-        "5" = [{ class = "^VirtualBox$|^TeamViewer$"; }];
+        "5" = [{ class = "^VirtualBox$|^TeamViewer$|^Spotify$"; }];
         "0" = [{ class = "^Doublecmd$"; window_role = "About"; }];
       };
 
@@ -107,7 +111,7 @@
 
       startup = [
         {
-          command = "$HOME/.nix-profile/bin/alacritty -e tmux";
+          command = "$HOME/.nix-profile/bin/alacritty";
           always = false;
           notification = false;
         }

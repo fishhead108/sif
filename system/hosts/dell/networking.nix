@@ -8,5 +8,6 @@
     hostName = "dell";
     interfaces.enp59s0.useDHCP = true;
     interfaces.wlp0s20f3.useDHCP = true;
+    firewall.allowedTCPPorts = [ 9100 ]; # printer
   };
 }

@@ -2,10 +2,11 @@
 
 let
   mkHome = username: (
-
+    
     let
     homeDirectory = "/home/${username}";
     configHome = "${homeDirectory}/.config";
+    # hostname = hostName;
 
     pkgs = import nixpkgs {
         inherit system;

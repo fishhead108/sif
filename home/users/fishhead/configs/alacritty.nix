@@ -5,6 +5,10 @@
     enable = true;
 
     settings = {
+      env = {
+          TERM = "xterm-256color";
+      };
+
       window = {
         title = "Terminal";
 
@@ -19,10 +23,9 @@
 
       font = {
         normal.family = "JetbrainsMono Nerd Font";
-        size = 8.0;
+        size = 12.0;
+        # size = 8.0;
       };
-
-      
 
       shell = { program = "${pkgs.zsh}/bin/zsh"; };
 

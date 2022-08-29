@@ -59,6 +59,11 @@
       # Enable touchpad support.
       libinput.enable = true;
 
+      # smartd = {
+      #   enable = true;
+      #   notifications.x11.enable = true;
+      # };
+
       # Enable lightdm
       displayManager.lightdm = {
         enable = true;
@@ -108,11 +113,14 @@
     # Enable CUPS to print documents.
     printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+      # drivers = [ pkgs.hplip ];
     };
     
     # Enable scanner support
     # Docs: https://nixos.wiki/wiki/Scanners
-    saned.enable = true;
+    saned = {
+      enable = true;
+      # extraBackends = [ pkgs.hplipWithPlugin ];
+    };
   };
 }
