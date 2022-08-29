@@ -26,18 +26,18 @@
     let
       system = "x86_64-linux";
 
-      deploy = sshUser: hostName: homeUser: configurationName: {
+      deploy = sshUser: hostName: homeUser: osConfigurationName: hmConfigurationName:  {
         hostname = hostName;
         sshUser = sshUser;
           profiles = {
             system = {
               user = "root";
-              path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${configurationName};
+              path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${osConfigurationName};
             };
             home = {
               user = homeUser;
               profilePath = "/nix/var/nix/profiles/per-user/${homeUser}/home-manager";
-              path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations.${homeUser};
+              path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations.${hmConfigurationName};
             };
           };
       };
@@ -63,8 +63,8 @@
       );
 
       deploy.nodes = {
-        dell    = deploy "fishhead" "192.168.1.199" "fishhead" "dell";
-        lenovo  = deploy "fishhead" "localhost" "fishhead" "lenovo";
+        lenovo  = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo";
+        dell    = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell";
       };
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

@@ -1,26 +1,25 @@
-{ pkgs, lib, config, systemConfig ? (import <nixpkgs/nixos> {}).config, ... }:
+{ pkgs, lib, specialArgs, ... }:
 let
-  hostname = "${builtins.readFile /etc/hostname }";
+  mod = if specialArgs.hostname == "lenovo" then "Mod4" else "Mod1";
 in
 {
   home.file.".xprofile".source = ./i3/xprofile;
   home.file.".config/i3/rofi_powermenu.sh".source = ./i3/rofi_powermenu.sh;
   home.file.".config/i3/rofi_custom.sh".source = ./i3/rofi_custom.sh;
   home.file.".config/i3/polybar.sh".source = ./polybar/launch.sh;
-  
+
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3;
-    extraConfig = "popup_during_fullscreen smart\ndefault_border pixel 1\ndefault_floating_border pixel 1\n";
+    extraConfig = "set $mod ${mod}\npopup_during_fullscreen smart\ndefault_border pixel 1\ndefault_floating_border pixel 1\n";
 
     config = rec {
-      # modifier = if systemConfig.networking.hostName != "lenovo" then "Mod4" else "Mod1";
-      modifier = if hostname != "lenovo" then "Mod4" else "Mod1";
-      # modifier = "Mod1";
+      # modifier = "Mod4";
+
       bars = [ ];
 
       focus.forceWrapping = true;
-      floating.modifier = "Mod4";
+      floating.modifier = "Mod5";
 
       workspaceAutoBackAndForth = true;
       workspaceLayout = "tabbed";
@@ -72,28 +71,28 @@ in
         "XF86AudioRaiseVolume" = "exec amixer set Master 4%+";
         "XF86MonBrightnessDown" = "exec brightnessctl set 4%-";
         "XF86MonBrightnessUp" = "exec brightnessctl set 4%+";
-        "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
-        "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons";
-        "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -modi window -show window -show-icons";
-        "${modifier}+Shift+x" = "exec systemctl suspend";
+        "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+        "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons";
+        "${mod}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -modi window -show window -show-icons";
+        "${mod}+Shift+x" = "exec systemctl suspend";
         ##### new
         # Lock the computer
-        "${modifier}+l" = "exec i3lock-pixeled";
+        "${mod}+l" = "exec i3lock-pixeled";
         # Start rofi
         "F10" = "exec ${pkgs.rofi}/bin/rofi -modi filebrowser -show filebrowser -show-icons";
         "F11" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
         "F12" = "exec ${pkgs.rofi-systemd}/bin/rofi-systemd";
         # rofi_power menu
-        "${modifier}+Shift+e" = "exec sh $HOME/.config/i3/rofi_powermenu.sh";
+        "${mod}+Shift+e" = "exec sh $HOME/.config/i3/rofi_powermenu.sh";
         # rofi_custom menu
-        "${modifier}+x" = "exec sh $HOME/.config/i3/rofi_custom.sh";
+        "${mod}+x" = "exec sh $HOME/.config/i3/rofi_custom.sh";
         # launch polybar
-        "${modifier}+ctrl+c" = "exec sh $HOME/.config/i3/polybar.sh";
+        "${mod}+ctrl+c" = "exec sh $HOME/.config/i3/polybar.sh";
         # Google search 
-        "${modifier}+Shift+s" = "exec ${pkgs.rofi}/bin/rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.com/search?q={}";
+        "${mod}+Shift+s" = "exec ${pkgs.rofi}/bin/rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.com/search?q={}";
         # for merge into new window
-        "${modifier}+M" = "focus left;split v;layout stacking;focus right;move left";
-        "${modifier}+comma" = "focus right;split v;layout stacking;focus left;move right";
+        "${mod}+M" = "focus left;split v;layout stacking;focus right;move left";
+        "${mod}+comma" = "focus right;split v;layout stacking;focus left;move right";
       };
 
       # workspaceOutputAssign = [
@@ -120,16 +119,16 @@ in
           always = false;
           notification = false;
         }
-        {
-          command = "exec i3-msg workspace 1";
-          always = true;
-          notification = false;
-        }
-        {
-          command = "systemctl --user restart polybar.service";
-          always = true;
-          notification = false;
-        }
+        # {
+        #   command = "exec i3-msg workspace 1";
+        #   always = true;
+        #   notification = false;
+        # }
+        # {
+        #   command = "systemctl --user restart polybar.service";
+        #   always = true;
+        #   notification = false;
+        # }
         {
           command = "${pkgs.feh}/bin/feh --bg-scale ~/background.jpg";
           always = true;

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, specialArgs, ... }:
 
 {
   programs.alacritty = {
@@ -23,8 +23,7 @@
 
       font = {
         normal.family = "JetbrainsMono Nerd Font";
-        size = 12.0;
-        # size = 8.0;
+        size = if specialArgs.pcProfile == "desktop" then 12.0 else 8.0;
       };
 
       shell = { program = "${pkgs.zsh}/bin/zsh"; };

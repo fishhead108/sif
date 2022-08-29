@@ -3,9 +3,6 @@
 
 {
   home.packages = with pkgs; [
-    # Ensure dmenu is available.
-    dmenu
-
     # Ensure Adwaita icons are available.
     gnome.adwaita-icon-theme
   ];

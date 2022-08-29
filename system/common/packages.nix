@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
 
   environment = {
     # etc = {
@@ -35,6 +35,7 @@
     '';
 
     sessionVariables = rec {
+      HOSTNAME        = config.networking.hostName;
       XDG_CACHE_HOME  = "\${HOME}/.cache";
       XDG_CONFIG_HOME = "\${HOME}/.config";
       XDG_BIN_HOME    = "\${HOME}/.local/bin";
@@ -44,6 +45,10 @@
       PATH = [ 
         "\${XDG_BIN_HOME}"
       ];
+    };
+
+    variables = {
+      HOSTNAME        = config.networking.hostName;
     };
 
     systemPackages = with pkgs; [

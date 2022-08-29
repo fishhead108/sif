@@ -1,12 +1,11 @@
 { system, nixpkgs, home-manager, ... }:
 
 let
-  mkHome = username: (
-    
+  mkHome = username: hostname: pcProfile: (
+
     let
     homeDirectory = "/home/${username}";
     configHome = "${homeDirectory}/.config";
-    # hostname = hostName;
 
     pkgs = import nixpkgs {
         inherit system;
@@ -23,6 +22,10 @@ let
     home-manager.lib.homeManagerConfiguration rec {
       inherit pkgs;
 
+      extraSpecialArgs = { 
+        inherit hostname pcProfile;
+      };
+
       modules = [
         {
           imports = [
@@ -38,5 +41,6 @@ let
   );
 in
 {
-  fishhead = mkHome "fishhead";
+  fishhead-dell = mkHome "fishhead" "dell" "laptop";
+  fishhead-lenovo = mkHome  "fishhead" "lenovo" "desktop";
 }
