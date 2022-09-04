@@ -3,6 +3,8 @@
   fonts = {
     enableDefaultFonts = true; 
     fontDir.enable = true;
+    enableGhostscriptFonts = true;
+    fonts.fontconfig.allowType1 = true; # https://github.com/NixOS/nixpkgs/issues/59379
     fonts = with pkgs; [
       # The classic Microsoft fonts everyone uses.
       corefonts

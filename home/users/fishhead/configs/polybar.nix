@@ -37,10 +37,9 @@ in {
       alsaSupport = true;
     };
 
-    # script = "polybar -q -r top & polybar -q -r bottom &";
     script = ''
       # Terminate already running bar instances
-      killall -q polybar
+      pgrep polybar | xargs kill
 
       # Wait until the processes have been shut down
       while pgrep -x polybar >/dev/null; do sleep 1; done

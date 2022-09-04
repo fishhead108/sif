@@ -7,8 +7,10 @@
 
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    # agenix = { 
-    #   url = "github:ryantm/agenix";inputs.nixpkgs.follows = "nixpkgs"; };
+    agenix = { 
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs"; 
+    };
 
     nurpkgs = {
       url = github:nix-community/NUR;
@@ -22,7 +24,7 @@
 
   };
 
-  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs }:
+  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs, agenix }:
     let
       system = "x86_64-linux";
 
@@ -45,8 +47,8 @@
     {
       nixosConfigurations = (
         import ./outputs/nixos-conf.nix {
-          inherit system;
-          inherit (nixpkgs) lib inputs;
+          inherit (nixpkgs) lib;
+          inherit system inputs agenix;
         }
       );
 

@@ -1,6 +1,12 @@
-{ config, pkgs, lib, ... }: {
-  
+{ config, pkgs, lib, ... }: 
+# let
+#   # secrets = ../../../secrets/ts_auth.age;
+#   age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
+# in
+{  
   services = {
+
+    yubikey-agent.enable = true;
 
     localtimed.enable = true;
 
@@ -62,7 +68,7 @@
     tailscale.enable = true;
 
     # Use the systemd-timesyncd SNTP client to sync the system clock (enabled by default)
-    timesyncd.enable = true;
+    # timesyncd.enable = true;
 
     # Thermals and cooling
     thermald.enable = true;
@@ -73,6 +79,9 @@
     gnome.gnome-keyring.enable = true;
   };
 
+age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
+  # age.secrets.ts_auth.file = ../../../secrets/ts_auth.age;
+  # secrets = ../../../secrets/ts_auth.age;
 
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
@@ -98,7 +107,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey ${builtins.readFile ../../secrets/ts_auth.token}
+      ${tailscale}/bin/tailscale up --authkey $(cat ${config.age.secrets.ts_auth.path})
     '';
   };
 }

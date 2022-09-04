@@ -19,11 +19,6 @@ in
       kernelVersion.acpi_call
     ];
 
-    loader = { 
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-
     consoleLogLevel = 1;
 
     # Sysctl params

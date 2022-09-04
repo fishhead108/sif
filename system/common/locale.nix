@@ -1,7 +1,7 @@
 { pkgs, ... }: {
 
   # Set your time zone.
-  time.timeZone = "Europe/Zurich";
+  time.timeZone = "Europe/Paris";
 
   console = {
     # Set terminal font

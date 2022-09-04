@@ -7,6 +7,12 @@
   nixpkgs.overlays = [ (import ../../misc/packages) ];
   
   boot = {
+
+    loader = { 
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    
     plymouth = {
       enable = true;
       # https://sidhartharya.me/using-custom-plymouth-theme-on-nixos/

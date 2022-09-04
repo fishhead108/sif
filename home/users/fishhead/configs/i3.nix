@@ -1,6 +1,6 @@
 { pkgs, lib, specialArgs, ... }:
 let
-  mod = if specialArgs.hostname == "lenovo" then "Mod4" else "Mod1";
+  mod = if specialArgs.pcProfile == "desktop" then "Mod1" else "Mod4";
 in
 {
   home.file.".xprofile".source = ./i3/xprofile;
@@ -13,9 +13,8 @@ in
     package = pkgs.i3;
     extraConfig = "set $mod ${mod}\npopup_during_fullscreen smart\ndefault_border pixel 1\ndefault_floating_border pixel 1\n";
 
-    config = rec {
-      # modifier = "Mod4";
-
+    config = {
+      modifier = mod;
       bars = [ ];
 
       focus.forceWrapping = true;
@@ -39,24 +38,23 @@ in
       window = {
         border = 1;
         hideEdgeBorders = "smart";
-        # titlebar = false;
         commands = [ 
-          # { command = "border pixel 1"; criteria = { class = "^.*"; }; } 
           { command = "floating enable"; criteria = { window_role = "pop-up"; }; } 
           { command = "floating enable"; criteria = { window_role = "task_dialog"; }; } 
           { command = "floating enable"; criteria = { class = "qt5ct|Lxappearance|^Gpick$|Pamac|Peek|Nitrogen|Audacious|Pavucontrol"; }; } 
           { command = "focus"; criteria = { class = "Gksu|Pinentry|Pinentry-gtk-2|pinentry-gnome3"; }; } 
           { command = "no_focus"; criteria = { class = "Skype"; }; }
-          { command = "move to workspace 5, workspace --no-auto-back-and-forth 5"; criteria = { class = "spotify"; }; }
+          { command = "move to workspace 5"; criteria = { class = "Spotify"; }; }
+          { command = "move to workspace 1"; criteria = { class = "Alacritty"; }; }
         ];
       };
 
       assigns = {
-        "1" = [{ class = "^alacritty$"; }];
-        "2" = [{ instance = "^Navigator$"; class = "^Firefox$"; }];
+        "1" = [{ class = "^Alacritty$"; }];
+        "2" = [{ instance = "^Navigator$"; class = "^firefox$"; }];
         "3" = [{ class = "^Code$"; }];
         "4" = [{ class = "^TelegramDesktop$|^Skype$|^Slack$|^zoom$"; }];
-        "5" = [{ class = "^VirtualBox$|^TeamViewer$|^Spotify$"; }];
+        "5" = [{ class = "^spotify$|^VirtualBox$|^TeamViewer$"; }];
         "0" = [{ class = "^Doublecmd$"; window_role = "About"; }];
       };
 
@@ -124,11 +122,11 @@ in
         #   always = true;
         #   notification = false;
         # }
-        # {
-        #   command = "systemctl --user restart polybar.service";
-        #   always = true;
-        #   notification = false;
-        # }
+        {
+          command = "systemctl --user restart polybar.service";
+          always = true;
+          notification = false;
+        }
         {
           command = "${pkgs.feh}/bin/feh --bg-scale ~/background.jpg";
           always = true;
