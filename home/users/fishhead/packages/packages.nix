@@ -15,7 +15,6 @@
     gtk-engine-murrine              # A very flexible theme engine
     gtk_engines                     # Theme engines for GTK 2
     xscreensaver                    # A set of screensavers
-    which                           # Shows the full path of (shell) commands
     arandr                          # A simple visual front end for XRandR
     brightnessctl                   # This program allows you read and control device brightness
     xfce.xfce4-power-manager        # A power manager for the Xfce Desktop Environment
@@ -50,6 +49,7 @@
     htop                    # An interactive process viewer
     neofetch                # A fast, highly customizable system info script
     tmux                    # Terminal multiplexer
+    which                   # Shows the full path of (shell) commands
 
     # Development
     jq                      # A lightweight and flexible command-line JSON processor

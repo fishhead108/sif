@@ -17,9 +17,9 @@
     };
 
     # Install LXD
-    lxd.enable = true;
+    lxd.enable = false;
     # Install VB
-    virtualbox.host.enable = true;
+    virtualbox.host.enable = false;
     # Libvirtd (Qemu)
     libvirtd.enable = true;
   };

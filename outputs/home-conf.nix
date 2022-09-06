@@ -43,4 +43,5 @@ in
 {
   fishhead-dell = mkHome "fishhead" "dell" "laptop";
   fishhead-lenovo = mkHome  "fishhead" "lenovo" "desktop";
+  deployer = mkHome  "deployer" "lenovo" "server";
 }

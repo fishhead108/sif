@@ -4,7 +4,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 let
-  kernelVersion = pkgs.linuxPackages_5_19;
+  kernelVersion = pkgs.linuxPackages_5_18;
 in
 {
   imports =

@@ -1,20 +1,6 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
 
   environment = {
-    # etc = {
-    #   # Put config files in /etc. Note that you also can put these in ~/.config, but then you can't manage them with NixOS anymore!
-    #   "sway/config".source = ./dotfiles/sway/config;
-    #   "xdg/waybar/config".source = ./dotfiles/waybar/config;
-    #   "xdg/waybar/style.css".source = ./dotfiles/waybar/style.css;
-    # };
-
-    ### Workaround
-    ### Failed to load config files: 
-    ### Failed to get contents of the config dir (/etc/libblockdev/conf.d/)
-    ### Error opening directory “/etc/libblockdev/conf.d/”: No such file or directory. 
-    ### Using the built-in config
-    etc."libblockdev/conf.d/00-default.cfg".source = "${pkgs.libblockdev}/etc/libblockdev/conf.d/00-default.cfg";
-
     # QT4/5 global theme
     etc."xdg/Trolltech.conf" = {
       text = ''
@@ -24,14 +10,14 @@
       mode = "444";
     };
       
-    shellInit = ''
+    shellInit = lib.mkDefault ''
       # export QT_STYLE_OVERIDE=Adwaita-dark
-    # export QT_QPA_PLATFORMTHEME=qt5ct
-      # if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
-      #   export GPG_TTY="$(tty)"
-      #   gpg-connect-agent /bye
-      #   export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
-      # fi
+      # export QT_QPA_PLATFORMTHEME=qt5ct
+      if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
+        export GPG_TTY="$(tty)"
+        gpg-connect-agent /bye
+        export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+      fi
     '';
 
     sessionVariables = rec {
@@ -40,7 +26,6 @@
       XDG_CONFIG_HOME = "\${HOME}/.config";
       XDG_BIN_HOME    = "\${HOME}/.local/bin";
       XDG_DATA_HOME   = "\${HOME}/.local/share";
-      # XDG_DATA_DIRS   = "\${HOME}/.nix-profile/share:/usr/local/share:/usr/share";
 
       PATH = [ 
         "\${XDG_BIN_HOME}"
@@ -82,7 +67,7 @@
       pinentry-gnome                      # GnuPG’s interface to passphrase input
       pinentry-curses                     # GnuPG’s interface to passphrase input
       libnotify                           # A library that sends desktop notifications to a notification daemon
-      # accountsservice                     # D-Bus interface for user account query and manipulation
+      accountsservice                     # D-Bus interface for user account query and manipulation
       ranger                              # File manager with minimalistic curses interface
       geoclue2                            # Geolocation framework and some data providers
       dnsutils                            # network: dig
@@ -121,7 +106,7 @@
     ssh.startAgent = false;
 
     gnupg.agent = {
-      enable = false;
+      enable = lib.mkDefault true;
       enableSSHSupport = true;
       pinentryFlavor = "gtk2";
     };

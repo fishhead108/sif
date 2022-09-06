@@ -27,7 +27,4 @@
     vlock.u2fAuth = true;
     xscreensaver.u2fAuth = true;
   };
-
-    # Get notifications when waiting for my yubikey
-    # services.yubikey-touch-detector.enable = true;
 }

@@ -137,12 +137,12 @@ in
           always = false;
           notification = false;
         }
-        {
-          # Launch sound tray icon
-          command = "${pkgs.pasystray}/bin/pasystray";
-          always = false;
-          notification = false;
-        }
+        # {
+        #   # Launch sound tray icon
+        #   command = "${pkgs.pasystray}/bin/pasystray";
+        #   always = false;
+        #   notification = false;
+        # }
         {
           # network-monior
           command = "${pkgs.networkmanagerapplet}/bin/nm-applet";

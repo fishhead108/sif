@@ -16,22 +16,6 @@ systemctl --user import-environment DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_AUTH_SO
 if [ -z $_XPROFILE_SOURCED ]; then
         export _XPROFILE_SOURCED=1
 
-        # ## Tray 
-        # nm-applet &
-        # pasystray &
-        # rescuetime &
-
-        # ## Browser
-        # firefox &
-
-        # ## VSCode
-        # code &
-
-        # ## Chats
-        # slack &
-        # telegram-desktop &
-
-        # # Music
-        # spotify &
+        pasystray &
 
 fi

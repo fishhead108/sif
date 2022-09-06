@@ -41,10 +41,7 @@
     };
   };
 
-  
-
-  users.users.root.password = "Init1234";
-  users.users.fishhead.password = "Init1234";
+  # users.users.root.password = "";
+  # users.users.fishhead.password = "";
   systemd.services.qemu-guest-agent.path = [ pkgs.shadow ];
-
 }

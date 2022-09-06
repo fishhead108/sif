@@ -1,14 +1,10 @@
 { config, pkgs, lib, ... }: 
-# let
-#   # secrets = ../../../secrets/ts_auth.age;
-#   age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
-# in
 {  
   services = {
 
-    yubikey-agent.enable = true;
+    yubikey-agent.enable = false;
 
-    localtimed.enable = true;
+    localtimed.enable = false;
 
     journald.extraConfig = ''
       SystemMaxUse=100M
@@ -79,9 +75,10 @@
     gnome.gnome-keyring.enable = true;
   };
 
-age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
-  # age.secrets.ts_auth.file = ../../../secrets/ts_auth.age;
-  # secrets = ../../../secrets/ts_auth.age;
+  # 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
 
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {

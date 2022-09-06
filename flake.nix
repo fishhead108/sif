@@ -28,8 +28,8 @@
     let
       system = "x86_64-linux";
 
-      deploy = sshUser: hostName: homeUser: osConfigurationName: hmConfigurationName:  {
-        hostname = hostName;
+      deploy = sshUser: sshHostName: homeUser: osConfigurationName: hmConfigurationName:  {
+        hostname = sshHostName;
         sshUser = sshUser;
           profiles = {
             system = {
@@ -65,8 +65,9 @@
       );
 
       deploy.nodes = {
-        lenovo  = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo";
-        dell    = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell";
+        lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo";
+        dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell";
+        builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
       };
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

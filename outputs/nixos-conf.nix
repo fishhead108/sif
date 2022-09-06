@@ -7,7 +7,7 @@
     modules = [
       agenix.nixosModules.age
       ../system/hosts/vm
-      ../system/configuration.nix
+      ../system/common
     ];
   };
 
@@ -17,7 +17,7 @@
     modules = [
       agenix.nixosModules.age
       ../system/hosts/dell
-      ../system/configuration.nix
+      ../system/common
     ];
   };
 
@@ -27,7 +27,18 @@
     modules = [
       agenix.nixosModules.age
       ../system/hosts/lenovo
-      ../system/configuration.nix
+      ../system/common
     ];
   };
+
+  builder = lib.nixosSystem {
+    inherit system;
+    specialArgs = { inherit inputs; };
+    modules = [
+      agenix.nixosModules.age
+      ../system/hosts/builder
+      ../system/common
+    ];
+  };
+
 }
