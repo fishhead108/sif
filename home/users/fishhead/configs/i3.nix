@@ -45,7 +45,7 @@ in
           { command = "focus"; criteria = { class = "Gksu|Pinentry|Pinentry-gtk-2|pinentry-gnome3"; }; } 
           { command = "no_focus"; criteria = { class = "Skype"; }; }
           { command = "move to workspace 5"; criteria = { class = "Spotify"; }; }
-          { command = "move to workspace 1"; criteria = { class = "Alacritty"; }; }
+          # { command = "move to workspace 1"; criteria = { class = "Alacritty"; }; }
         ];
       };
 

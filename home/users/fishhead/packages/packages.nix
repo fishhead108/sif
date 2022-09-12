@@ -69,6 +69,7 @@
     # Sec
     _1password              # 1Password command-line tool
     _1password-gui          # Multi-platform password manager
+    keepassxc               # Offline password manager with many features.
     rofi-pass               # A script to make rofi work with password-store
     protonvpn-gui           # Official ProtonVPN Linux app
     tor                     # Anonymizing overlay network

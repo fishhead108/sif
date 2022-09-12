@@ -1,7 +1,9 @@
-{ pkgs, ...}:
-
+{ pkgs, lib, specialArgs, ...}:
+let
+  laptop = if specialArgs.pcProfile == "laptop" then true else false;
+in
 {
-  systemd.user.services.battery_status = {
+  systemd.user.services.battery_status = lib.mkIf (laptop == true) {
     Unit = {
       Description = "Service: Send notification if battery is low";
       After = "display-manager.service";
@@ -20,7 +22,7 @@
     };
   };
 
-  systemd.user.timers.battery_status = {
+  systemd.user.timers.battery_status = lib.mkIf (laptop) {
     Unit = {
       Description = "Timer: Send notification if battery is low";
       Requires= "battery_status.service";

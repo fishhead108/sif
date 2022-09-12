@@ -80,6 +80,7 @@
   };
   
   programs = {
+
     neovim.enable = true;
     
     neovim.viAlias = true;
