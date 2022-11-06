@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, specialArgs, ... }:
 
 # Created By @icanwalkonwater
 # Edited and ported to Nix by Th0rgal
@@ -28,7 +28,16 @@ let
   # Red
   urgency = "#e74c3c";
 
-in {
+  bluetoothScript = pkgs.callPackage ./polybar/scripts/bluetooth.nix {};
+  monitorScript   = pkgs.callPackage ./polybar/scripts/monitor.nix {};
+  mprisScript     = pkgs.callPackage ./polybar/scripts/mpris.nix {};
+  networkScript   = pkgs.callPackage ./polybar/scripts/network.nix {};
+  openCalendar = "${pkgs.xfce.orage}/bin/orage";
+
+  laptop = if specialArgs.pcProfile == "laptop" then true else false;
+
+in 
+{
   services.polybar = {
     enable = true;
 
@@ -37,14 +46,22 @@ in {
       alsaSupport = true;
     };
 
-    script = ''
+    script = with pkgs; ''
+      set +e
+      export MONITOR=$(${monitorScript}/bin/monitor);
+      echo "Running polybar on $MONITOR";
+      export ETH_INTERFACE=$(${networkScript}/bin/check-network eth);
+      export WIFI_INTERFACE=$(${networkScript}/bin/check-network wifi);
+      echo "Network interfaces $ETH_INTERFACE & $WIFI_INTERFACE";
+
       # Terminate already running bar instances
-      pgrep polybar | xargs kill
+      ${procps}/bin/pkill -q polybar
 
-      # Wait until the processes have been shut down
-      while pgrep -x polybar >/dev/null; do sleep 1; done
+      # Launch Polybar
+      polybar -q -r top & disown
+      polybar -q -r bottom & disown
 
-      polybar -q -r top & polybar -q -r bottom &
+      echo "Polybar launched..."
     ''; 
 
     config = {
@@ -120,7 +137,7 @@ in {
         foreground = "\${colors.foreground}";
 
         modules-left = "network wireless-network";
-        # modules-center = "time-tomsk";
+        modules-center = "bctl mpris";
         modules-right = "xkeyboard filesystem cpu memory battery powermenu";
 
         font-0 = "FuraCode Nerd Font:size=12;3";
@@ -143,12 +160,29 @@ in {
 
       #--------------------MODULES--------------------"
 
+      "module/mpris" = {
+        type = "custom/script";
+        exec = "${mprisScript}/bin/mpris";
+        tail = true;
+        label-maxlen = 60;
+        interval = 2;
+        format = "  <label>";
+        format-padding = 2;
+      };
+
+      "module/bctl" = {
+        type = "custom/script";
+        exec = "${bluetoothScript}/bin/bluetooth-ctl";
+        tail = true;
+        click-left = "${bluetoothScript}/bin/bluetooth-ctl --toggle &";
+      };
+
       "module/xkeyboard" = {
         type = "internal/xkeyboard";
         blacklist-0 = "num lock";
 
         format = "<label-layout> <label-indicator>";
-        format-underline = "\${colors.secondary}";
+        format-underline = "\${colors.secondary-content}";
         label-layout = "%layout%";
         # format-prefix =  "🖮 ";
         format-background = "\${colors.background-highlight}";
@@ -202,7 +236,7 @@ in {
         label-muted = "VOL Muted";
       };
 
-      "module/battery" = {
+      "module/battery" = lib.mkIf (laptop) {
         type = "internal/battery";
         full-at = 101; # to disable it
         battery = "BAT0"; # TODO: Better way to fill this
@@ -280,7 +314,7 @@ in {
         format-background = "\${colors.background-highlight}";
         format-foreground = "\${colors.yellow}";
 
-        label = "%time%";
+        label = "%{A1:${openCalendar}:}%time%%{A}";
       };
 
       "module/i3" = {
@@ -332,7 +366,7 @@ in {
 
       "module/wireless-network" = {
         type = "internal/network";
-        interface = "wlp0s20f3";
+        interface = "wlo1";
         interval = "3.0";
         format-connected-background = "\${colors.background-highlight}";
         format-connected-foreground = "\${colors.orange}";
@@ -342,7 +376,7 @@ in {
 
       "module/network" = {
         type = "internal/network";
-        interface = "enp59s0";
+        interface = "eno2";
 
         interval = "1.0";
 

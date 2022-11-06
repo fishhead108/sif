@@ -37,6 +37,9 @@
     };
 
     systemPackages = with pkgs; [
+      findutils                           #
+      procps                              #
+      psmisc                              # A set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
       wget                                # Tool for retrieving files using HTTP, HTTPS, and FTP
       curl                                # A command line tool for transferring files with URL syntax
       git                                 # Distributed version control system
@@ -81,30 +84,30 @@
   
   programs = {
 
-    neovim.enable = true;
+    neovim.enable = lib.mkDefault true;
     
-    neovim.viAlias = true;
+    neovim.viAlias = lib.mkDefault true;
 
     # Whether to enable iftop + setcap wrapper.
-    iftop.enable = true;
+    iftop.enable = lib.mkDefault true;
 
     # Whether to enable iotop + setcap wrapper.
-    iotop.enable = true;
+    iotop.enable = lib.mkDefault true;
 
     # Whether to add mtr to the global environment and configure a setcap wrapper for it.
-    mtr.enable = true;
+    mtr.enable = lib.mkDefault true;
 
     # Whether to enable Bash completion for all interactive bash shells.
-    bash.enableCompletion = true;
+    bash.enableCompletion = lib.mkDefault true;
 
     # Whether to install Light backlight control command and udev rules granting access to members of the "video" group.
-    light.enable = true;
+    light.enable = lib.mkDefault true;
 
-    dconf.enable = true;
+    dconf.enable = lib.mkDefault true;
 
-    mosh.enable = true;
+    mosh.enable = lib.mkDefault true;
 
-    ssh.startAgent = false;
+    ssh.startAgent = lib.mkDefault false;
 
     gnupg.agent = {
       enable = lib.mkDefault true;

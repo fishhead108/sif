@@ -53,7 +53,7 @@
     # Enable the X11 windowing system.
     xserver = {
       enable = true;
-      layout = "us,ru";
+      layout = "us,ru,fr";
       xkbOptions = "grp:caps_toggle,grp_led:caps";
 
       # Enable touchpad support.

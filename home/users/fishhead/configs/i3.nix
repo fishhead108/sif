@@ -6,7 +6,7 @@ in
   home.file.".xprofile".source = ./i3/xprofile;
   home.file.".config/i3/rofi_powermenu.sh".source = ./i3/rofi_powermenu.sh;
   home.file.".config/i3/rofi_custom.sh".source = ./i3/rofi_custom.sh;
-  home.file.".config/i3/polybar.sh".source = ./polybar/launch.sh;
+  # home.file.".config/i3/polybar.sh".source = ./polybar/launch.sh;
 
   xsession.windowManager.i3 = {
     enable = true;

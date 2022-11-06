@@ -3,7 +3,7 @@ let
   laptop = if specialArgs.pcProfile == "laptop" then true else false;
 in
 {
-  systemd.user.services.battery_status = lib.mkIf (laptop == true) {
+  systemd.user.services.battery_status = lib.mkIf (laptop) {
     Unit = {
       Description = "Service: Send notification if battery is low";
       After = "display-manager.service";

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
 
   # Whether to enable ALSA sound.
   sound.enable = true;
@@ -27,6 +27,8 @@
       # For compatibility with 32-bit applications
       support32Bit = true;
 
+      extraConfig = "load-module module-echo-cancel aec_method=webrtc source_name=echocancel sink_name=echocancel1";
+
       daemon.config = {
         flat-volumes = "no";
         resample-method = "speex-float-10";
@@ -34,6 +36,6 @@
     };
     
     # Update the CPU microcode for Intel processors.
-    cpu.intel.updateMicrocode = true;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }

@@ -68,6 +68,10 @@
         lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo";
         dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell";
         builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
+        # pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
+        # pi4-2      = deploy "nixos" "192.168.1.33" "deployer" "pi4-2" "deployer";
+        # pi4-3      = deploy "nixos" "192.168.1.33" "deployer" "pi4-3" "deployer";
+        # pi4-4      = deploy "nixos" "192.168.1.33" "deployer" "pi4-4" "deployer";
       };
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

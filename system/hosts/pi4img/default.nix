@@ -6,9 +6,8 @@
 {
   imports = [
     ./boot.nix
-    ./hardware.nix
-    ./networking.nix
+    # ./hardware.nix
+    # ./networking.nix
     # ./packages.nix
-    ./services.nix
   ];
 }

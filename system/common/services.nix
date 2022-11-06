@@ -13,13 +13,13 @@
     
     # Enable a deamon that allows updating some devices
     # firmware, including UEFI for several machines
-    fwupd.enable = true;
+    fwupd.enable = lib.mkDefault true;
 
     # List of packages containing udev rules. All files found in pkg/etc/udev/rules.d and pkg/lib/udev/rules.d will be included.
     udev.packages = with pkgs; [ yubikey-personalization libu2f-host ];
     
     #### GEOCLUE
-    geoclue2.enable = true;
+    geoclue2.enable = lib.mkDefault true;
 
     # clight = {
     #   # Maybe causes freezes on sway + nvidia
@@ -36,20 +36,20 @@
     # automatically advertise the network services running on
     # its machine, facilitating user access to those services
     avahi = {
-      enable = true;
+      enable = lib.mkDefault true;
       nssmdns = true;
     };
 
-    fstrim.enable = true;
+    fstrim.enable = lib.mkDefault true;
 
     # Windows share
     gvfs = {
-      enable = true;
+      enable = lib.mkDefault true;
       package = lib.mkForce pkgs.gnome3.gvfs;
     };
 
     # Smartcard support
-    pcscd.enable = true;
+    pcscd.enable = lib.mkDefault true;
 
     # ssh
     openssh = {
@@ -57,6 +57,7 @@
       passwordAuthentication = false;
       kbdInteractiveAuthentication = false;
       permitRootLogin = "no";
+      extraConfig = "AllowUsers fishhead deployer nixos\nPermitEmptyPasswords no\nClientAliveInterval 300\nClientAliveCountMax 0";
     };
     
     dbus.packages = with pkgs; [ dconf ];
@@ -67,16 +68,16 @@
     # timesyncd.enable = true;
 
     # Thermals and cooling
-    thermald.enable = true;
+    thermald.enable = lib.mkDefault true;
 
-    usbmuxd.enable = true;
+    usbmuxd.enable = lib.mkDefault true;
 
     # Enable keyring
-    gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = lib.mkDefault true;
   };
 
   # 
-  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = lib.mkDefault false;
 
   age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
 

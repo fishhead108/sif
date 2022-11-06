@@ -4,11 +4,8 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [
-    ./boot.nix
-    ./hardware.nix
-    ./networking.nix
-    # ./packages.nix
-    ./services.nix
-  ];
+  networking = {
+    hostName = "pi4-1";
+    interfaces.eth0.useDHCP = true;
+  };
 }

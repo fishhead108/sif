@@ -1,6 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -47,7 +47,7 @@
     longitude = 6.626003;
   };
 
-  documentation = {
+  documentation = lib.mkDefault {
     dev.enable = true;
     man.enable = true;
     info.enable = false;

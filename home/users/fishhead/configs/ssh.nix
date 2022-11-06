@@ -26,4 +26,58 @@
 
   # Send a keepalive every 30 seconds.
   programs.ssh.serverAliveInterval = 30;
+
+  programs.ssh.matchBlocks = {
+    "github.com" = {
+      identitiesOnly = true;
+      identityFile = "~/.ssh/github";
+    };
+
+    "*.github.com" = {
+      identitiesOnly = true;
+      identityFile = "~/.ssh/github";
+    };
+
+    "*.revizto.com" = {
+      user = "dmiroshnichenko";
+    };
+
+    "*.revizto-stage.com" = {
+      user = "dmiroshnichenko";
+    };
+
+    "*.infra.revizto.com" = {
+      user = "dmiroshnichenko";
+    };
+
+    "lenovo" = {
+      hostname = "lenovo.home.arpa";
+      user = "fishhead";
+    };
+
+    "pi3" = {
+      hostname = "192.168.1.151";
+      user = "fishhead";
+    };
+
+    "pi4-1" = {
+      hostname = "192.168.1.13";
+      user = "fishhead";
+    };
+
+    "pi4-2" = {
+      hostname = "192.168.1.119";
+      user = "fishhead";
+    };
+
+    "pi4-3" = {
+      hostname = "192.168.1.68";
+      user = "fishhead";
+    };
+
+    "pi4-4" = {
+      hostname = "192.168.1.220";
+      user = "fishhead";
+    };
+  };
 }
