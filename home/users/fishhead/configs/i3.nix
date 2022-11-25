@@ -31,7 +31,7 @@ in
       };
 
       fonts = {
-        names = [ "FuraCode Nerd Font" ];
+        names = [ "FuraMono Nerd Font" ];
         size = 10.0;
       };
 

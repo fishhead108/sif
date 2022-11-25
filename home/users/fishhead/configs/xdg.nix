@@ -5,6 +5,7 @@
   xdg = {
     enable = true;
     mime.enable = true;
+    systemDirs.data = ["$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"];
     userDirs = {
       enable = true;
       createDirectories = false;

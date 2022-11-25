@@ -118,8 +118,8 @@ in
         wm-stack = "i3";
         override-redirect = false;
 
-        font-0 = "FuraCode Nerd Font:size=12;3";
-        font-1 = "FuraCode Nerd Font:style=Bold:size=12;3";
+        font-0 = "FuraMono Nerd Font:size=12;3";
+        font-1 = "FuraMono Nerd Font:style=Bold:size=12;3";
 
         locale = "en_US.UTF-8";
       };
@@ -140,8 +140,8 @@ in
         modules-center = "bctl mpris";
         modules-right = "xkeyboard filesystem cpu memory battery powermenu";
 
-        font-0 = "FuraCode Nerd Font:size=12;3";
-        font-1 = "FuraCode Nerd Font:style=Bold:size=12;3";
+        font-0 = "FuraMono Nerd Font:size=12;3";
+        font-1 = "FuraMono Nerd Font:style=Bold:size=12;3";
 
         locale = "en_US.UTF-8";
       };
@@ -324,16 +324,16 @@ in
         format = "<label-state> <label-mode>";
         format-background = "\${colors.background-highlight}";
 
-        ws-icon-0 = "1;";
-        ws-icon-1 = "2;";
-        ws-icon-2 = "3;﬏";
-        ws-icon-3 = "4;";
-        ws-icon-4 = "5;";
-        ws-icon-5 = "6;";
-        ws-icon-6 = "7;";
-        ws-icon-7 = "8;";
-        ws-icon-8 = "9;";
-        ws-icon-9 = "10;";
+        ws-icon-0 = "1; ";
+        ws-icon-1 = "2; ";
+        ws-icon-2 = "3;﬏ ";
+        ws-icon-3 = "4; ";
+        ws-icon-4 = "5; ";
+        ws-icon-5 = "6; ";
+        ws-icon-6 = "7; ";
+        ws-icon-7 = "8; ";
+        ws-icon-8 = "9; ";
+        ws-icon-9 = "10; ";
 
         label-mode = "%mode%";
         label-mode-padding = 1;

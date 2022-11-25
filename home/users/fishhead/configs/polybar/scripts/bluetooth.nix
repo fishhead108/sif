@@ -34,12 +34,12 @@ in
       if ${bctl} show | grep -q "Powered: no"; then
         ${bctl} power on >> /dev/null
         ${pkgs.coreutils}/bin/sleep 1
-        devices_paired=$(${bctl} paired-devices | grep Device | cut -d ' ' -f 2)
+        devices_paired=$(${bctl} devices | grep Device | cut -d ' ' -f 2)
         echo "$devices_paired" | while read -r line; do
           ${bctl} connect "$line" >> /dev/null
         done
       else
-        devices_paired=$(${bctl} paired-devices | grep Device | cut -d ' ' -f 2)
+        devices_paired=$(${bctl} devices | grep Device | cut -d ' ' -f 2)
         echo "$devices_paired" | while read -r line; do
           ${bctl} disconnect "$line" >> /dev/null
         done

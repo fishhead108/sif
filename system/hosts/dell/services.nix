@@ -49,6 +49,15 @@
   services = {
     # AccountsService is a D-Bus service for accessing the list of user accounts and information attached to those accounts.
     accounts-daemon.enable = true;
+    x2goserver.enable = true;
+
+    xrdp.enable = true;
+    xrdp.defaultWindowManager = "startplasma-x11";
+
+    openssh = {
+        forwardX11 = true;
+        extraConfig = "X11UseLocalhost = no";
+    };
 
     # Enable the X11 windowing system.
     xserver = {

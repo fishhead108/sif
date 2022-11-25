@@ -65,6 +65,7 @@
     unzip                   # An extraction utility for archives compressed in .zip format
     zstd                    # Zstandard real-time compression algorithm
     libsForQt5.okular       # KDE document viewer
+    foliate                 # A simple and modern GTK eBook reader
 
     # Sec
     _1password              # 1Password command-line tool
@@ -83,6 +84,7 @@
     vlc                     # Cross-platform media player and streaming server
     feh                     # A light-weight image viewer
     flameshot               # Powerful yet simple to use screenshot software
+    audacity                # Sound editor with graphical UI
     
     # Sound 
     lxqt.pavucontrol-qt     # A Pulseaudio mixer in Qt (port of pavucontrol)

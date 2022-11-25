@@ -20,17 +20,30 @@
 
       git = {
         extraConfig = { 
+          commit.gpgsign = true;
+          gpg.format = "ssh";
+          user.signingkey = "~/.ssh/github-sign";
           safe = {
           directory = "*";
           };
+
+          diff.tool = "vscode";
+          difftool.vscode.cmd =
+            let
+              cmd = "code --wait --diff $LOCAL $REMOTE";
+            in
+            cmd;
+
+          merge.tool = "vscode";
+          mergetool.vscode.cmd =
+            let
+              cmd = "code --wait $MERGED";
+            in
+            cmd;
         };
         enable = true;
         userName = "Dmitrii Miroshnichenko";
         userEmail = "2543810@gmail.com";
-        signing = {
-          key = "43005EF80787DE60";
-          signByDefault = true;
-        };
       };
 
       zsh = {

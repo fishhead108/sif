@@ -9,10 +9,12 @@
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
     firewall = {
+      # boolean or one of "strict", "loose"
+      checkReversePath = true;
       allowPing = true;
-      allowedTCPPorts = [ 22 25565 ];
+      allowedTCPPorts = [ 22 ];
       allowedUDPPorts = [ config.services.tailscale.port ];
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = [ "tailscale0" "lo" ];
     };
 
     extraHosts =

@@ -1,5 +1,11 @@
 { pkgs, config, lib, ... }: {
 
+  xdg = {
+    # Needed for Flatpak
+    portal.enable = true;
+    portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   environment = {
     # QT4/5 global theme
     etc."xdg/Trolltech.conf" = {
@@ -55,7 +61,7 @@
       paprefs                             # PulseAudio Preferences
       pavucontrol                         # PulseAudio Volume Control
       pulsemixer                          # Cli and curses mixer for pulseaudio
-      alsaUtils
+      alsa-utils
       broadcom-bt-firmware                # Firmware for Broadcom WIDCOMM® Bluetooth devices
       tailscale                           # The node agent for Tailscale, a mesh VPN built on WireGuard
       man-pages                           # Linux development manual pages
@@ -84,7 +90,7 @@
   
   programs = {
 
-    neovim.enable = lib.mkDefault true;
+    neovim.enable = lib.mkDefault false;
     
     neovim.viAlias = lib.mkDefault true;
 

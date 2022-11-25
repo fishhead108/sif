@@ -17,7 +17,7 @@
       enable = true;
 
       # Enable all bluez plugins
-      package = pkgs.bluezFull;
+      package = pkgs.bluez;
 
       powerOnBoot = true;
 
@@ -45,7 +45,7 @@
         driSupport32Bit = true;
 
         # Use Mesa OpenGL drivers
-        package = pkgs.mesa_drivers;
+        package = pkgs.mesa.drivers;
     };
   };
 

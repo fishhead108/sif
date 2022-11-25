@@ -32,7 +32,10 @@
     wantedBy = [ "multi-user.target" ];
   };
 
-  services = {    
+  services = {
+
+    flatpak.enable = true;
+
     # AccountsService is a D-Bus service for accessing the list of user accounts and information attached to those accounts.
     accounts-daemon.enable = true;
 

@@ -45,7 +45,7 @@
     # Windows share
     gvfs = {
       enable = lib.mkDefault true;
-      package = lib.mkForce pkgs.gnome3.gvfs;
+      package = lib.mkForce pkgs.gnome.gvfs;
     };
 
     # Smartcard support

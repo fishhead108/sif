@@ -3,7 +3,6 @@
 {
   services.picom = {
     enable = true;
-    experimentalBackends = true;
 
     activeOpacity = 1.0;
     inactiveOpacity = 0.9;
