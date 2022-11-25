@@ -30,12 +30,12 @@
   programs.ssh.matchBlocks = {
     "github.com" = {
       identitiesOnly = true;
-      identityFile = "~/.ssh/github";
+      identityFile = "~/.ssh/github-auth";
     };
 
     "*.github.com" = {
       identitiesOnly = true;
-      identityFile = "~/.ssh/github";
+      identityFile = "~/.ssh/github-auth";
     };
 
     "*.revizto.com" = {
