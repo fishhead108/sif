@@ -35,7 +35,8 @@ in
     yubikey-touch-detector
 
     # The Yubikey oath configuration program.
-    yubioath-desktop
+    # yubioath-desktop
+    # yubioath-flutter
 
     yubico-piv-tool
     pass

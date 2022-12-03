@@ -10,7 +10,7 @@
 
     firewall = {
       # boolean or one of "strict", "loose"
-      checkReversePath = true;
+      checkReversePath = "loose";
       allowPing = true;
       allowedTCPPorts = [ 22 ];
       allowedUDPPorts = [ config.services.tailscale.port ];
