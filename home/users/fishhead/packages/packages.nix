@@ -58,6 +58,10 @@
     lazygit                 # Simple terminal UI for git commands
     python39Full            # A high-level dynamically-typed programming language
     openssl_3               # A cryptographic library that implements the SSL and TLS protocols
+    d2                      # A modern diagram scripting language that turns text to diagrams
+    python310Packages.pipx  # Install and Run Python Applications in Isolated Environments
+    # gcc                     # GNU Compiler Collection, version 11.3.0 (wrapper script)
+    fx                      # Terminal JSON viewer
     
     # Documents
     evince                  # GNOME's document viewer

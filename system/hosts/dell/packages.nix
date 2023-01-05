@@ -8,5 +8,6 @@
       acpi                                # Show battery status and other ACPI information
       smartmontools
       x2goserver
+      freerdp
     ];
 }

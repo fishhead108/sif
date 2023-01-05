@@ -85,6 +85,7 @@
       wirelesstools                       # network: iwgetid
       nix-tree                            # Interactively browse a Nix store paths dependencies
       deploy-rs                           # A simple multi-profile Nix-flake deploy tool.
+      # crowdsec                            # CrowdSec is a free, open-source and collaborative IPS
     ];
   };
   

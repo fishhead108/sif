@@ -11,7 +11,7 @@
   };
 
   environment.sessionVariables = lib.mkDefault {
-    XKB_DEFAULT_LAYOUT = "us,ru,fr";
+    XKB_DEFAULT_LAYOUT = "us,ru";
     XKB_DEFAULT_OPTIONS = "grp:caps_toggle,grp_led:caps";
     LANG = "en_US.UTF-8";
   };

@@ -108,4 +108,18 @@
       ${tailscale}/bin/tailscale up --authkey $(cat ${config.age.secrets.ts_auth.path})
     '';
   };
+  # systemd.services.crowdsec = with pkgs; {
+  #   description = "Crowdsec agent";
+
+  #   after = [ "syslog.target" "network.target" "remote-fs.target" "nss-lookup.target" ];
+  #   wantedBy = [ "multi-user.target" ];
+
+  #   serviceConfig.Type = "notify";
+
+  #   serviceConfig = {
+  #     ExecStartPre="${crowdsec}/bin/crowdsec -c /etc/crowdsec/config.yaml -t";
+  #     ExecStart="${crowdsec}/bin/crowdsec -c /etc/crowdsec/config.yaml";
+  #     ExecReload="${util-linux}/bin/kill -HUP $MAINPID";
+  #   };
+  # };
 }
