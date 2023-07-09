@@ -40,6 +40,7 @@
             };
             home = {
               user = homeUser;
+              remoteBuilder = true;
               profilePath = "/nix/var/nix/profiles/per-user/${homeUser}/home-manager";
               path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations.${hmConfigurationName};
             };

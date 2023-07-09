@@ -16,7 +16,7 @@
     fwupd.enable = lib.mkDefault true;
 
     # List of packages containing udev rules. All files found in pkg/etc/udev/rules.d and pkg/lib/udev/rules.d will be included.
-    # udev.packages = with pkgs; [ yubikey-personalization libu2f-host ];
+    udev.packages = with pkgs; [ yubikey-personalization libu2f-host ];
     
     #### GEOCLUE
     geoclue2.enable = lib.mkDefault true;
