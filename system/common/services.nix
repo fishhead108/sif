@@ -81,7 +81,7 @@
   # 
   systemd.services.NetworkManager-wait-online.enable = lib.mkDefault false;
 
-  age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
+  #age.secrets.ts_auth.file = ../../secrets/ts_auth.age;
 
   # create a oneshot job to authenticate to Tailscale
   # systemd.services.tailscale-autoconnect = {
