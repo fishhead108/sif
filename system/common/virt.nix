@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   virtualisation = {
@@ -17,10 +17,10 @@
     };
 
     # Install LXD
-    lxd.enable = false;
+    lxd.enable = lib.mkDefault false;
     # Install VB
-    virtualbox.host.enable = false;
+    virtualbox.host.enable = lib.mkDefault false;
     # Libvirtd (Qemu)
-    libvirtd.enable = true;
+    libvirtd.enable = lib.mkDefault true;
   };
 }

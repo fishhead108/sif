@@ -7,7 +7,6 @@
         clock24 = true;
         escapeTime = 0;
         historyLimit = 10000;
-        # breaks tmate
         newSession = false;
         secureSocket = false;
         shortcut = "space";
@@ -17,6 +16,9 @@
 
         plugins = with pkgs; [
             tmuxPlugins.cpu
+            tmuxPlugins.extrakto
+            # tmuxPlugins.treemux
+            # tmuxPlugins.tmux-autoreload
             {
                 plugin = tmuxPlugins.resurrect;
                 extraConfig = "set -g @resurrect-strategy-nvim 'session'";
@@ -52,6 +54,9 @@
         
         # auto window rename
         set-window-option -g automatic-rename
+
+        # Show CPU info
+        set -g status-right '#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
 
         bind -n S-M-Up {
           copy-mode

@@ -42,19 +42,19 @@ let
   mods1  = builtins.readFile ./modules.ini;
   mods2  = builtins.readFile ./user_modules.ini;
 
-  bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix {};
+  # bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix {};
   klsScript       = pkgs.callPackage ../../scripts/keyboard-layout-switch.nix { inherit pkgs; };
   monitorScript   = pkgs.callPackage ./scripts/monitor.nix {};
   mprisScript     = pkgs.callPackage ./scripts/mpris.nix {};
   networkScript   = pkgs.callPackage ./scripts/network.nix {};
 
-  bctl = ''
-    [module/bctl]
-    type = custom/script
-    exec = ${bluetoothScript}/bin/bluetooth-ctl
-    tail = true
-    click-left = ${bluetoothScript}/bin/bluetooth-ctl --toggle &
-  '';
+  # bctl = ''
+  #   [module/bctl]
+  #   type = custom/script
+  #   exec = ${bluetoothScript}/bin/bluetoothctl
+  #   tail = true
+  #   click-left = ${bluetoothScript}/bin/bluetoothctl --toggle &
+  # '';
 
   cal = ''
     [module/clickable-date]

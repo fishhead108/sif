@@ -28,7 +28,7 @@ let
   # Red
   urgency = "#e74c3c";
 
-  bluetoothScript = pkgs.callPackage ./polybar/scripts/bluetooth.nix {};
+  # bluetoothScript = pkgs.callPackage ./polybar/scripts/bluetooth.nix {};
   monitorScript   = pkgs.callPackage ./polybar/scripts/monitor.nix {};
   mprisScript     = pkgs.callPackage ./polybar/scripts/mpris.nix {};
   networkScript   = pkgs.callPackage ./polybar/scripts/network.nix {};
@@ -42,13 +42,13 @@ in
     enable = true;
 
     package = pkgs.polybar.override {
-      i3GapsSupport = true;
       alsaSupport = true;
+      i3Support = true;
     };
 
     script = with pkgs; ''
       set +e
-      export MONITOR=$(${monitorScript}/bin/monitor);
+      # export MONITOR=$(${monitorScript}/bin/monitor);
       echo "Running polybar on $MONITOR";
       export ETH_INTERFACE=$(${networkScript}/bin/check-network eth);
       export WIFI_INTERFACE=$(${networkScript}/bin/check-network wifi);
@@ -58,8 +58,9 @@ in
       ${procps}/bin/pkill -q polybar
 
       # Launch Polybar
-      polybar -q -r top & disown
-      polybar -q -r bottom & disown
+      MONITOR=DP-2 polybar -q -r top & disown
+      MONITOR=DP-2 polybar -q -r bottom & disown
+      MONITOR=HDMI-3 polybar -q -r second & disown
 
       echo "Polybar launched..."
     ''; 
@@ -87,6 +88,34 @@ in
         green                = "#859900";
       };
       #====================BARS====================#
+
+      "bar/second" = {
+        monitor = "HDMI-3";
+        monitor-strict = false;
+        dpi = "[0-9]+";
+        bottom = false;
+        width = "100%";
+        height = 30;
+
+        background = "\${colors.background}";
+        foreground = "\${colors.foreground}";
+
+        underline-size = 2;
+        underline-color = "#00f";
+
+        module-margin-right = 1;
+        modules-center = "i3";
+
+        enable-ipc = false;
+
+        wm-stack = "i3";
+        override-redirect = false;
+
+        font-0 = "FiraMono Nerd Font:size=12;3";
+        font-1 = "FiraMono Nerd Font:style=Bold:size=12;3";
+
+        locale = "en_US.UTF-8";
+      };
 
       "bar/top" = {
         monitor-strict = true;
@@ -118,8 +147,8 @@ in
         wm-stack = "i3";
         override-redirect = false;
 
-        font-0 = "FuraMono Nerd Font:size=12;3";
-        font-1 = "FuraMono Nerd Font:style=Bold:size=12;3";
+        font-0 = "FiraMono Nerd Font:size=12;3";
+        font-1 = "FiraMono Nerd Font:style=Bold:size=12;3";
 
         locale = "en_US.UTF-8";
       };
@@ -140,8 +169,8 @@ in
         modules-center = "bctl mpris";
         modules-right = "xkeyboard filesystem cpu memory battery powermenu";
 
-        font-0 = "FuraMono Nerd Font:size=12;3";
-        font-1 = "FuraMono Nerd Font:style=Bold:size=12;3";
+        font-0 = "FiraMono Nerd Font:size=12;3";
+        font-1 = "FiraMono Nerd Font:style=Bold:size=12;3";
 
         locale = "en_US.UTF-8";
       };
@@ -170,12 +199,12 @@ in
         format-padding = 2;
       };
 
-      "module/bctl" = {
-        type = "custom/script";
-        exec = "${bluetoothScript}/bin/bluetooth-ctl";
-        tail = true;
-        click-left = "${bluetoothScript}/bin/bluetooth-ctl --toggle &";
-      };
+      # "module/bctl" = {
+      #   type = "custom/script";
+      #   exec = "${bluetoothScript}/bin/bluetoothctl";
+      #   tail = true;
+      #   click-left = "${bluetoothScript}/bin/bluetoothctl --toggle &";
+      # };
 
       "module/xkeyboard" = {
         type = "internal/xkeyboard";
@@ -319,17 +348,17 @@ in
 
       "module/i3" = {
         type = "internal/i3";
-        pin-workspaces = false;
+        pin-workspaces = true;
         strip-wsnumbers = true;
         format = "<label-state> <label-mode>";
         format-background = "\${colors.background-highlight}";
 
         ws-icon-0 = "1; ";
-        ws-icon-1 = "2; ";
-        ws-icon-2 = "3;﬏ ";
-        ws-icon-3 = "4; ";
-        ws-icon-4 = "5; ";
-        ws-icon-5 = "6; ";
+        ws-icon-1 = "2; ";
+        ws-icon-2 = "3; ";
+        ws-icon-3 = "4; ";
+        ws-icon-4 = "5; ";
+        ws-icon-5 = "6; ";
         ws-icon-6 = "7; ";
         ws-icon-7 = "8; ";
         ws-icon-8 = "9; ";

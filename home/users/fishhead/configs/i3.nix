@@ -17,7 +17,7 @@ in
       modifier = mod;
       bars = [ ];
 
-      focus.forceWrapping = true;
+      focus.wrapping = "yes";
       floating.modifier = "Mod5";
 
       workspaceAutoBackAndForth = true;
@@ -31,7 +31,7 @@ in
       };
 
       fonts = {
-        names = [ "FuraMono Nerd Font" ];
+        names = [ "FiraMono Nerd Font" ];
         size = 10.0;
       };
 
@@ -55,6 +55,7 @@ in
         "3" = [{ class = "^Code$"; }];
         "4" = [{ class = "^TelegramDesktop$|^Skype$|^Slack$|^zoom$"; }];
         "5" = [{ class = "^spotify$|^VirtualBox$|^TeamViewer$"; }];
+        "6" = [{ class = "^Google-chrome$"; }];
         "0" = [{ class = "^Doublecmd$"; window_role = "About"; }];
       };
 
@@ -93,18 +94,18 @@ in
         "${mod}+comma" = "focus right;split v;layout stacking;focus left;move right";
       };
 
-      # workspaceOutputAssign = [
-      #   { workspace = "workspace 1"; output = "eDP-1"; }
-      #   { workspace = "2"; output = "eDP-1"; }
-      #   { workspace = "3"; output = "eDP-1"; }
-      #   { workspace = "4"; output = "eDP-1"; }
-      #   { workspace = "5"; output = "HDMI-1"; }
-      #   { workspace = "6"; output = "HDMI-1"; }
-      #   { workspace = "7"; output = "HDMI-1"; }
-      #   { workspace = "8"; output = "HDMI-1"; }
-      #   { workspace = "9"; output = "HDMI-1"; }
-      #   { workspace = "10"; output = "HDMI-1"; }
-      # ];
+      workspaceOutputAssign = [
+        { workspace = "workspace 1"; output = "DP-2"; }
+        { workspace = "2"; output = "DP-2"; }
+        { workspace = "3"; output = "DP-2"; }
+        { workspace = "4"; output = "DP-2"; }
+        { workspace = "5"; output = "DP-2"; }
+        { workspace = "6"; output = "HDMI-3"; }
+        { workspace = "7"; output = "HDMI-3"; }
+        { workspace = "8"; output = "HDMI-3"; }
+        { workspace = "9"; output = "HDMI-3"; }
+        { workspace = "10"; output = "HDMI-3"; }
+      ];
 
       startup = [
         {

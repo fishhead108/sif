@@ -51,13 +51,13 @@
     accounts-daemon.enable = true;
     x2goserver.enable = true;
 
-    xrdp.enable = true;
-    xrdp.defaultWindowManager = "startplasma-x11";
+    # xrdp.enable = true;
+    # xrdp.defaultWindowManager = "startplasma-x11";
 
-    openssh = {
-        forwardX11 = true;
-        extraConfig = "X11UseLocalhost = no";
-    };
+    # openssh = {
+    #     settings.forwardX11 = true;
+    #     extraConfig = "X11UseLocalhost = no";
+    # };
 
     # Enable the X11 windowing system.
     xserver = {
@@ -75,7 +75,7 @@
 
       # Enable lightdm
       displayManager.lightdm = {
-        enable = true;
+        enable = false;
          
         # extraConfig = ''
         #   greeter-hide-users=false
@@ -99,7 +99,7 @@
       };
       
       desktopManager.xterm.enable = true;
-      windowManager.i3.enable = true;
+      windowManager.i3.enable = false;
     };
     
     # Enable ACPI deamon. When an event occurs, it executes
@@ -115,7 +115,7 @@
     tlp.enable = false;
     tlp.extraConfig = "USB_AUTOSUSPEND=0";
     
-    usbmuxd.enable = true;
+    # usbmuxd.enable = false;
     
     blueman.enable = true;
     

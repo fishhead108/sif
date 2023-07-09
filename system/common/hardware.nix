@@ -8,10 +8,7 @@
 
   hardware = {
     ##### disable nvidia, very nice battery life.
-    #nvidiaOptimus.disable = lib.mkDefault true;
-
-    # High-resolution display
-    video.hidpi.enable = true;
+    # nvidiaOptimus.disable = lib.mkDefault true;
 
     # ddcutils requires i2c
     i2c.enable = true;

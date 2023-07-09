@@ -24,12 +24,12 @@ in
     xorg.xinput
 
     # The Yubikey manager and its GUI.
-    yubikey-manager
-    yubikey-manager-qt
+    # yubikey-manager
+    # yubikey-manager-qt
 
     # The Yubikey personalization tool and its GUI.
-    yubikey-personalization
-    yubikey-personalization-gui
+    # yubikey-personalization
+    # yubikey-personalization-gui
 
     # A tool to detect when your YubiKey is waiting for a touch
     yubikey-touch-detector

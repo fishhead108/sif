@@ -31,8 +31,8 @@
     wm-stack = "i3";
     override-redirect = false;
 
-    font-0 = "FuraMono Nerd Font:size=12;3";
-    font-1 = "FuraMono Nerd Font:style=Bold:size=12;3";
+    font-0 = "FiraMono Nerd Font:size=12;3";
+    font-1 = "FiraMono Nerd Font:style=Bold:size=12;3";
 
     locale = "en_US.UTF-8";
   };
@@ -53,8 +53,8 @@
     # modules-center = "time-tomsk";
     modules-right = "xkeyboard filesystem cpu memory battery powermenu";
 
-    font-0 = "FuraMono Nerd Font:size=12;3";
-    font-1 = "FuraMono Nerd Font:style=Bold:size=12;3";
+    font-0 = "FiraMono Nerd Font:size=12;3";
+    font-1 = "FiraMono Nerd Font:style=Bold:size=12;3";
 
     locale = "en_US.UTF-8";
   };

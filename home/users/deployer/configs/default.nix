@@ -4,6 +4,6 @@
 
   imports = [
     ./neovim
-    ./ssh.nix
+    # ./ssh.nix
   ];
 }

@@ -11,7 +11,7 @@
   };
 
   boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+  # boot.loader.generic-extlinux-compatible.enable = true;
 
   boot.initrd.availableKernelModules = [ "usbhid" "xhci_pci" "usb_storage" ];
   boot.initrd.kernelModules = [ ];

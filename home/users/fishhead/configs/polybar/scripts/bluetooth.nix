@@ -5,7 +5,7 @@ let
   bctl  = "/run/current-system/sw/bin/bluetoothctl";
   sctl  = "/run/current-system/sw/bin/systemctl";
 in
-  pkgs.writeShellScriptBin "bluetooth-ctl" ''
+  pkgs.writeShellScriptBin "bluetoothctl" ''
     bluetooth_print() {
       ${bctl} | while read -r; do
         if [ "$(${sctl} is-active "bluetooth.service")" = "active" ]; then

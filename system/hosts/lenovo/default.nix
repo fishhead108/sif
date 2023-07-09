@@ -8,7 +8,8 @@
     ./boot.nix
     ./hardware.nix
     ./networking.nix
-    # ./packages.nix
+    ./packages.nix
     ./services.nix
+    ./virt.nix
   ];
 }

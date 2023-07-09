@@ -10,5 +10,7 @@
     ./networking.nix
     ./services.nix
     ./nix.nix
+    ./hyprland
+    ./packages.nix
   ];
 }

@@ -5,6 +5,9 @@
     ./battery_status.nix
     ./dunst.nix
     ./gpg.nix
+    ./waybar.nix
+    ./mako.nix
+    ./fonts.nix
     ./i3.nix
     ./keyring.nix
     ./locale.nix

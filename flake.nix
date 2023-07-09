@@ -7,6 +7,8 @@
 
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     agenix = { 
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs"; 
@@ -24,7 +26,7 @@
 
   };
 
-  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs, agenix }:
+  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs, agenix, hyprland }:
     let
       system = "x86_64-linux";
 
@@ -43,14 +45,22 @@
             };
           };
       };
+      crossSystem = {
+        config = self.nixosConfigurations."pi4-1".config.system.build.hostPlatform.config;
+        platforms."aarch64-linux" = {
+          system = "aarch64-linux-gnu";
+          # config = { libcVersion = "musl"; };
+        };
+      };
     in
     {
       nixosConfigurations = (
         import ./outputs/nixos-conf.nix {
           inherit (nixpkgs) lib;
-          inherit system inputs agenix;
+          inherit system crossSystem inputs agenix hyprland;
         }
       );
+
 
       homeConfigurations = (
         import ./outputs/home-conf.nix {
@@ -58,22 +68,22 @@
         }
       );
 
-      devShell.${system} = (
-        import ./outputs/installation.nix {
-          inherit system nixpkgs;
-        }
-      );
+      # devShell.${system} = (
+      #   import ./outputs/installation.nix {
+      #     inherit system nixpkgs;
+      #   }
+      # );
 
       deploy.nodes = {
         lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo";
         dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell";
         builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
-        # pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
+        pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
         # pi4-2      = deploy "nixos" "192.168.1.33" "deployer" "pi4-2" "deployer";
         # pi4-3      = deploy "nixos" "192.168.1.33" "deployer" "pi4-3" "deployer";
         # pi4-4      = deploy "nixos" "192.168.1.33" "deployer" "pi4-4" "deployer";
       };
 
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

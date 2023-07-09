@@ -20,7 +20,7 @@
     xfce.xfce4-power-manager        # A power manager for the Xfce Desktop Environment
     i3lock-pixeled                  # Simple i3lock helper which pixels a screenshot
     i3lock-fancy                    # i3lock is a bash script that takes a screenshot of the desktop, blurs the background and adds a lock icon and text
-    i3lock-color                    # A simple screen locker like slock, enhanced version with extra configuration options
+    # i3lock-color                    # A simple screen locker like slock, enhanced version with extra configuration options
     mime-types                      # 
     lxappearance                    # Lightweight program for configuring the theme and fonts of gtk applications
     qt5ct                           # Qt5 Configuration Too
@@ -48,7 +48,7 @@
     gh                      # GitHub CLI tool
     htop                    # An interactive process viewer
     neofetch                # A fast, highly customizable system info script
-    tmux                    # Terminal multiplexer
+    # tmux                    # Terminal multiplexer
     which                   # Shows the full path of (shell) commands
 
     # Development
@@ -142,7 +142,7 @@
     slack                                   # Desktop client for Slack
 
     # Ops tools
-    awscli2                                 # Unified tool to manage your AWS services
+    # awscli2                                 # Unified tool to manage your AWS services
     aws-vault                               # A vault for securely storing and accessing AWS credentials in development environments
     ansible                                 # Radically simple IT automation
     tflint                                  # Terraform linter focused on possible errors, best practices, and so on
@@ -158,9 +158,10 @@
     kubectx                                 # Fast way to switch between clusters and namespaces in kubectl!
     kubernetes-helm                         # A package manager for kubernetes
     lens                                    # The Kubernetes IDE
-    vagrant                                 # A tool for building complete development environments
+    # vagrant                                 # A tool for building complete development environments
     minikube                                # A tool that makes it easy to run Kubernetes locally
     docker-compose                          # Multi-container orchestration for Docker
     cloud-nuke                              # A tool for cleaning up your cloud accounts by nuking (deleting) all resources within it
+    
   ];
 }

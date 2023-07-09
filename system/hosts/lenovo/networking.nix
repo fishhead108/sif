@@ -8,5 +8,13 @@
     hostName = "lenovo";
     interfaces.eno2.useDHCP = true;
     interfaces.wlo1.useDHCP = true;
+    # For Vagrant
+    firewall = {
+      allowedTCPPorts = [ 8384 22000 ];
+      allowedUDPPorts = [ 22000 21027 ];
+      extraCommands = ''
+        ip46tables -I INPUT 1 -i vboxnet+ -p tcp -m tcp --dport 2049 -j ACCEPT
+      '';
+    };
   };
 }

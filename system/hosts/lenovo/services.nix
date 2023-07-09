@@ -34,10 +34,22 @@
 
   services = {
 
+    # For Vagrant
+    nfs.server.enable = true;
+
     flatpak.enable = true;
 
     # AccountsService is a D-Bus service for accessing the list of user accounts and information attached to those accounts.
     accounts-daemon.enable = true;
+
+    # ssh
+    # openssh = {
+    #   settings = {
+    #     passwordAuthentication = false;
+    #     kbdInteractiveAuthentication = false;
+    #     permitRootLogin = "no";
+    #   };
+    # };
 
     # Enable the X11 windowing system.
     xserver = {
@@ -64,8 +76,29 @@
       windowManager.i3.enable = true;
     };
 
-    usbmuxd.enable = true;
     blueman.enable = true;
-  };
-  
+
+    # syncthing = {
+    #   enable = true;
+    #   dataDir = "/home/fishhead/Documents";
+    #   configDir = "/home/fishhead/.config/syncthing";
+    #   overrideDevices = true;     # overrides any devices added or deleted through the WebUI
+    #   overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+    #   devices = {
+    #     "ipad" = { id = "XQXJNYK-ZCC3XRD-CBLASET-P4LPXES-CIUWI32-SYSEUG7-IUNUCMW-4PVCCQA"; };
+    #     # "device2" = { id = "DEVICE-ID-GOES-HERE"; };
+    #   };
+    #   folders = {
+    #     "Documents" = {        # Name of folder in Syncthing, also the folder ID
+    #       path = "/home/fishhead/Documents";    # Which folder to add to Syncthing
+    #       devices = [ "ipad" ];      # Which devices to share the folder with
+    #     };
+    #     "TGD" = {
+    #       path = "/home/fishhead/Downloads/Telegram Desktop";
+    #       devices = [ "ipad" ];
+    #       ignorePerms = false;     # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
+    #     };
+    #   };
+    # };
+  };  
 }

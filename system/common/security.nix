@@ -19,7 +19,7 @@
     };
 
     # Enable the AppArmor Mandatory Access Control system
-    apparmor.enable = true;
+    apparmor.enable = false;
   };
 
   programs = {
@@ -37,14 +37,14 @@
 
   # tmpfs = /tmp is mounted in ram. Doing so makes temp file management speedy
   # on ssd systems, and volatile! Because it's wiped on reboot.
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
   # If not using tmpfs, which is naturally purged on reboot, we must clean it
   # /tmp ourselves. /tmp should be volatile storage!
-  boot.cleanTmpDir = (!config.boot.tmpOnTmpfs);
+  boot.tmp.cleanOnBoot = (!config.boot.tmp.useTmpfs);
 
   # Fix a security hole in place for backwards compatibility. See desc in
   # nixpkgs/nixos/modules/system/boot/loader/systemd-boot/systemd-boot.nix
-  boot.loader.systemd-boot.editor = false;
+  # boot.loader.systemd-boot.editor = false;
 
   boot.kernel.sysctl = {
     # The Magic SysRq key is a key combo that allows users connected to the

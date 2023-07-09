@@ -53,8 +53,6 @@
     "dell" = {
       hostname = "dell.home.arpa";
       user = "fishhead";
-      forwardX11 = true;
-      forwardX11Trusted = true;
     };
 
     "lenovo" = {

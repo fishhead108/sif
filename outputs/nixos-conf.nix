@@ -1,15 +1,15 @@
-{ lib, inputs, system, agenix, ... }:
+{ lib, inputs, system, agenix, hyprland, ... }:
 
 {
-  # pi4-1 = lib.nixosSystem {
-  #   inherit system;
-  #   specialArgs = { inherit inputs; };
-  #   modules = [
-  #     agenix.nixosModules.age
-  #     ../system/hosts/pi4-1
-  #     ../system/common
-  #   ];
-  # };
+  pi4-1 = lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = { inherit inputs; };
+    modules = [
+      agenix.nixosModules.age
+      ../system/hosts/pi4-1
+      ../system/common
+    ];
+  };
 
   # pi4-2 = lib.nixosSystem {
   #   inherit system;
@@ -55,6 +55,7 @@
     inherit system;
     specialArgs = { inherit inputs; };
     modules = [
+      hyprland.nixosModules.default
       agenix.nixosModules.age
       ../system/hosts/dell
       ../system/common
