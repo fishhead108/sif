@@ -16,7 +16,7 @@
     ./polybar.nix
     ./redshift.nix
     ./rofi.nix
-    ./spotify.nix
+    #./spotify.nix
     ./ssh.nix
     ./tmux.nix
     ./udiskie.nix
