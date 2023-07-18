@@ -1,10 +1,10 @@
 { pkgs, lib, config, ... }: {
 
   # Whether to enable ALSA sound.
-  sound.enable = true;
+  sound.enable = lib.mkDefault false;
 
   # Enable sound.
-  nixpkgs.config.pulseaudio = true;
+  nixpkgs.config.pulseaudio = false;
 
   hardware = {
     ##### disable nvidia, very nice battery life.
@@ -15,7 +15,7 @@
 
     # Whether to enable the PulseAudio sound server.
     pulseaudio = {
-      enable = true;
+      enable = lib.mkDefault false;
 
       # 1. Only the full build has Bluetooth support
       # 2. Enable JACK support

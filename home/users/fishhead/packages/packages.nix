@@ -5,6 +5,7 @@
     # Appearance
     rofi-systemd                    # Control your systemd units using rofi
     gsettings-desktop-schemas       # Collection of GSettings schemas for settings shared by various components of a desktop
+    glib                            # Access to gsettings
     xdg-utils                       # A set of command line tools that assist applications with a variety of desktop integration tasks
     xdg-user-dirs                   # A tool to help manage well known user directories like the desktop folder and the music folder
     xfce.thunar                     # Xfce file manager
@@ -30,6 +31,7 @@
     numix-solarized-gtk-theme       # Solarized versions of Numix GTK2 and GTK3 theme
     numix-cursor-theme              # Numix cursor theme
     numix-icon-theme                # Numix icon theme
+    thunderbird-unwrapped
 
     # Helpers
     rescuetime              # Helps you understand your daily habits so you can focus and be more productive
@@ -62,6 +64,7 @@
     python310Packages.pipx  # Install and Run Python Applications in Isolated Environments
     # gcc                     # GNU Compiler Collection, version 11.3.0 (wrapper script)
     fx                      # Terminal JSON viewer
+    postman                 # API Development Environment
     
     # Documents
     evince                  # GNOME's document viewer
@@ -72,8 +75,8 @@
     foliate                 # A simple and modern GTK eBook reader
 
     # Sec
-    _1password              # 1Password command-line tool
-    _1password-gui          # Multi-platform password manager
+    # _1password              # 1Password command-line tool
+    # _1password-gui          # Multi-platform password manager
     keepassxc               # Offline password manager with many features.
     rofi-pass               # A script to make rofi work with password-store
     protonvpn-gui           # Official ProtonVPN Linux app

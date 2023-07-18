@@ -5,7 +5,11 @@
   xdg = {
     enable = true;
     mime.enable = true;
-    systemDirs.data = ["$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"];
+    systemDirs.data = [
+      "$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"
+      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+    ];
     userDirs = {
       enable = true;
       createDirectories = false;

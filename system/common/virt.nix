@@ -21,6 +21,6 @@
     # Install VB
     virtualbox.host.enable = lib.mkDefault false;
     # Libvirtd (Qemu)
-    libvirtd.enable = lib.mkDefault true;
+    libvirtd.enable = lib.mkDefault false;
   };
 }

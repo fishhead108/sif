@@ -28,10 +28,11 @@
     };
   
   services.openssh.enable = true;
+  services.openssh.permitRootLogin = "yes";
 
   networking = {
     useDHCP = false;                        # Deprecated
-    hostName = "vm";
+    hostName = "virtualvm";
     interfaces.eth0.useDHCP = true;
     interfaces.br0.useDHCP = true;
     bridges = {
@@ -41,7 +42,6 @@
     };
   };
 
-  # users.users.root.password = "";
-  # users.users.fishhead.password = "";
+  users.users.root.password = "";
   systemd.services.qemu-guest-agent.path = [ pkgs.shadow ];
 }

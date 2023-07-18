@@ -30,8 +30,9 @@
     let
       system = "x86_64-linux";
 
-      deploy = sshUser: sshHostName: homeUser: osConfigurationName: hmConfigurationName:  {
+      deploy = sshUser: sshHostName: homeUser: osConfigurationName: hmConfigurationName: sshOptions: {
         hostname = sshHostName;
+        sshOpts = sshOptions;
         sshUser = sshUser;
           profiles = {
             system = {
@@ -76,10 +77,11 @@
       # );
 
       deploy.nodes = {
-        lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo";
-        dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell";
-        builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
-        pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
+        lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo" [];
+        # vm         = deploy "root" "virtualvm" "root" "vm" "fishhead-lenovo" [];
+        # dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" [ "-p" "2222" ];;
+        # builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
+        # pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
         # pi4-2      = deploy "nixos" "192.168.1.33" "deployer" "pi4-2" "deployer";
         # pi4-3      = deploy "nixos" "192.168.1.33" "deployer" "pi4-3" "deployer";
         # pi4-4      = deploy "nixos" "192.168.1.33" "deployer" "pi4-4" "deployer";

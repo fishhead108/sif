@@ -1,4 +1,11 @@
 self: super: {
+  # thunderbird-unwrapped = super.thunderbird-unwrapped.overrideAttrs (_: {
+  #   version = "115.0b6";
+  # });
+  # discord = super.discord.overrideAttrs (_: {
+  #   src = builtins.fetchTarball
+  #     "https://discord.com/api/download?platform=linux&format=tar.gz";
+  # })
   # discord = super.discord.overrideAttrs (_: {
   #   src = builtins.fetchTarball
   #     "https://discord.com/api/download?platform=linux&format=tar.gz";

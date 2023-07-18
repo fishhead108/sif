@@ -3,11 +3,13 @@
   programs.noisetorch.enable = true;
   environment.systemPackages = with pkgs; [
       # x2goclient
-      guvcview
-      obs-studio
-      screenkey
-      zlib
-      # syncthing
-      # syncthingtray
+      guvcview                # A simple interface for devices supported by the linux UVC driver
+      #obs-studio              # 
+      screenkey               # A screencast tool to display your keys inspired by Screenflick
+      zlib                    #
+      # syncthing              # 
+      # syncthingtray          # 
+      _1password              # 1Password command-line tool
+      _1password-gui          # Multi-platform password manager
   ];
 }

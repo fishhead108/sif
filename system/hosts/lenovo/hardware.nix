@@ -14,6 +14,8 @@
 
       powerOnBoot = true;
 
+      # hsphfpd.enable = true;
+
       # Modern headsets will generally try to connect using the A2DP profile.
       # To enable this we need to add the following lines:
       settings = {
@@ -22,6 +24,8 @@
           };
       };
     };
+
+    pulseaudio.enable = false;
 
     opengl = {
         # Enable OpenGL support in X11 systems, as well as for

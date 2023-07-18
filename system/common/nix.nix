@@ -21,7 +21,7 @@
       keep-outputs             = true;
       keep-derivations         = true;
       connect-timeout          = 3;
-      max-jobs                 = 6;
+      max-jobs                 = "auto";
       min-free                 = "524288000";
       max-free                 = "5368709120";
     };
