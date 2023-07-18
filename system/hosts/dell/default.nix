@@ -5,12 +5,13 @@
 
 {
   imports = [
+    # ./hyprland
     ./boot.nix
     ./hardware.nix
     ./networking.nix
-    ./services.nix
     ./nix.nix
-    ./hyprland
     ./packages.nix
+    ./security.nix
+    ./services.nix
   ];
 }

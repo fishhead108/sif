@@ -51,16 +51,16 @@
   #   ];
   # };
 
-  # dell = lib.nixosSystem {
-  #   inherit system;
-  #   specialArgs = { inherit inputs; };
-  #   modules = [
-  #     hyprland.nixosModules.default
-  #     agenix.nixosModules.age
-  #     ../system/hosts/dell
-  #     ../system/common
-  #   ];
-  # };
+  dell = lib.nixosSystem {
+    inherit system;
+    specialArgs = { inherit inputs; };
+    modules = [
+      hyprland.nixosModules.default
+      agenix.nixosModules.age
+      ../system/hosts/dell
+      ../system/common
+    ];
+  };
 
   lenovo = lib.nixosSystem {
     inherit system;

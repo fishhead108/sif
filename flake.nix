@@ -79,7 +79,7 @@
       deploy.nodes = {
         lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo" [];
         # vm         = deploy "root" "virtualvm" "root" "vm" "fishhead-lenovo" [];
-        # dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" [ "-p" "2222" ];;
+        dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" [];
         # builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
         # pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
         # pi4-2      = deploy "nixos" "192.168.1.33" "deployer" "pi4-2" "deployer";

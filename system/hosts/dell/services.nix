@@ -49,7 +49,7 @@
   services = {
     # AccountsService is a D-Bus service for accessing the list of user accounts and information attached to those accounts.
     accounts-daemon.enable = true;
-    x2goserver.enable = true;
+    # x2goserver.enable = true;
 
     # xrdp.enable = true;
     # xrdp.defaultWindowManager = "startplasma-x11";
@@ -101,6 +101,39 @@
       desktopManager.xterm.enable = true;
       windowManager.i3.enable = false;
     };
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      # No idea if I need this
+      alsa.support32Bit = true;
+      pulse.enable = true;
+
+      # # High quality BT calls
+      # media-session.config.bluez-monitor.rules = [
+      #   {
+      #     # Matches all cards
+      #     matches = [{ "device.name" = "~bluez_card.*"; }];
+      #     actions = {
+      #       "update-props" = {
+      #         "bluez5.auto-connect" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+      #       };
+      #     };
+      #   }
+      #   {
+      #     matches = [
+      #       # Matches all sources
+      #       { "node.name" = "~bluez_input.*"; }
+      #       # Matches all outputs
+      #       { "node.name" = "~bluez_output.*"; }
+      #     ];
+      #     actions = {
+      #       "node.pause-on-idle" = false;
+      #     };
+      #   }
+      # ];
+    };
+
     
     # Enable ACPI deamon. When an event occurs, it executes
     # programs to handle the event. These events are triggered
@@ -131,5 +164,7 @@
       enable = true;
       # extraBackends = [ pkgs.hplipWithPlugin ];
     };
+
+
   };
 }

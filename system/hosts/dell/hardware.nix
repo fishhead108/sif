@@ -12,6 +12,8 @@
   };
 
   hardware = {
+    pulseaudio.enable = false;
+    
     # Enable bluetooth
     bluetooth = {
       enable = true;
