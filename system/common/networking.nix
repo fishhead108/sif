@@ -12,7 +12,7 @@
       # boolean or one of "strict", "loose"
       checkReversePath = "loose";
       allowPing = true;
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [ ];
       allowedUDPPorts = [ config.services.tailscale.port ];
       trustedInterfaces = [ "tailscale0" "lo" ];
     };

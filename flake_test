@@ -1,0 +1,177 @@
+{
+  description = "NixOS and user(Home Manager) configurations";
+
+  inputs = {
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    agenix = { 
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs"; 
+    };
+
+    nurpkgs = {
+      url = github:nix-community/NUR;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = github:nix-community/home-manager;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
+    # MacOS Package Management
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Emacs Overlays
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      flake = false;
+    };
+
+      # Nix-community Doom Emacs
+    doom-emacs = {
+      url = "github:nix-community/nix-doom-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.emacs-overlay.follows = "emacs-overlay";
+    };
+
+  };
+
+  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, deploy-rs, agenix, hyprland, darwin, doom-emacs, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+  let
+      # system = "x86_64-linux";
+      location = "$HOME/.setup";
+      username = "fishhead";
+      hostname = "dmiroshnichenko-laptop";
+      system = "aarch64-darwin";
+  in
+  {
+    # nixosConfigurations = (
+    #   import ./outputs/nixos-conf.nix {
+    #     inherit (nixpkgs) lib;
+    #     inherit system inputs agenix hyprland;
+    #   }
+    # );
+
+    # homeConfigurations = (
+    #   import ./outputs/home-conf.nix {
+    #     inherit system nixpkgs nurpkgs home-manager;
+    #   }
+    # );
+
+    darwinConfigurations = (
+      import ./outputs/nixos-conf.nix {
+        inherit (nixpkgs) lib;
+        inherit system inputs darwin doom-emacs nix-homebrew homebrew-core homebrew-cask;
+      }
+    );
+
+    deploy.nodes = {
+      # lenovo = let system = "x86_64-linux"; in {
+      #   hostname = "localhost";
+      #   system = "localhost";
+      #   sshUser = "fishhead";
+      #   sshOpts = [];
+      #   profiles = {
+      #     system = {
+      #       user = "root";
+      #       path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."lenovo";
+      #     };
+      #     home = {
+      #       user = "fishhead";
+      #       remoteBuilder = true;
+      #       profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
+      #       path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead-lenovo";
+      #     };
+      #   };
+      # };
+
+      # pi41 = let system = "aarch64-linux"; in {
+      #   hostname = "localhost";
+      #   system = "localhost";
+      #   sshUser = "fishhead";
+      #   sshOpts = [];
+      #   profiles = {
+      #     system = {
+      #       user = "root";
+      #       path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations."lenovo";
+      #     };
+      #     home = {
+      #       user = "fishhead";
+      #       remoteBuilder = true;
+      #       profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
+      #       path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead-lenovo";
+      #     };
+      #   };
+      # };
+
+      # pi-4 = {
+      #   config = self.nixosConfigurations."pi4-1".config.system.build.hostPlatform.config;
+      #   platforms."aarch64-linux" = {
+      #     system = "aarch64-linux-gnu";
+      #     # config = { libcVersion = "musl"; };
+      #   };
+      # };
+
+      # lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo" "x86_64-linux" [];
+      # vm         = deploy "root" "virtualvm" "root" "vm" "fishhead-lenovo" [];
+      # dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" "x86_64-linux" [];
+      # builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
+      # pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
+      # pi4-2      = deploy "nixos" "192.168.1.33" "deployer" "pi4-2" "deployer";
+      # pi4-3      = deploy "nixos" "192.168.1.33" "deployer" "pi4-3" "deployer";
+      # pi4-4      = deploy "nixos" "192.168.1.33" "deployer" "pi4-4" "deployer";
+      mac = let system = "aarch64-darwin"; in {
+        hostname = "192.168.1.61";
+        system = "aarch64-darwin";
+        sshUser = "fishhead";
+        sshOpts = [];
+        profiles = {
+          system = {
+            user = "root";
+            profilePath = "/nix/var/nix/profiles/system";
+            path = deploy-rs.lib.${system}.activate.fullDrvPath self.darwinConfigurations."mac";
+          };
+          # home = {
+          #   user = "fishhead";
+          #   remoteBuilder = true;
+          #   profilePath = "/nix/var/nix/profiles/per-user/fishhead/home-manager";
+          #   path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."fishhead-mac";
+          # };
+        };
+      };
+
+      # mac = {
+      #     sshUser= "fishhead";
+      #     hostname = "192.168.1.61";
+      #     system = "aarch64-darwin";
+      #     profiles.system.profilePath = "/nix/var/nix/profiles/system";
+      #     profiles.system.path = deploy.lib.x86_64-darwin.activate.fullDrvPath;
+      # };
+    };
+
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+  };
+}

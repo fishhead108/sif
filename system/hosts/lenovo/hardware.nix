@@ -4,7 +4,11 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+  sound.enable = true;
+  nixpkgs.config.pulseaudio = true;
   hardware = {
+    pulseaudio.enable = true;
+    
     # Enable bluetooth
     bluetooth = {
       enable = true;
@@ -24,8 +28,6 @@
           };
       };
     };
-
-    pulseaudio.enable = false;
 
     opengl = {
         # Enable OpenGL support in X11 systems, as well as for

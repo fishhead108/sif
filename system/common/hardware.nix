@@ -4,7 +4,7 @@
   sound.enable = lib.mkDefault false;
 
   # Enable sound.
-  nixpkgs.config.pulseaudio = false;
+  nixpkgs.config.pulseaudio = lib.mkDefault false;
 
   hardware = {
     ##### disable nvidia, very nice battery life.

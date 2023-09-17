@@ -1,4 +1,9 @@
 {pkgs, ...}:
+let
+  my-python-packages = ps: with ps; [
+    requests
+  ];
+in
 {
   home.packages = with pkgs; [
 
@@ -32,6 +37,7 @@
     numix-cursor-theme              # Numix cursor theme
     numix-icon-theme                # Numix icon theme
     thunderbird-unwrapped
+    junction                        # https://github.com/sonnyp/Junction
 
     # Helpers
     rescuetime              # Helps you understand your daily habits so you can focus and be more productive
@@ -58,7 +64,8 @@
     git-crypt               # Transparent file encryption in git
     git-sizer               # Compute various size metrics for a Git repository
     lazygit                 # Simple terminal UI for git commands
-    python39Full            # A high-level dynamically-typed programming language
+    # python39Full            # A high-level dynamically-typed programming language
+    (pkgs.python39Full.withPackages my-python-packages)
     openssl_3               # A cryptographic library that implements the SSL and TLS protocols
     d2                      # A modern diagram scripting language that turns text to diagrams
     python310Packages.pipx  # Install and Run Python Applications in Isolated Environments
@@ -98,6 +105,7 @@
     pasystray               # PulseAudio system tray
 
     # Browsers
+    junction
     google-chrome                           # A freeware web browser developed by Google
     (wrapFirefox firefox-bin-unwrapped {    # Mozilla Firefox, free web browser (binary package)
       extraPolicies = {

@@ -47,8 +47,9 @@
   };
 
   documentation = lib.mkDefault {
-    dev.enable = true;
-    man.enable = true;
+    nixos.enable = false;
+    dev.enable = false;
+    man.enable = false;
     info.enable = false;
   };
 

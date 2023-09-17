@@ -41,8 +41,8 @@ in
         commands = [ 
           { command = "floating enable"; criteria = { window_role = "pop-up"; }; } 
           { command = "floating enable"; criteria = { window_role = "task_dialog"; }; } 
-          { command = "floating enable"; criteria = { class = "qt5ct|Lxappearance|^Gpick$|Pamac|Peek|Nitrogen|Audacious|Pavucontrol"; }; } 
-          { command = "focus"; criteria = { class = "Gksu|Pinentry|Pinentry-gtk-2|pinentry-gnome3"; }; } 
+          { command = "floating enable"; criteria = { class = "qt5ct|Lxappearance|^Gpick$|Pamac|Peek|Nitrogen|Audacious|Pavucontrol|Junction";}; } 
+          { command = "focus"; criteria = { class = "Gksu|Pinentry|Pinentry-gtk-2|pinentry-gnome3|Junction"; }; } 
           { command = "no_focus"; criteria = { class = "Skype"; }; }
           { command = "move to workspace 5"; criteria = { class = "Spotify"; }; }
           # { command = "move to workspace 1"; criteria = { class = "Alacritty"; }; }

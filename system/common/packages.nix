@@ -49,6 +49,7 @@
       wget                                # Tool for retrieving files using HTTP, HTTPS, and FTP
       curl                                # A command line tool for transferring files with URL syntax
       git                                 # Distributed version control system
+      git-crypt
       pv                                  # Tool for monitoring the progress of data through a pipeline
       home-manager                        # A user environment configurator
       brightnessctl                       # This program allows you read and control device brightness

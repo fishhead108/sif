@@ -60,6 +60,48 @@
     # };
 
     # Enable the X11 windowing system.
+    # xserver = {
+    #   enable = true;
+    #   layout = "us,ru";
+    #   xkbOptions = "grp:caps_toggle,grp_led:caps";
+
+    #   # Enable touchpad support.
+    #   libinput.enable = true;
+
+    #   # smartd = {
+    #   #   enable = true;
+    #   #   notifications.x11.enable = true;
+    #   # };
+
+    #   # Enable lightdm
+    #   displayManager.lightdm = {
+    #     enable = false;
+         
+    #     # extraConfig = ''
+    #     #   greeter-hide-users=false
+    #     #   user-session=fishhead
+    #     #   default-user=fishhead
+    #     # '';
+
+    #     # extraSeatDefaults = ''
+    #     #   default-user=fishhead
+    #     #   greeter-hide-users=false
+    #     #   user-session=fishhead
+    #     #   greeter-show-manual-login=true
+    #     # '';
+
+    #     greeters.gtk = {
+    #       enable = true;
+    #       cursorTheme.name = "Adwaita-dark";
+    #       theme.name = "Adwaita-dark";
+    #       indicators = [ "~host" "~spacer" "~clock" "~spacer" "~power" ];
+    #     };
+    #   };
+      
+    #   desktopManager.xterm.enable = true;
+    #   windowManager.i3.enable = false;
+    # };
+
     xserver = {
       enable = true;
       layout = "us,ru";
@@ -68,28 +110,10 @@
       # Enable touchpad support.
       libinput.enable = true;
 
-      # smartd = {
-      #   enable = true;
-      #   notifications.x11.enable = true;
-      # };
-
       # Enable lightdm
       displayManager.lightdm = {
-        enable = false;
+        enable = true;
          
-        # extraConfig = ''
-        #   greeter-hide-users=false
-        #   user-session=fishhead
-        #   default-user=fishhead
-        # '';
-
-        # extraSeatDefaults = ''
-        #   default-user=fishhead
-        #   greeter-hide-users=false
-        #   user-session=fishhead
-        #   greeter-show-manual-login=true
-        # '';
-
         greeters.gtk = {
           enable = true;
           cursorTheme.name = "Adwaita-dark";
@@ -99,7 +123,7 @@
       };
       
       desktopManager.xterm.enable = true;
-      windowManager.i3.enable = false;
+      windowManager.i3.enable = true;
     };
 
     pipewire = {
@@ -108,6 +132,8 @@
       # No idea if I need this
       alsa.support32Bit = true;
       pulse.enable = true;
+
+      wireplumber.enable = true;
 
       # # High quality BT calls
       # media-session.config.bluez-monitor.rules = [

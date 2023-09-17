@@ -2,7 +2,7 @@
 
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       # A set of various monospaced fonts, patched with numerous extra unicode
       # glyphs for extra-shiny fonts in terminals, etc.
       font-manager

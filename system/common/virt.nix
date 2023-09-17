@@ -4,11 +4,11 @@
   virtualisation = {
     # Allow unprivileged user to pass USB devices connected to
     # this machine to libvirt VMs, both local and remote
-    spiceUSBRedirection.enable = true;
+    spiceUSBRedirection.enable = lib.mkDefault  true;
 
     # Install and configure Docker
     docker = {
-      enable = true;
+      enable = lib.mkDefault true;
       # Run docker system prune -f periodically
       autoPrune.enable = true;
       autoPrune.dates = "weekly";

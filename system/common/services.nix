@@ -2,9 +2,9 @@
 {  
   services = {
 
-    yubikey-agent.enable = false;
+    yubikey-agent.enable = lib.mkDefault false;
 
-    localtimed.enable = false;
+    localtimed.enable = lib.mkDefault false;
 
     journald.extraConfig = ''
       SystemMaxUse=100M
