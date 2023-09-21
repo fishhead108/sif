@@ -42,7 +42,8 @@
             home = {
               user = homeUser;
               remoteBuilder = true;
-              profilePath = "/nix/var/nix/profiles/per-user/${homeUser}/home-manager";
+              # profilePath = "/nix/var/nix/profiles/per-user/${homeUser}/home-manager";
+              profilePath = "/home/${homeUser}/.local/state/nix/profiles/home-manager";
               path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations.${hmConfigurationName};
             };
           };
@@ -77,11 +78,11 @@
       # );
 
       deploy.nodes = {
-        lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo" [];
+        lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo" ["-oControlMaster=no"];
         # vm         = deploy "root" "virtualvm" "root" "vm" "fishhead-lenovo" [];
-        dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" [];
+        # dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" [];
         # builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
-        # pi4-1      = deploy "nixos" "192.168.1.13" "deployer" "pi4-1" "deployer";
+        # pi4-1      = deploy "nixos" "`192.168.1.13" "deployer" "pi4-1" "deployer";
         # pi4-2      = deploy "nixos" "192.168.1.33" "deployer" "pi4-2" "deployer";
         # pi4-3      = deploy "nixos" "192.168.1.33" "deployer" "pi4-3" "deployer";
         # pi4-4      = deploy "nixos" "192.168.1.33" "deployer" "pi4-4" "deployer";
