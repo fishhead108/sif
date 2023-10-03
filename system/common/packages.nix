@@ -95,6 +95,11 @@
   
   programs = {
 
+    _1password-gui = {
+        enable = true;
+        polkitPolicyOwners = [ "fishhead" ];
+    };
+
     neovim.enable = lib.mkDefault false;
     
     neovim.viAlias = lib.mkDefault true;

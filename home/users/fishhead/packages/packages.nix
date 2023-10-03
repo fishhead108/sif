@@ -62,7 +62,10 @@
     # python39Full            # A high-level dynamically-typed programming language
     openssl_3               # A cryptographic library that implements the SSL and TLS protocols
     d2                      # A modern diagram scripting language that turns text to diagrams
-    python310Packages.pipx  # Install and Run Python Applications in Isolated Environments
+    python311
+    python311Packages.pipx  # Install and Run Python Applications in Isolated Environment
+    python311Packages.pip
+    python311Packages.requests
     # gcc                     # GNU Compiler Collection, version 11.3.0 (wrapper script)
     fx                      # Terminal JSON viewer
     postman                 # API Development Environment

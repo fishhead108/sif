@@ -2,6 +2,9 @@
 {  
   services = {
 
+    # For fingerprint support
+    fprintd.enable = lib.mkDefault true;
+
     yubikey-agent.enable = lib.mkDefault false;
 
     localtimed.enable = lib.mkDefault false;

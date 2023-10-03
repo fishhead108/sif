@@ -33,6 +33,9 @@
   };
 
   services = {
+    rpcbind.enable = true;
+
+    yubikey-agent.enable = false;
 
     # For Vagrant
     nfs.server.enable = true;
@@ -41,15 +44,6 @@
 
     # AccountsService is a D-Bus service for accessing the list of user accounts and information attached to those accounts.
     accounts-daemon.enable = true;
-
-    # ssh
-    # openssh = {
-    #   settings = {
-    #     passwordAuthentication = false;
-    #     kbdInteractiveAuthentication = false;
-    #     permitRootLogin = "no";
-    #   };
-    # };
 
     # Enable the X11 windowing system.
     xserver = {

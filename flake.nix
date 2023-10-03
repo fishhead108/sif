@@ -78,7 +78,7 @@
       # );
 
       deploy.nodes = {
-        lenovo     = deploy "fishhead" "localhost" "fishhead" "lenovo" "fishhead-lenovo" ["-oControlMaster=no"];
+        lenovo     = deploy "fishhead" "127.0.0.1" "fishhead" "lenovo" "fishhead-lenovo" [];
         # vm         = deploy "root" "virtualvm" "root" "vm" "fishhead-lenovo" [];
         # dell       = deploy "fishhead" "192.168.1.199" "fishhead" "dell" "fishhead-dell" [];
         # builder    = deploy "fishhead" "192.168.1.33" "deployer" "builder" "deployer";
