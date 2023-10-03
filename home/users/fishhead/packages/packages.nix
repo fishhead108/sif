@@ -1,9 +1,4 @@
 {pkgs, ...}:
-let
-  my-python-packages = ps: with ps; [
-    requests
-  ];
-in
 {
   home.packages = with pkgs; [
 
@@ -65,7 +60,6 @@ in
     git-sizer               # Compute various size metrics for a Git repository
     lazygit                 # Simple terminal UI for git commands
     # python39Full            # A high-level dynamically-typed programming language
-    (pkgs.python39Full.withPackages my-python-packages)
     openssl_3               # A cryptographic library that implements the SSL and TLS protocols
     d2                      # A modern diagram scripting language that turns text to diagrams
     python310Packages.pipx  # Install and Run Python Applications in Isolated Environments
