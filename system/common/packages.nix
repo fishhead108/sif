@@ -19,11 +19,11 @@
     shellInit = lib.mkDefault ''
       # export QT_STYLE_OVERIDE=Adwaita-dark
       # export QT_QPA_PLATFORMTHEME=qt5ct
-      if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
-        export GPG_TTY="$(tty)"
-        gpg-connect-agent /bye
-        export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
-      fi
+      # if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
+      #   export GPG_TTY="$(tty)"
+      #   gpg-connect-agent /bye
+      #   export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+      # fi
     '';
 
     sessionVariables = rec {

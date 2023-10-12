@@ -35,7 +35,7 @@
   services = {
     rpcbind.enable = true;
 
-    yubikey-agent.enable = false;
+    yubikey-agent.enable = true;
 
     # For Vagrant
     nfs.server.enable = true;

@@ -4,7 +4,7 @@
     ./alacritty.nix
     ./battery_status.nix
     ./dunst.nix
-    ./gpg.nix
+    # ./gpg.nix
     ./waybar.nix
     ./mako.nix
     ./fonts.nix
@@ -16,7 +16,7 @@
     ./polybar.nix
     ./redshift.nix
     ./rofi.nix
-    #./spotify.nix
+    ./spotify.nix
     ./ssh.nix
     ./tmux.nix
     ./udiskie.nix

@@ -9,7 +9,7 @@
   '';
 
   # Enable gpg.
-  programs.gpg.enable = true;
+  programs.gpg.enable = false;
 
   programs.gpg.settings =
     let

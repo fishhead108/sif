@@ -69,6 +69,7 @@
     # gcc                     # GNU Compiler Collection, version 11.3.0 (wrapper script)
     fx                      # Terminal JSON viewer
     postman                 # API Development Environment
+    #vscode
     
     # Documents
     evince                  # GNOME's document viewer
@@ -145,7 +146,6 @@
     tdesktop                                # Telegram Desktop messaging app
     skypeforlinux                           # Linux client for skype
     zoom-us                                 # zoom.us video conferencing application
-    teams                                   # Microsoft Teams
     discord                                 # All-in-one cross-platform voice and text chat for gamers
     slack                                   # Desktop client for Slack
 

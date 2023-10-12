@@ -13,6 +13,9 @@ self: super: {
   # zellij = super.zellij.overrideAttrs (_: {
   #   version = "0.31.3";
   # });
+  vscode = super.vscode.overrideAttrs (_: {
+    version = "1.82.2";
+  });
   # tmux = super.tmux.overrideAttrs (_: {
   #   version = "3.1";
   # });
