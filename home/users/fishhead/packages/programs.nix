@@ -22,7 +22,7 @@
         extraConfig = { 
           commit.gpgsign = true;
           gpg.format = "ssh";
-          user.signingkey = "~/.ssh/github-sign";
+          user.signingkey = "~/.ssh/id_ed25519_sk_rk_git-sign.pub";
           safe = {
           directory = "*";
           };

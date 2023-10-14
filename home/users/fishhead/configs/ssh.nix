@@ -28,15 +28,15 @@
   programs.ssh.serverAliveInterval = 30;
 
   programs.ssh.matchBlocks = {
-    "github.com" = {
-      identitiesOnly = true;
-      identityFile = "~/.ssh/github-auth";
-    };
+    # "github.com" = {
+    #   identitiesOnly = true;
+    #   identityFile = "~/.ssh/github-auth";
+    # };
 
-    "*.github.com" = {
-      identitiesOnly = true;
-      identityFile = "~/.ssh/github-auth";
-    };
+    # "*.github.com" = {
+    #   identitiesOnly = true;
+    #   identityFile = "~/.ssh/github-auth";
+    # };
 
     "*.revizto.com" = {
       user = "dmiroshnichenko";
