@@ -19,7 +19,16 @@
       };
 
       git = {
-        extraConfig = { 
+        extraConfig = {
+          push = {
+            default = "simple";
+          };
+          pull = {
+            rebase = true;
+          };
+          branch = {
+            autosetupmerge = true;
+          };
           commit.gpgsign = true;
           gpg.format = "ssh";
           user.signingkey = "~/.ssh/id_ed25519_sk_rk_git-sign.pub";
