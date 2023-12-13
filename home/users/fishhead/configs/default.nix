@@ -4,13 +4,15 @@
     ./alacritty.nix
     ./battery_status.nix
     ./dunst.nix
-    # ./gpg.nix
+    ./fonts.nix
+    ./git.nix
     ./waybar.nix
     ./mako.nix
-    ./fonts.nix
+    # ./gpg.nix
     ./i3.nix
     ./keyring.nix
     ./locale.nix
+    ./mako.nix
     ./neovim
     ./picom.nix
     ./polybar.nix
@@ -21,6 +23,7 @@
     ./tmux.nix
     ./udiskie.nix
     ./vscode.nix
+    #./waybar.nix
     ./xdg.nix
   ];
 }

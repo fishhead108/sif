@@ -24,6 +24,7 @@
     sniffnet # Cross-platform application to monitor your network traffic with ease
     opensnitch # An application firewall
     yubikey-agent
+    obs-studio
 #    vscode
   ];
 

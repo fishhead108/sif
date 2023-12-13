@@ -33,7 +33,7 @@ let
           ];
           home = {
             inherit username homeDirectory;
-            stateVersion = "23.05";
+            stateVersion = "23.11";
           };
         }
       ];

@@ -24,7 +24,7 @@
       # For compatibility with 32-bit applications
       support32Bit = true;
 
-      extraConfig = "load-module module-echo-cancel aec_method=webrtc source_name=echocancel sink_name=echocancel1";
+      # extraConfig = "load-module module-echo-cancel aec_method=webrtc source_name=echocancel sink_name=echocancel1";
 
       daemon.config = {
         flat-volumes = "no";

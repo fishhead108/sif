@@ -46,7 +46,7 @@
 
     # Terminal
     termite                 # A simple VTE-based terminal
-    termius                 # A cross-platform SSH client with cloud data sync and more
+    # termius                 # A cross-platform SSH client with cloud data sync and more
     wtf                     # The personal information dashboard for your terminal
     gh                      # GitHub CLI tool
     htop                    # An interactive process viewer
@@ -55,6 +55,7 @@
     which                   # Shows the full path of (shell) commands
 
     # Development
+    j2cli                   # Jinja2 Command-Line Tool
     jq                      # A lightweight and flexible command-line JSON processor
     git-crypt               # Transparent file encryption in git
     git-sizer               # Compute various size metrics for a Git repository
@@ -70,6 +71,7 @@
     fx                      # Terminal JSON viewer
     postman                 # API Development Environment
     #vscode
+    powershell              # Powerful cross-platform (Windows, Linux, and macOS) shell and scripting language based on .NET
     
     # Documents
     evince                  # GNOME's document viewer
@@ -84,7 +86,7 @@
     # _1password-gui          # Multi-platform password manager
     keepassxc               # Offline password manager with many features.
     rofi-pass               # A script to make rofi work with password-store
-    protonvpn-gui           # Official ProtonVPN Linux app
+    # protonvpn-gui           # Official ProtonVPN Linux app
     tor                     # Anonymizing overlay network
     tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
     

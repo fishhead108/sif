@@ -33,6 +33,9 @@
   };
 
   services = {
+
+    opensnitch.enable = true;
+    
     rpcbind.enable = true;
 
     yubikey-agent.enable = true;

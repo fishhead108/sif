@@ -18,43 +18,6 @@
         enableZshIntegration = true;
       };
 
-      git = {
-        extraConfig = {
-          push = {
-            default = "simple";
-          };
-          pull = {
-            rebase = true;
-          };
-          branch = {
-            autosetupmerge = true;
-          };
-          commit.gpgsign = true;
-          gpg.format = "ssh";
-          user.signingkey = "~/.ssh/id_ed25519_sk_rk_git-sign.pub";
-          safe = {
-          directory = "*";
-          };
-
-          diff.tool = "vscode";
-          difftool.vscode.cmd =
-            let
-              cmd = "code --wait --diff $LOCAL $REMOTE";
-            in
-            cmd;
-
-          merge.tool = "vscode";
-          mergetool.vscode.cmd =
-            let
-              cmd = "code --wait $MERGED";
-            in
-            cmd;
-        };
-        enable = true;
-        userName = "Dmitrii Miroshnichenko";
-        userEmail = "2543810@gmail.com";
-      };
-
       zsh = {
         enable = true;
         enableCompletion = true;

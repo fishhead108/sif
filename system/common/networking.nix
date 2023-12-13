@@ -6,7 +6,7 @@
 
     useDHCP = false;
     
-    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    nameservers = [ "45.90.28.0#a33e46.dns.nextdns.io" "45.90.30.0#a33e46.dns.nextdns.io" ];
 
     firewall = {
       # boolean or one of "strict", "loose"

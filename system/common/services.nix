@@ -57,11 +57,11 @@
     # ssh
     openssh = {
       enable = true;
-      # settings = {
-      #   passwordAuthentication = false;
-      #   kbdInteractiveAuthentication = false;
-      #   permitRootLogin = "no";
-      # };
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+      };
       extraConfig = "AllowUsers fishhead deployer nixos\nPermitEmptyPasswords no\nClientAliveInterval 300\nClientAliveCountMax 0";
     };
     

@@ -8,6 +8,7 @@
     hostName = "lenovo";
     interfaces.eno2.useDHCP = true;
     interfaces.wlo1.useDHCP = true;
+    # nameservers = [ "45.90.28.47" "45.90.30.47" ];
     # For Vagrant
     firewall = {
       allowedTCPPorts = [ 8384 22000 ];
