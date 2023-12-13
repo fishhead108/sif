@@ -40,7 +40,7 @@
     # its machine, facilitating user access to those services
     avahi = {
       enable = lib.mkDefault true;
-      nssmdns = true;
+      nssmdns4 = true;
     };
 
     fstrim.enable = lib.mkDefault true;
