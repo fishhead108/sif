@@ -192,13 +192,13 @@ in
       windowrule = workspace 1, ^(.*Kitty.*)$
       windowrule = workspace 1, ^(.*Termite.*)$
       windowrule = workspace 2, ^(.*firefox.*)$
-      windowrule = monitor=DP-2, ^(.*firefox.*)$
+      windowrule = monitor 0, ^(.*firefox.*)$
       windowrule = workspace 3, ^Code$
       windowrule = workspace 3, ^(.*obsidian.*)$
       windowrule = workspace 4, ^org.telegram.desktop$|^Skype$|^Slack$|^zoom$|^thunderbird$
       windowrule = workspace 5, ^spotify$|^Spotify$|^VirtualBox$|^TeamViewer$
       windowrule = workspace 6, ^(.*Google-chrome.*)$
-      windowrule = monitor HDMI-3, ^(.*Google-chrome.*)$
+      windowrule = monitor 1, ^(.*Google-chrome.*)$
 
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
@@ -215,6 +215,7 @@ in
       windowrulev2 = maximize,class:^(.*Slack.*)$
       windowrulev2 = maximize,class:^(.*org.telegram.desktop.*)$
       windowrulev2 = maximize,class:^(.*obsidian.*)$
+      windowrulev2 = maximize,class:^(.*Code.*)$
       windowrulev2 = maximize,class:^(.*thunderbird.*)$
       windowrulev2 = move cursor -3% -105%,class:^(wofi)$
       windowrulev2 = noanim,class:^(wofi)$
