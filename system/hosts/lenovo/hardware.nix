@@ -6,8 +6,11 @@
 {
   sound.enable = true;
   nixpkgs.config.pulseaudio = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
   hardware = {
-    pulseaudio.enable = true;
+    # pulseaudio.enable = true;
     
     # Enable bluetooth
     bluetooth = {
@@ -30,21 +33,33 @@
     };
 
     opengl = {
-        # Enable OpenGL support in X11 systems, as well as for
-        # Wayland compositors like sway and Weston
-        enable = true;
+      # Enable OpenGL support in X11 systems, as well as for
+      # Wayland compositors like sway and Weston
+      enable = true;
 
-        # Enable accelerated OpenGL rendering through the Direct
-        # Rendering Interface (DRI)
-        driSupport = true;
+      # Enable accelerated OpenGL rendering through the Direct
+      # Rendering Interface (DRI)
+      driSupport = true;
 
-        # Support Direct Rendering for 32-bit applications (such
-        # as Wine). This is currently only supported for the
-        # nvidia and ati_unfree drivers, as well as Mesa
-        driSupport32Bit = true;
+      # Support Direct Rendering for 32-bit applications (such
+      # as Wine). This is currently only supported for the
+      # nvidia and ati_unfree drivers, as well as Mesa
+      driSupport32Bit = true;
 
-        # Use Mesa OpenGL drivers
-        package = pkgs.mesa.drivers;
+      # Use Mesa OpenGL drivers
+      # package = pkgs.mesa.drivers;
+
+      # https://nixos.wiki/wiki/Intel_Graphics
+      # https://nixos.wiki/wiki/Accelerated_Video_Playback
+      extraPackages = with pkgs; [
+        intel-gmmlib
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        intel-vaapi-driver
+        # vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        intel-ocl
+        libvdpau-va-gl
+        vaapiVdpau
+      ];
     };
   };
 

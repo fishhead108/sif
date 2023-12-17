@@ -3,9 +3,6 @@
 {
     programs = {
       
-      # Enable NeoVim
-      neovim.enable = true;
-
       # Enable GO language
       go.enable = true;
 

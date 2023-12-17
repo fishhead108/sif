@@ -32,16 +32,17 @@ in
       "v4l2loopback" 
       "acpi_call" 
       "kvm-intel"
+      "i915"
     ];
 
     kernelParams = [ 
       "quiet"
       "splash"
       "vga=current"
-      "i915.fastboot=1"
       "loglevel=3"
       "udev.log_priority=3"
       "systemd.show_status=auto"
+      # "i915.fastboot=1"
     ];
 
   };

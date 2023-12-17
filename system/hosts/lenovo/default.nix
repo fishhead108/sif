@@ -5,6 +5,7 @@
 
 {
   imports = [
+    # ./hyprland
     ./boot.nix
     ./hardware.nix
     ./networking.nix

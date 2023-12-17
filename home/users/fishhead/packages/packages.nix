@@ -1,4 +1,24 @@
-{pkgs, ...}:
+{pkgs, lib, ...}:
+let
+myslack = pkgs.slack.overrideAttrs (oldAttrs: rec {
+      version = "4.35.126";
+      src = pkgs.fetchurl {
+        url =
+          "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb";
+        sha256 = "sha256-ldFASntF8ygu657WXwk/XlpHzB+S9x8SjAOjjDKsvCs=";
+      };
+
+      fixupPhase = ''
+        sed -i -e 's/,"WebRTCPipeWireCapturer"/,"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar
+
+        rm $out/bin/slack
+        makeWrapper $out/lib/slack/slack $out/bin/slack \
+          --prefix XDG_DATA_DIRS : $GSETTINGS_SCHEMAS_PATH \
+          --suffix PATH : ${lib.makeBinPath [ pkgs.xdg-utils ]} \
+          --add-flags "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
+      '';
+    });
+in
 {
   home.packages = with pkgs; [
 
@@ -32,7 +52,6 @@
     numix-cursor-theme              # Numix cursor theme
     numix-icon-theme                # Numix icon theme
     thunderbird-unwrapped
-    junction                        # https://github.com/sonnyp/Junction
 
     # Helpers
     rescuetime              # Helps you understand your daily habits so you can focus and be more productive
@@ -46,6 +65,7 @@
 
     # Terminal
     termite                 # A simple VTE-based terminal
+    kitty
     # termius                 # A cross-platform SSH client with cloud data sync and more
     wtf                     # The personal information dashboard for your terminal
     gh                      # GitHub CLI tool
@@ -105,7 +125,7 @@
     pasystray               # PulseAudio system tray
 
     # Browsers
-    junction
+    junction                        # https://github.com/sonnyp/Junction
     google-chrome                           # A freeware web browser developed by Google
     (wrapFirefox firefox-bin-unwrapped {    # Mozilla Firefox, free web browser (binary package)
       extraPolicies = {
@@ -149,7 +169,8 @@
     skypeforlinux                           # Linux client for skype
     zoom-us                                 # zoom.us video conferencing application
     discord                                 # All-in-one cross-platform voice and text chat for gamers
-    slack                                   # Desktop client for Slack
+    # slack                                   # Desktop client for Slack
+    myslack
 
     # Ops tools
     # awscli2                                 # Unified tool to manage your AWS services

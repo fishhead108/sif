@@ -11,7 +11,7 @@
     # nvidiaOptimus.disable = lib.mkDefault true;
 
     # ddcutils requires i2c
-    i2c.enable = true;
+    i2c.enable = lib.mkDefault true;
 
     # Whether to enable the PulseAudio sound server.
     pulseaudio = {

@@ -1,26 +1,20 @@
 { config, pkgs, ... }:
 
-let
-  inherit (config.colorscheme) colors;
-  kitty-xterm = pkgs.writeShellScriptBin "xterm" ''
-    ${config.programs.kitty.package}/bin/kitty -1 "$@"
-  '';
-in
 {
-  home = {
-    packages = [ kitty-xterm ];
-    sessionVariables = {
-      TERMINAL = "kitty -1";
-    };
-  };
+  # home = {
+  #   packages = [ kitty-xterm ];
+  #   sessionVariables = {
+  #     TERMINAL = "kitty -1";
+  #   };
+  # };
 
 
   programs.kitty = {
     enable = true;
-    font = {
-      name = config.fontProfiles.monospace.family;
-      size = 12;
-    };
+    # font = {
+    #   # name = config.fontProfiles.monospace.family;
+    #   size = 12;
+    # };
     settings = {
       window_padding_width = 15;
       foreground = "#${colors.base05}";

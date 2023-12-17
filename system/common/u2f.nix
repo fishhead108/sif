@@ -11,6 +11,8 @@
 
   # Disable u2fAuth for all these modules
   # I only want to enable u2fAuth for ssh, sudo and su really
+  # If set, users listed in $XDG_CONFIG_HOME/Yubico/u2f_keys (or $HOME/.config/Yubico/u2f_keys if XDG variable is not set) 
+  # are able to log in with the associated U2F key. Path can be changed using security.pam.u2f.authFile option.
   security.pam.services = {
     chpasswd.u2fAuth = lib.mkDefault true;
     i3lock.u2fAuth = lib.mkDefault true;

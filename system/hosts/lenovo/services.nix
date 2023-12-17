@@ -34,6 +34,19 @@
 
   services = {
 
+    dbus.enable = true;
+  
+    greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command = "Hyprland";
+          user = "fishhead";
+        };
+        default_session = initial_session;
+      };
+    };
+
     opensnitch.enable = true;
     
     rpcbind.enable = true;
@@ -49,31 +62,79 @@
     accounts-daemon.enable = true;
 
     # Enable the X11 windowing system.
-    xserver = {
-      enable = true;
-      layout = "us,ru";
-      xkbOptions = "grp:caps_toggle,grp_led:caps";
+    # xserver = {
+    #   enable = true;
+    #   layout = "us,ru";
+    #   xkbOptions = "grp:caps_toggle,grp_led:caps";
 
-      # Enable touchpad support.
-      libinput.enable = true;
+    #   # Enable touchpad support.
+    #   libinput.enable = true;
 
-      # Enable lightdm
-      displayManager.lightdm = {
-        enable = true;
+    #   # Enable lightdm
+    #   displayManager.lightdm = {
+    #     enable = true;
          
-        greeters.gtk = {
-          enable = true;
-          cursorTheme.name = "Adwaita-dark";
-          theme.name = "Adwaita-dark";
-          indicators = [ "~host" "~spacer" "~clock" "~spacer" "~power" ];
-        };
-      };
+    #     greeters.gtk = {
+    #       enable = true;
+    #       cursorTheme.name = "Adwaita-dark";
+    #       theme.name = "Adwaita-dark";
+    #       indicators = [ "~host" "~spacer" "~clock" "~spacer" "~power" ];
+    #     };
+    #   };
       
-      desktopManager.xterm.enable = true;
-      windowManager.i3.enable = true;
-    };
+    #   desktopManager.xterm.enable = true;
+    #   windowManager.i3.enable = true;
+    # };
+
+    ### Wayland
+    # xserver = {
+    #   enable = true;
+    #   layout = "us,ru";
+    #   xkbOptions = "grp:caps_toggle,grp_led:caps";
+
+    #   # Enable touchpad support.
+    #   libinput.enable = true;
+
+    #   # smartd = {
+    #   #   enable = true;
+    #   #   notifications.x11.enable = true;
+    #   # };
+
+    #   # Enable lightdm
+    #   displayManager.lightdm = {
+    #     enable = false;
+         
+    #     # extraConfig = ''
+    #     #   greeter-hide-users=false
+    #     #   user-session=fishhead
+    #     #   default-user=fishhead
+    #     # '';
+
+    #     # extraSeatDefaults = ''
+    #     #   default-user=fishhead
+    #     #   greeter-hide-users=false
+    #     #   user-session=fishhead
+    #     #   greeter-show-manual-login=true
+    #     # '';
+
+    #     greeters.gtk = {
+    #       enable = true;
+    #       cursorTheme.name = "Adwaita-dark";
+    #       theme.name = "Adwaita-dark";
+    #       indicators = [ "~host" "~spacer" "~clock" "~spacer" "~power" ];
+    #     };
+    #   };
+      
+    #   desktopManager.xterm.enable = true;
+    #   windowManager.i3.enable = false;
+    # };
 
     blueman.enable = true;
+
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
 
     # syncthing = {
     #   enable = true;

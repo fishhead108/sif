@@ -18,15 +18,15 @@ in
   ];
 
   # Use neovim as the default editor.
-  home.sessionVariables.EDITOR = "${config.home.profileDirectory}/bin/nvim";
+  #home.sessionVariables.EDITOR = "${config.home.profileDirectory}/bin/nvim";
 
   # Add shell aliases for various vim modes.
   home.shellAliases = {
     # Compatibility aliases for the basic vim commands.
     ex = "${neovim} -e";
-    vi = "${neovim}";
+    #vi = "${neovim}";
     view = "${neovim} -R";
-    vim = "${neovim}";
+   # vim = "${neovim}";
     vimdiff = "${neovim} -d";
 
     # Compatibility aliases for the restricted-mode vim commands.
@@ -56,4 +56,9 @@ in
   # Enable Ruby support.
   programs.neovim.withRuby = true;
 
+  programs.neovim = {
+    viAlias = true;
+    vimAlias = true;
+    defaultEditor = true;
+  };
 }

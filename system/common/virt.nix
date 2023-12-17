@@ -4,7 +4,7 @@
   virtualisation = {
     # Allow unprivileged user to pass USB devices connected to
     # this machine to libvirt VMs, both local and remote
-    spiceUSBRedirection.enable = lib.mkDefault  true;
+    spiceUSBRedirection.enable = lib.mkDefault true;
 
     # Install and configure Docker
     docker = {

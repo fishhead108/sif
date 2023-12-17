@@ -56,7 +56,7 @@ in
     swaylock
     swayidle
     swaybg
-    swaylock-effects
+    # swaylock-effects
     wdisplays
     wofi
     playerctl
