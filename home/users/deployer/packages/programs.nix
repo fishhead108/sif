@@ -31,7 +31,7 @@
         };
         enable = true;
         userName = "Dmitrii Miroshnichenko";
-        userEmail = "2543810@gmail.com";
+        userEmail = "dm@revizto.com";
         signing = {
           key = "43005EF80787DE60";
           signByDefault = true;

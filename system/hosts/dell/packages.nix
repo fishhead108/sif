@@ -46,7 +46,7 @@ in
       _1password              # 1Password command-line tool
       _1password-gui          # Multi-platform password manager
       sniffnet                # Cross-platform application to monitor your network traffic with ease
-      opensnitch              # An application firewall
+      # opensnitch              # An application firewall
       # wireplumber
       # pipecontrol
     ];

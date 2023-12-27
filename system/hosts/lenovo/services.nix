@@ -47,7 +47,7 @@
       };
     };
 
-    opensnitch.enable = true;
+    opensnitch.enable = false;
     
     rpcbind.enable = true;
 

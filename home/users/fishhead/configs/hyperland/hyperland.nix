@@ -178,13 +178,27 @@ in
       # Example windowrule v1
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       # windowrule = float, ^(kitty)$
-      windowrule = float,^(pavucontrol)$
+      windowrule = float, yad|nm-connection-editor|pavucontrol|Rofi|nomacs|eog
+      # windowrule = float,^(pavucontrol)$
       windowrule = float,^(blueman-manager)$
       windowrule = float,^(nm-connection-editor)$
       windowrule = float,^(chromium)$
       windowrule = float,^(thunar)$
       windowrule = float, title:^(btop)$
+      windowrule = float, title:^(.*feh.*)$
       windowrule = float, title:^(update-sys)$
+      windowrule = float, title:^(Open Files)$
+      windowrule = float, title:^(Compact folders)$
+
+      # Bluetooth Manager
+      windowrule = float, blueman-manager
+      windowrule = workspace 9, blueman-manager
+      
+      # Zathura
+      windowrule = float, zathura
+      windowrule = center, zathura
+      windowrule = size 55% 90%, zathura
+      
       windowrule = maximize, class:^(firefox)$
 
       # Place apps per workspace
@@ -195,8 +209,8 @@ in
       windowrule = monitor 0, ^(.*firefox.*)$
       windowrule = workspace 3, ^Code$
       windowrule = workspace 3, ^(.*obsidian.*)$
-      windowrule = workspace 4, ^org.telegram.desktop$|^Skype$|^Slack$|^zoom$|^thunderbird$
-      windowrule = workspace 5, ^spotify$|^Spotify$|^VirtualBox$|^TeamViewer$
+      windowrule = workspace 4, ^org.telegram.desktop$|^Skype$|^Slack$|^zoom$
+      windowrule = workspace 5, ^spotify$|^Spotify$|^VirtualBox$|^TeamViewer$|^thunderbird$
       windowrule = workspace 6, ^(.*Google-chrome.*)$
       windowrule = monitor 1, ^(.*Google-chrome.*)$
 
@@ -216,11 +230,9 @@ in
       windowrulev2 = maximize,class:^(.*org.telegram.desktop.*)$
       windowrulev2 = maximize,class:^(.*obsidian.*)$
       windowrulev2 = maximize,class:^(.*Code.*)$
-      windowrulev2 = maximize,class:^(.*thunderbird.*)$
       windowrulev2 = move cursor -3% -105%,class:^(wofi)$
       windowrulev2 = noanim,class:^(wofi)$
       windowrulev2 = opacity 0.8 0.6,class:^(wofi)$
-      windowrulev2 = float,class:^(thunderbird)$,title:^(.*)(Reminder)(.*)$
       # windowrulev2 = float, class:^(org.keepassxc.KeePassXC)$, title:^(KeePassXC -  Access Request)$
       # windowrulev2 = center, class:^(org.keepassxc.KeePassXC)$, title:^(KeePassXC -  Access Request)$
 
@@ -229,6 +241,24 @@ in
       windowrulev2 = noanim,class:^(xwaylandvideobridge)$
       windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
       windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
+
+      # Thunderbird
+      windowrulev2 = maximize,class:^(.*thunderbird.*)$
+      windowrulev2 = animation popin,class:^(thunderbird)$,title:^(New Folder)$
+      windowrulev2 = float, class:^(thunderbird)$, title:^(.*Reminder.*)
+      windowrulev2 = float, class:^(thunderbird)$, title:^(.*Password.*)
+      windowrulev2 = float, class:^(thunderbird)$, title:^(.*Write.*)
+      windowrulev2 = float, class:^(thunderbird)$, title:^(.*Enter.*)
+      windowrulev2 = float, class:^(thunderbird)$, title:^(?=\s*$)
+
+      # Firefox
+      windowrulev2 = float, class:^(firefox)$, title:^(Picture-in-Picture)$
+      windowrule = size 70% 70%, class:^(firefox)$, title:^(Picture-in-Picture)$
+      windowrulev2 = float, class:^(firefox)$, title:^(Library)$
+      windowrulev2 = float, class:^(firefox)$, title:^(Developer Tools)(.*)$
+      windowrulev2 = float, class:^(firefox)$, title:^(.*About.*)$
+      windowrulev2 = float, class:^(firefox)$, title:\bFirefox — Sharing Indicator\b
+      windowrulev2 = move 50% 5%, class:^(firefox)$, title:\bFirefox — Sharing Indicator\b
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       $mainMod = ALT
@@ -241,6 +271,7 @@ in
       bind = $mainMod, R, exec, sh $HOME/.config/rofi/bin/launcher
       bind = $mainMod, S, exec, grim -g "$(slurp)" - | swappy -f -
       bind = $mainMod, P, pseudo, # dwindle
+      bind = $mainMod, F, fullscreen, 1
       bind = $mainMod, J, togglesplit, # dwindle
       bind = $mainMod, L, exec, swaylock # Lock the screen
       bind = $mainMod, M, exec, wlogout --protocol layer-shell # show the logout window

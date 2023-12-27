@@ -89,7 +89,7 @@ in
     python311Packages.requests
     # gcc                     # GNU Compiler Collection, version 11.3.0 (wrapper script)
     fx                      # Terminal JSON viewer
-    postman                 # API Development Environment
+    #postman                 # API Development Environment
     #vscode
     powershell              # Powerful cross-platform (Windows, Linux, and macOS) shell and scripting language based on .NET
     
