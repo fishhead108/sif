@@ -25,7 +25,7 @@
   programs = {
     # Enable the Firejail namespaces and seccomp-bpf sandbox.
     # See: https://github.com/netblue30/firejail
-    firejail.enable = true;
+    firejail.enable = false;
   };
 
   ## System security tweaks

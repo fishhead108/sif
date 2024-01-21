@@ -24,8 +24,8 @@ in
     xorg.xinput
 
     # The Yubikey manager and its GUI.
-    yubikey-manager
-    yubikey-manager-qt
+    # yubikey-manager
+    # yubikey-manager-qt
 
     # The Yubikey personalization tool and its GUI.
     yubikey-personalization
@@ -36,7 +36,7 @@ in
 
     # The Yubikey oath configuration program.
     # yubioath-desktop
-    yubioath-flutter
+    # yubioath-flutter
 
     yubico-piv-tool
     pass

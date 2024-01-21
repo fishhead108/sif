@@ -5,7 +5,7 @@
     git = {
       enable = true;
       userName = "Dmitrii Miroshnichenko";
-      userEmail = "dm@gmail.com";
+      userEmail = "dm@revizto.com";
 
       aliases = {
         undo = "reset HEAD~1 --mixed";

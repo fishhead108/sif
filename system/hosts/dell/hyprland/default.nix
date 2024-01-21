@@ -10,9 +10,9 @@ let
     # systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
 
     text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
-      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland XDG_SESSION_TYPE=wayland
+      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+      systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
     '';
   };
 
@@ -58,7 +58,8 @@ in
     swaybg
     # swaylock-effects
     wdisplays
-    wofi
+    # wofi
+    cliphist
     playerctl
     mako
     kitty

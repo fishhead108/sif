@@ -1,11 +1,11 @@
 {pkgs, lib, ...}:
 let
 myslack = pkgs.slack.overrideAttrs (oldAttrs: rec {
-      version = "4.35.126";
+      version = "4.36.136";
       src = pkgs.fetchurl {
         url =
           "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb";
-        sha256 = "sha256-ldFASntF8ygu657WXwk/XlpHzB+S9x8SjAOjjDKsvCs=";
+        sha256 = "13x182nyfcn60bqkwkipydfr2jgkfx964f6bmnm2xqm0h1ndpkg3";
       };
 
       fixupPhase = ''
@@ -28,8 +28,7 @@ in
     glib                            # Access to gsettings
     xdg-utils                       # A set of command line tools that assist applications with a variety of desktop integration tasks
     xdg-user-dirs                   # A tool to help manage well known user directories like the desktop folder and the music folder
-    xfce.thunar                     # Xfce file manager
-    xfce.thunar-volman              # Thunar extension for automatic management of removable drives and media
+    cinnamon.nemo
     networkmanagerapplet            # NetworkManager control applet for GNOME
     xorg.xprop                      # The xprop utility is for displaying window and font properties in an X server
     xclip                           # Tool to access the X clipboard from a console application
@@ -58,9 +57,9 @@ in
     obsidian                # A powerful knowledge base that works on top of a local folder of plain text Markdown files
     anki-bin                # Spaced repetition flashcard program
     mpv                     # General-purpose media player, fork of MPlayer and mplayer2
-    ledger-live-desktop     # Wallet app for Ledger Nano S and Ledger Blue
+    # ledger-live-desktop     # Wallet app for Ledger Nano S and Ledger Blue
     appimage-run
-    restic                  # A backup program that is fast, efficient and secure
+    # restic                  # A backup program that is fast, efficient and secure
     remmina                 # Remote desktop client written in GTK
 
     # Terminal
@@ -84,7 +83,7 @@ in
     openssl_3               # A cryptographic library that implements the SSL and TLS protocols
     d2                      # A modern diagram scripting language that turns text to diagrams
     python311
-    python311Packages.pipx  # Install and Run Python Applications in Isolated Environment
+    # python311Packages.pipx  # Install and Run Python Applications in Isolated Environment
     python311Packages.pip
     python311Packages.requests
     # gcc                     # GNU Compiler Collection, version 11.3.0 (wrapper script)
@@ -104,11 +103,11 @@ in
     # Sec
     # _1password              # 1Password command-line tool
     # _1password-gui          # Multi-platform password manager
-    keepassxc               # Offline password manager with many features.
+    # keepassxc               # Offline password manager with many features.
     rofi-pass               # A script to make rofi work with password-store
     # protonvpn-gui           # Official ProtonVPN Linux app
-    tor                     # Anonymizing overlay network
-    tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
+    # tor                     # Anonymizing overlay network
+    # tor-browser-bundle-bin  # Tor Browser Bundle built by torproject.org
     
     # Media
     youtube-dl              # Command-line tool to download videos from YouTube.com and other sites
@@ -173,7 +172,7 @@ in
     myslack
 
     # Ops tools
-    # awscli2                                 # Unified tool to manage your AWS services
+    awscli2                                 # Unified tool to manage your AWS services
     aws-vault                               # A vault for securely storing and accessing AWS credentials in development environments
     ansible                                 # Radically simple IT automation
     tflint                                  # Terraform linter focused on possible errors, best practices, and so on

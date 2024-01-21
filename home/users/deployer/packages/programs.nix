@@ -2,11 +2,6 @@
 
 {
     programs = {
-
-      _1password-gui = {
-        enable = true;
-        polkitPolicyOwners = [ "fishhead" ];
-      };
       
       # Enable NeoVim
       neovim.enable = true;

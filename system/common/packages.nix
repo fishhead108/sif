@@ -1,11 +1,11 @@
 { pkgs, config, lib, ... }: 
 {
 
-  xdg = {
-    # Needed for Flatpak
-    portal.enable = lib.mkDefault false;
-    portal.extraPortals = [ ];
-  };
+  # xdg = {
+  #   # Needed for Flatpak
+  #   portal.enable = lib.mkDefault false;
+  #   portal.extraPortals = [ ];
+  # };
 
   environment = {
     # QT4/5 global theme
@@ -37,6 +37,7 @@
       XDG_CONFIG_HOME = "\${HOME}/.config";
       XDG_BIN_HOME    = "\${HOME}/.local/bin";
       XDG_DATA_HOME   = "\${HOME}/.local/share";
+      XDG_SESSION_TYPE = "wayland";
 
       PATH = [ 
         "\${XDG_BIN_HOME}"
@@ -143,7 +144,7 @@
     gnupg.agent = {
       enable = lib.mkDefault false;
       enableSSHSupport = true;
-      pinentryFlavor = "gtk2";
+      pinentryFlavor = "qt";
     };
   };
 

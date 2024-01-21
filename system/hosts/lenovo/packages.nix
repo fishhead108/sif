@@ -15,9 +15,9 @@ let
     # systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
 
     text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
-      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland XDG_SESSION_TYPE=wayland
+      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+      systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
     '';
   };
 
@@ -39,13 +39,23 @@ in
 {
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-wlr
     ];
+    wlr = {
+      enable = true;
+      settings = { # uninteresting for this problem, for completeness only
+        screencast = {
+          output_name = "DP-2";
+          max_fps = 30;
+          chooser_type = "simple";
+          chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+        };
+      };
+    };
   };
 
   programs = {
@@ -81,7 +91,7 @@ in
       # syncthing              # 
       # syncthingtray          # 
       _1password # 1Password command-line tool
-      _1password-gui # Multi-platform password manager
+      _1password-gui-beta # Multi-platform password manager
       sniffnet # Cross-platform application to monitor your network traffic with ease
       # opensnitch # An application firewall
       yubikey-agent

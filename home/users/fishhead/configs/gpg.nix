@@ -99,5 +99,5 @@
   # The solution is to either keep starting gcr, or shove it into dbus
   # packages (for the host system?), or, easier, just use the gtk2 or qt
   # flavors.
-  services.gpg-agent.pinentryFlavor = lib.mkDefault "curses";
+  services.gpg-agent.pinentryFlavor = lib.mkDefault "qt";
 }

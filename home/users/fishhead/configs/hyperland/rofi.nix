@@ -11,7 +11,7 @@
     ];
     terminal = "${pkgs.alacritty}/bin/alacritty";
     # theme = ./rofi/rofi_theme.rasi;
-    theme = ./rofi/spotlight_dark.rasi;
+    # theme = ./rofi/spotlight_dark.rasi;
 
     # theme = builtins.toString (pkgs.writeText "rofi-theme" ''
     #   /**

@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+let
+  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+in
+{
   
   # Copy my avatar to help accounts-daemon. It will fail without internet connection
   systemd.services.userAvatar = {
@@ -32,20 +36,61 @@
     wantedBy = [ "multi-user.target" ];
   };
 
+  environment.etc = {
+    "flatpak/remotes.d/flathub.flatpakrepo".source = pkgs.fetchurl {
+      url = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      # Let this run once and you will get the hash as an error.
+      hash = "sha256-M3HdJQ5h2eFjNjAHP+/aFTzUQm9y9K+gwzc64uj+oDo=";
+    };
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${tuigreet} --time --remember --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
+  # this is a life saver.
+  # literally no documentation about this anywhere.
+  # might be good to write about this...
+  # https://www.reddit.com/r/NixOS/comments/u0cdpi/tuigreet_with_xmonad_how/
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    StandardOutput = "tty";
+    StandardError = "journal"; # Without this errors will spam on screen
+    # Without these bootlogs will spam on screen
+    TTYReset = true;
+    TTYVHangup = true;
+    TTYVTDisallocate = true;
+  };
+
   services = {
 
     dbus.enable = true;
   
-    greetd = {
-      enable = true;
-      settings = rec {
-        initial_session = {
-          command = "Hyprland";
-          user = "fishhead";
-        };
-        default_session = initial_session;
-      };
-    };
+    # greetd = {
+    #   enable = true;
+    #   settings = rec {
+    #     initial_session = {
+    #       command = "Hyprland";
+    #       user = "fishhead";
+    #     };
+    #     default_session = initial_session;
+    #   };
+    # };
+
+    # greetd = {
+    #   enable = true;
+    #   settings.default_session = {
+    #     command = "${pkgs.greetd.wlgreet}/bin/wlgreet";
+    #     user = "fishhead";
+    #   };
+    # };
 
     opensnitch.enable = false;
     

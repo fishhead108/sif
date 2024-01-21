@@ -14,7 +14,7 @@ start-portal = pkgs.writeScript "start-portal" ''
 rofi_exitmenu = "sh " + pkgs.writeScript "rofi_exitmenu" ''
   #!${pkgs.stdenv.shell} --login
 
-  action=$(echo -e "lock\nlogout\nshutdown\nreboot" | wofi --dmenu -p "power:")
+  action=$(echo -e "lock\nlogout\nshutdown\nreboot" | rofi -dmenu -p "power:")
 
   if [[ "$action" == "lock" ]]
   then
@@ -45,6 +45,8 @@ rofi_exitmenu = "sh " + pkgs.writeScript "rofi_exitmenu" ''
 
 in
 {
+  systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd = {
@@ -66,9 +68,15 @@ in
       exec-once = swww init
       exec = sleep 0.5 && default_wallpaper
 
+      exec-once = systemctl --user import-environment \{,WAYLAND_\}DISPLAY HYPRLAND_INSTANCE_SIGNATURE; systemctl --user start hm-graphical-session.target
+
       exec-once = dunst
+      exec-once = maco
       exec-once = nm-applet --indicator
       exec = pkill waybar & sleep 0.5 && waybar
+      exec-once = /usr/lib/polkit-kde-authentication-agent-1
+      exec-once = wl-paste --type text --watch cliphist store 
+      exec-once = wl-paste --type image --watch cliphist store
 
       exec-once = ${start-portal}
       exec-once = alacritty -e tmux
@@ -84,6 +92,7 @@ in
 
       # Some default env vars.
       env = XCURSOR_SIZE,24
+      env = XDG_SESSION_TYPE,wayland
 
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input {
@@ -183,7 +192,7 @@ in
       windowrule = float,^(blueman-manager)$
       windowrule = float,^(nm-connection-editor)$
       windowrule = float,^(chromium)$
-      windowrule = float,^(thunar)$
+      windowrule = float,^(nemo)$
       windowrule = float, title:^(btop)$
       windowrule = float, title:^(.*feh.*)$
       windowrule = float, title:^(update-sys)$
@@ -221,18 +230,18 @@ in
       # windowrule = opacity 0.95 0.8, ^(obsidian)$
       windowrulev2 = opacity 0.8 0.8,class:^(alacritty)$
       windowrulev2 = animation popin,class:^(alacritty)$,title:^(update-sys)$
-      windowrulev2 = animation popin,class:^(thunar)$
-      windowrulev2 = opacity 0.8 0.8,class:^(thunar)$
+      windowrulev2 = animation popin,class:^(nemo)$
+      windowrulev2 = opacity 0.8 0.8,class:^(nemo)$
       windowrulev2 = opacity 0.8 0.8,class:^(VSCodium)$
       windowrulev2 = animation popin,class:^(chromium)$
       windowrulev2 = maximize,class:^(Google-chrome)$
       windowrulev2 = maximize,class:^(.*Slack.*)$
       windowrulev2 = maximize,class:^(.*org.telegram.desktop.*)$
       windowrulev2 = maximize,class:^(.*obsidian.*)$
-      windowrulev2 = maximize,class:^(.*Code.*)$
-      windowrulev2 = move cursor -3% -105%,class:^(wofi)$
-      windowrulev2 = noanim,class:^(wofi)$
-      windowrulev2 = opacity 0.8 0.6,class:^(wofi)$
+      
+      # windowrulev2 = move cursor -3% -105%,class:^(rofi)$
+      # windowrulev2 = noanim,class:^(rofi)$
+      # windowrulev2 = opacity 0.8 0.6,class:^(rofi)$
       # windowrulev2 = float, class:^(org.keepassxc.KeePassXC)$, title:^(KeePassXC -  Access Request)$
       # windowrulev2 = center, class:^(org.keepassxc.KeePassXC)$, title:^(KeePassXC -  Access Request)$
 
@@ -241,6 +250,10 @@ in
       windowrulev2 = noanim,class:^(xwaylandvideobridge)$
       windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
       windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
+
+      # Code
+      windowrulev2 = maximize,class:^(Code)$
+      windowrulev2 = float, class:^(Code)$, title:^(.*Tout remplacer.*)
 
       # Thunderbird
       windowrulev2 = maximize,class:^(.*thunderbird.*)$
@@ -276,12 +289,16 @@ in
       bind = $mainMod, L, exec, swaylock # Lock the screen
       bind = $mainMod, M, exec, wlogout --protocol layer-shell # show the logout window
       bind = $mainMod SHIFT, M, exit, # Exit Hyprland all together no (force quit Hyprland)
-      bind = $mainMod, E, exec, thunar # Show the graphical file browser
+      bind = $mainMod, E, exec, nemo # Show the graphical file browser
       bind = $mainMod, V, togglefloating, # Allow a window to float
+      bind = $mainMod SHIFT, S, exec, rofi -dmenu -p \"Search\" | xargs -I{} xdg-open https://www.google.com/search?q={}
       bind = $mainMod SHIFT, E, exec, ${rofi_exitmenu}
-      bind = $mainMod, D, exec, wofi --show drun --allow-images # Show the graphical app launcher
-      bind = $mainMod, S, exec, grim -g "$(slurp)" - | swappy -f - # take a screenshot
-      bind = ALT, V, exec, cliphist list | wofi -dmenu | cliphist decode | wl-copy # open clipboard manager
+      bind = $mainMod SHIFT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
+      bind = $mainMod, D, exec, rofi -modi drun -show drun -show-icons # Show the graphical app launcher
+      bind = $mainMod SHIFT, D, exec, rofi -modi window -show window -show-icons # Show the graphical app launcher
+      bind = CTRL, F9, exec, rofi -modi filebrowser -show filebrowser -show-icons
+      # bind = $mainMod, S, exec, grim -g "$(slurp)" - | swappy -f - # take a screenshot
+      # bind = ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy # open clipboard manager
       # bind = $mainMod, T, exec, ~/.config/HyprV/hyprv_util vswitch # switch HyprV version
 
       # Move focus with mainMod + arrow keys

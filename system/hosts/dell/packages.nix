@@ -10,8 +10,8 @@ let
 
     text = ''
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
-      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+      systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
     '';
   };
 
@@ -44,7 +44,7 @@ in
       smartmontools
       waybar
       _1password              # 1Password command-line tool
-      _1password-gui          # Multi-platform password manager
+      _1password-gui-beta          # Multi-platform password manager
       sniffnet                # Cross-platform application to monitor your network traffic with ease
       # opensnitch              # An application firewall
       # wireplumber

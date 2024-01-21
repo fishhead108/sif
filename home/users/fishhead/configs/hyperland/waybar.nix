@@ -3,7 +3,7 @@ let
 btm = "${pkgs.bottom}/bin/btm";
 jq  = "${pkgs.jq}/bin/jq";
 gsimplecal = "${pkgs.gsimplecal}/bin/gsimplecal";
-wofi = "${pkgs.wofi}/bin/wofi";
+rofi = "${pkgs.rofi}/bin/rofi";
 terminal = "${pkgs.kitty}/bin/kitty";
 terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
 pctl = "${pkgs.playerctl}/bin/playerctl";
@@ -51,7 +51,7 @@ in
           "on-click" = "sh " + pkgs.writeScript "rofi_powermenu" ''
             #!${pkgs.stdenv.shell} --login
 
-            action=$(echo -e "lock\nlogout\nshutdown\nreboot" | wofi --dmenu -p "power:")
+            action=$(echo -e "lock\nlogout\nshutdown\nreboot" | rofi --dmenu -p "power:")
 
             if [[ "$action" == "lock" ]]
             then
@@ -87,7 +87,7 @@ in
         #     text = "";
         #     tooltip = ''$(cat /etc/os-release | grep PRETTY_NAME | cut -d '"' -f2)'';
         #   };
-        #   on-click = "${wofi} -S drun -x 10 -y 10 -W 25% -H 60%";
+        #   on-click = "${rofi} -S drun -x 10 -y 10 -W 25% -H 60%";
         # };
 
         "custom/mpris" = {

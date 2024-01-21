@@ -72,7 +72,7 @@
     gnupg.agent = {
       enable = false;
       enableSSHSupport = true;
-      pinentryFlavor = "gtk2";
+      pinentryFlavor = "qt";
     };
   };
 
